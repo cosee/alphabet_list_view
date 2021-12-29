@@ -1,15 +1,16 @@
-name: alphabet_list_view
-description: A new Flutter project.
-version: 0.0.1
-homepage:
+name: alphabet_list_view_example
+description: Demonstrates how to use alphabet_list_view.
+publish_to: 'none'
+version: 1.0.0+1
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
-  flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  alphabet_list_view:
+    path: ../
 
 dev_dependencies:
   flutter_test:
@@ -18,3 +19,4 @@ dev_dependencies:
   dart_code_metrics: ^4.8.1
 
 flutter:
+  uses-material-design: true
