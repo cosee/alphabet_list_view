@@ -24,7 +24,67 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const AlphabeticListView(),
+      body: const AlphabetListView(
+        items: items,
+      ),
     );
   }
 }
+
+const List<AlphabetListViewItemGroup> items = [
+  AlphabetListViewItemGroup(tag: 'A', items: [
+    Text('A'),
+    Text('AA'),
+    Text('AAA'),
+    Text('AAA'),
+    Text('AAA'),
+    Text('AAA'),
+    Text('AAA'),
+    Text('AAA'),
+    Text('AAA'),
+    Text('AAA'),
+  ]),  AlphabetListViewItemGroup(tag: 'B', items: [
+    Text('B1'),
+    Text('BB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBB'),
+    Text('BBBx'),
+  ]),  AlphabetListViewItemGroup(tag: 'C', items: [
+    Text('C'),
+    Text('C'),
+    Text('CCCCCCCC'),
+    Text('CCCCCCCC'),
+    Text('CCCCCCCC'),
+    Text('CCCCCCCC'),
+    Text('CCCCCCCC'),
+    Text('CCCCCCCC'),
+    Text('CCCCCCCC'),
+    Text('CCCCCCCC'),
+  ]),
+];
