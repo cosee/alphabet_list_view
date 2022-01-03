@@ -43,40 +43,49 @@ class _AlphabetListViewState extends State<AlphabetListView> {
         widget.itemPositionsListener ?? ItemPositionsListener.create();
     dragListener.dragDetails.addListener(_valueChanged);
     itemPositionsListener.itemPositions.addListener(_positionsChanged);
+    itemPositionsListener.itemPositions.addListener(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: widget.items.isEmpty
-              ? Container()
-              : ScrollablePositionedList.builder(
-                  padding: const EdgeInsets.only(
-                    left: 15,
+    return ColoredBox(
+      color: Colors.blue,
+      child: Row(
+        children: [
+          Expanded(
+            child: widget.items.isEmpty
+                ? Container()
+                : LayoutBuilder(
+                    builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                      return ColoredBox(
+                        color: Colors.green,
+                        child: ScrollablePositionedList.builder(
+                          padding:
+                              EdgeInsets.only(bottom: constraints.maxHeight),
+                          itemScrollController: itemScrollController,
+                          itemCount: widget.items.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                Text(widget.items[index].tag),
+                                ...widget.items[index].items,
+                              ],
+                            );
+                          },
+                        ),
+                      );
+                    },
                   ),
-                  itemScrollController: itemScrollController,
-                  itemPositionsListener: itemPositionsListener,
-                  itemCount: widget.items.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        Text(widget.items[index].tag),
-                        ...widget.items[index].items,
-                      ],
-                    );
-                  },
-                  addRepaintBoundaries: false,
-                ),
-        ),
-        AlphabetScrollbar(
-          items: widget.items,
-          options: widget.alphabetListViewOptions,
-          indexBarDragNotifier: dragListener as AlphabetScrollbarDragNotifier,
-          controller: indexBarController,
-        ),
-      ],
+          ),
+          AlphabetScrollbar(
+            items: widget.items,
+            options: widget.alphabetListViewOptions,
+            indexBarDragNotifier: dragListener as AlphabetScrollbarDragNotifier,
+            controller: indexBarController,
+          ),
+        ],
+      ),
     );
   }
 
@@ -86,7 +95,6 @@ class _AlphabetListViewState extends State<AlphabetListView> {
     itemPositionsListener.itemPositions.removeListener(_positionsChanged);
     super.dispose();
   }
-
 
   void _valueChanged() {
     final IndexBarDragDetails details = dragListener.dragDetails.value;
@@ -98,8 +106,9 @@ class _AlphabetListViewState extends State<AlphabetListView> {
       if (widget.items.where((element) => element.tag == tag).isNotEmpty) {
         if (tag != lastTriggeredSymbol) {
           lastTriggeredSymbol = tag;
-          itemScrollController.jumpTo(index: widget.alphabetListViewOptions.data.indexOf(tag));
-
+          itemScrollController.jumpTo(
+            index: widget.alphabetListViewOptions.data.indexOf(tag),
+          );
         }
       }
     }
