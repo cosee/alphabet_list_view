@@ -24,57 +24,75 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const AlphabetListView(
+      body: AlphabetListView(
         items: items,
       ),
     );
   }
 }
 
-const List<AlphabetListViewItemGroup> items = [
-  AlphabetListViewItemGroup(tag: 'A', items: [
-    Text('AAA'),
-    Text('AAA'),
-    Text('AAA'),
-    Text('AAA'),
-    Text('AAA'),
-    Text('AAA'),
-    Text('AAA'),
+List<AlphabetListViewItemGroup> items = [
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'A', items: [
+    for (var i = 0; i < 1000; i++) const TestText('AAA'),
   ]),
-  AlphabetListViewItemGroup(tag: 'B', items: [
-    Text('BBB'),
-    Text('BBB'),
-    Text('BBB'),
-    Text('BBB'),
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'B', items: [
+    for (var i = 0; i < 1000; i++) const TestText('BBB'),
   ]),
-  AlphabetListViewItemGroup(tag: 'C', items: [
-    Text('CCC'),
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'C', items: [
+    for (var i = 0; i < 1000; i++) const TestText('CCC'),
   ]),
-  AlphabetListViewItemGroup(tag: 'D', items: [
-    Text('DDD'),
-    Text('DDD'),
-    Text('DDD'),
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'D', items: [
+    for (var i = 0; i < 1000; i++) const TestText('DDD'),
   ]),
-  AlphabetListViewItemGroup(tag: 'E', items: [
-    Text('EEE'),
-    Text('EEE'),
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'E', items: [
+    for (var i = 0; i < 1000; i++) const TestText('EEE'),
   ]),
-  AlphabetListViewItemGroup(tag: 'F', items: [
-    Text('FFF'),
-    Text('FFF'),
-    Text('FFF'),
-    Text('FFF'),
-    Text('FFF'),
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'F', items: [
+    for (var i = 0; i < 1000; i++) const TestText('FFF'),
   ]),
-  AlphabetListViewItemGroup(tag: 'G', items: [
-    Text('GGG'),
-    Text('GGG'),
-    Text('GGG'),
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'G', items: [
+    for (var i = 0; i < 1000; i++) const TestText('GGG'),
   ]),
-  AlphabetListViewItemGroup(tag: 'H', items: [
-    Text('HHH'),
-    Text('HHH'),
-    Text('HHH'),
-    Text('HHH'),
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'H', items: [
+    for (var i = 0; i < 1000; i++) const TestText('HHH'),
+  ]),
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'I', items: [
+    for (var i = 0; i < 1000; i++) const TestText('III'),
+  ]),
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'J', items: [
+    for (var i = 0; i < 1000; i++) const TestText('JJJ'),
+  ]),
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'K', items: [
+    for (var i = 0; i < 1000; i++) const TestText('KKK'),
+  ]),
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'L', items: [
+    for (var i = 0; i < 1000; i++) const TestText('LLL'),
   ]),
 ];
+
+class TestText extends StatefulWidget {
+  const TestText(this.string, {Key? key}) : super(key: key);
+  final String string;
+
+  @override
+  _TestTextState createState() => _TestTextState();
+}
+
+class _TestTextState extends State<TestText> {
+  @override
+  void initState() {
+    super.initState();
+   // print("INIT");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(widget.string);
+  }
+
+  @override
+  void dispose() {
+    //print("DISPOSE");
+    super.dispose();
+  }
+}
