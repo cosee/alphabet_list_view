@@ -1,7 +1,6 @@
 import 'package:alphabet_list_view/src/options.dart';
 import 'package:alphabet_list_view/src/scrollbar.dart';
 import 'package:flutter/material.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class AlphabetListView extends StatefulWidget {
   const AlphabetListView({
@@ -9,12 +8,10 @@ class AlphabetListView extends StatefulWidget {
     required this.items,
     this.alphabetListViewOptions = const AlphabetListViewOptions(),
     this.itemScrollController,
-    this.itemPositionsListener,
   }) : super(key: key);
 
   final List<AlphabetListViewItemGroup> items;
   final ScrollController? itemScrollController;
-  final ItemPositionsListener? itemPositionsListener;
   final AlphabetListViewOptions alphabetListViewOptions;
 
   @override
@@ -24,7 +21,6 @@ class AlphabetListView extends StatefulWidget {
 class _AlphabetListViewState extends State<AlphabetListView> {
   late AlphabetListViewOptions alphabetListViewOptions;
   late ScrollController itemScrollController;
-  late ItemPositionsListener itemPositionsListener;
   String? lastTriggeredSymbol;
 
   IndexBarDragListener dragListener = IndexBarDragListener.create();
@@ -38,10 +34,7 @@ class _AlphabetListViewState extends State<AlphabetListView> {
     super.initState();
     alphabetListViewOptions = widget.alphabetListViewOptions;
     itemScrollController = widget.itemScrollController ?? ScrollController();
-    itemPositionsListener =
-        widget.itemPositionsListener ?? ItemPositionsListener.create();
     dragListener.dragDetails.addListener(_valueChanged);
-    itemPositionsListener.itemPositions.addListener(() {});
   }
 
   @override
@@ -51,57 +44,36 @@ class _AlphabetListViewState extends State<AlphabetListView> {
       child: Row(
         children: [
           Expanded(
-            child: widget.items.isEmpty
-                ? Container()
-                : ColoredBox(
-                    color: Colors.green,
-                    child: CustomScrollView(
-                      controller: itemScrollController,
-                      slivers: [
-                        // SliverPersistentHeader(
-                        //   pinned: true,
-                        //   delegate: SectionHeaderDelegate("A"),
-                        // ),
-                        ...widget.items
-                            .map(
-                              (e) {
-                                return [
-                                  SliverPersistentHeader(
-                                    key: e.key,
-                                    delegate: SectionHeaderDelegate(e.tag),
-                                  ),
-                                  SliverList(
-                                    delegate: SliverChildListDelegate(e.items),
-                                  ),
-                                ];
-                              },
-                            )
-                            .expand((element) => element)
-                            .toList(),
-                        // SliverPersistentHeader(
-                        //   pinned: true, delegate: SectionHeaderDelegate("B"),
-                        // ),
-                        // SliverToBoxAdapter(
-                        //   child: Container(
-                        //     height: 500,
-                        //   ),
-                        // ),
-                        // const SliverAppBar(
-                        //   title: Text("HI"),
-                        //   pinned: true,
-                        // ),
-                        // SliverToBoxAdapter(
-                        //   child: Container(
-                        //     height: 500,
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
+            child: ColoredBox(
+              color: Colors.green,
+              child: CustomScrollView(
+                controller: itemScrollController,
+                slivers: widget.items
+                    .map(
+                      (e) {
+                        return [
+                          SliverToBoxAdapter(
+                            child: Container(
+                              key: e.key,
+                            ),
+                          ),
+                          SliverPersistentHeader(
+                            delegate: SectionHeaderDelegate(e.tag),
+                          ),
+                          SliverList(
+                            delegate: SliverChildListDelegate(e.items),
+                          ),
+                        ];
+                      },
+                    )
+                    .expand((element) => element)
+                    .toList(),
+              ),
+            ),
           ),
           AlphabetScrollbar(
             items: widget.items,
-            options: widget.alphabetListViewOptions,
+            alphabetScrollbarOptions: widget.alphabetListViewOptions.alphabetScrollbarOptions,
             indexBarDragNotifier: dragListener as AlphabetScrollbarDragNotifier,
             controller: indexBarController,
           ),
@@ -131,27 +103,6 @@ class _AlphabetListViewState extends State<AlphabetListView> {
               .currentContext!
               .findRenderObject()!,
         );
-      }
-    }
-
-    void _positionsChanged() {
-      final Iterable<ItemPosition> positions =
-          itemPositionsListener.itemPositions.value;
-      if (positions.isNotEmpty) {
-        final ItemPosition itemPosition = positions
-            .where((ItemPosition position) => position.itemTrailingEdge > 0)
-            .reduce(
-              (ItemPosition min, ItemPosition position) =>
-                  position.itemTrailingEdge < min.itemTrailingEdge
-                      ? position
-                      : min,
-            );
-        final int index = itemPosition.index;
-        final String tag = widget.items[index].getSuspensionTag();
-        if (selectTag != tag) {
-          selectTag = tag;
-          setState(() {});
-        }
       }
     }
   }
@@ -202,3 +153,5 @@ class SectionHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => false;
 }
+
+

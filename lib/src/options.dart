@@ -1,7 +1,32 @@
 import 'package:flutter/material.dart';
 
-class HintOptions {
-  const HintOptions({
+class AlphabetListViewOptions {
+  const AlphabetListViewOptions({
+    this.alphabetListOptions = const AlphabetListOptions(),
+    this.alphabetScrollbarOptions = const AlphabetScrollbarOptions(),
+  });
+
+  final AlphabetListOptions alphabetListOptions;
+  final AlphabetScrollbarOptions alphabetScrollbarOptions;
+}
+
+class AlphabetListOptions {
+  const AlphabetListOptions({this.showHeader = true});
+  final bool showHeader;
+}
+
+class AlphabetScrollbarOptions {
+  const AlphabetScrollbarOptions({
+    this.alphabetHintOptions,
+    this.symbols = defaultSymbols,
+  });
+
+  final AlphabetHintOptions? alphabetHintOptions;
+  final List<String> symbols;
+}
+
+class AlphabetHintOptions {
+  const AlphabetHintOptions({
     this.indexHintWidth = 72,
     this.indexHintHeight = 72,
     this.indexHintDecoration = const BoxDecoration(
@@ -9,7 +34,7 @@ class HintOptions {
       borderRadius: BorderRadius.all(Radius.circular(6)),
     ),
     this.indexHintTextStyle =
-    const TextStyle(fontSize: 24.0, color: Colors.white),
+        const TextStyle(fontSize: 24.0, color: Colors.white),
     this.indexHintChildAlignment = Alignment.center,
     this.indexHintAlignment = Alignment.center,
     this.indexHintPosition,
@@ -25,15 +50,6 @@ class HintOptions {
   final Offset? indexHintPosition;
   final Offset indexHintOffset;
 }
-
-class ItemOptions {
-  const ItemOptions({
-    this.padding = const EdgeInsets.all(5),
-  });
-
-  final EdgeInsets padding;
-}
-
 
 const List<String> defaultSymbols = [
   'A',
@@ -64,32 +80,3 @@ const List<String> defaultSymbols = [
   'Z',
   '#',
 ];
-
-
-
-class AlphabetListViewOptions {
-  const AlphabetListViewOptions({
-    this.data = defaultSymbols,
-    this.needRebuild = false,
-    this.ignoreDragCancel = false,
-    this.width = 30,
-    this.textStyle =
-    const TextStyle(fontSize: 12, color: Color.fromRGBO(69, 69, 69, 1.0)),
-    this.selectItemTextStyle,
-    this.itemNotUsedTextStyle,
-    this.itemOptions = const ItemOptions(),
-    this.hintOptions = const HintOptions(),
-  });
-
-  final List<String> data;
-  final bool needRebuild;
-  final bool ignoreDragCancel;
-  final double width;
-  final TextStyle textStyle;
-  final TextStyle? selectItemTextStyle;
-  final TextStyle? itemNotUsedTextStyle;
-  final ItemOptions itemOptions;
-  final HintOptions hintOptions;
-}
-
-

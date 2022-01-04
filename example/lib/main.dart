@@ -33,40 +33,40 @@ class Home extends StatelessWidget {
 
 List<AlphabetListViewItemGroup> items = [
   AlphabetListViewItemGroup(key: GlobalKey(), tag: 'A', items: [
-    for (var i = 0; i < 1000; i++) const TestText('AAA'),
+    for (var i = 0; i < 10; i++) const TestText('AAA'),
   ]),
   AlphabetListViewItemGroup(key: GlobalKey(), tag: 'B', items: [
-    for (var i = 0; i < 1000; i++) const TestText('BBB'),
+    for (var i = 0; i < 20; i++) const TestText('BBB'),
   ]),
   AlphabetListViewItemGroup(key: GlobalKey(), tag: 'C', items: [
-    for (var i = 0; i < 1000; i++) const TestText('CCC'),
+    for (var i = 0; i < 5; i++) const TestText('CCC'),
   ]),
   AlphabetListViewItemGroup(key: GlobalKey(), tag: 'D', items: [
-    for (var i = 0; i < 1000; i++) const TestText('DDD'),
+    for (var i = 0; i < 1; i++) const TestText('DDD'),
   ]),
   AlphabetListViewItemGroup(key: GlobalKey(), tag: 'E', items: [
-    for (var i = 0; i < 1000; i++) const TestText('EEE'),
+    for (var i = 0; i < 2; i++) const TestText('EEE'),
   ]),
   AlphabetListViewItemGroup(key: GlobalKey(), tag: 'F', items: [
-    for (var i = 0; i < 1000; i++) const TestText('FFF'),
+    for (var i = 0; i < 31; i++) const TestText('FFF'),
   ]),
   AlphabetListViewItemGroup(key: GlobalKey(), tag: 'G', items: [
-    for (var i = 0; i < 1000; i++) const TestText('GGG'),
+    for (var i = 0; i < 2; i++) const TestText('GGG'),
   ]),
   AlphabetListViewItemGroup(key: GlobalKey(), tag: 'H', items: [
-    for (var i = 0; i < 1000; i++) const TestText('HHH'),
+    for (var i = 0; i < 33; i++) const TestText('HHH'),
   ]),
   AlphabetListViewItemGroup(key: GlobalKey(), tag: 'I', items: [
-    for (var i = 0; i < 1000; i++) const TestText('III'),
+    for (var i = 0; i < 0; i++) const TestText('III'),
   ]),
   AlphabetListViewItemGroup(key: GlobalKey(), tag: 'J', items: [
-    for (var i = 0; i < 1000; i++) const TestText('JJJ'),
+    for (var i = 0; i < 4; i++) const TestText('JJJ'),
   ]),
   AlphabetListViewItemGroup(key: GlobalKey(), tag: 'K', items: [
-    for (var i = 0; i < 1000; i++) const TestText('KKK'),
+    for (var i = 0; i < 8; i++) const TestText('KKK'),
   ]),
   AlphabetListViewItemGroup(key: GlobalKey(), tag: 'L', items: [
-    for (var i = 0; i < 1000; i++) const TestText('LLL'),
+    for (var i = 0; i < 2; i++) const TestText('LLL'),
   ]),
 ];
 

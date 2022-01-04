@@ -1,21 +1,20 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
 import 'package:alphabet_list_view/src/options.dart';
-
 import 'package:alphabet_list_view/alphabet_list_view.dart';
+
 class AlphabetScrollbar extends StatefulWidget {
   const AlphabetScrollbar({
     Key? key,
     required this.items,
-    this.options = const AlphabetListViewOptions(),
+    this.alphabetScrollbarOptions = const AlphabetScrollbarOptions(),
     this.indexBarDragNotifier,
     this.controller,
   }) : super(key: key);
 
   final List<AlphabetListViewItemGroup> items;
-  final AlphabetListViewOptions options;
+  final AlphabetScrollbarOptions alphabetScrollbarOptions;
   final AlphabetScrollbarDragNotifier? indexBarDragNotifier;
   final AlphabetScrollbarController? controller;
 
@@ -29,7 +28,7 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   @override
   void initState() {
     super.initState();
-    symbolKeys = {for (var k in widget.options.data) k: GlobalKey()};
+    symbolKeys = {for (var k in widget.alphabetScrollbarOptions.symbols) k: GlobalKey()};
 
     widget.controller?._indexBarState = this;
   }
@@ -37,7 +36,7 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: widget.options.width,
+      width: 20,
       child: Listener(
         onPointerMove: (event) {
           String? symbol = _identifyTouchedSymbol(event, symbolKeys);
@@ -54,7 +53,7 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
-          children: widget.options.data
+          children: widget.alphabetScrollbarOptions.symbols
               .map((e) => _IndexBarItem(
                     key: symbolKeys[e],
                     symbol: e,
