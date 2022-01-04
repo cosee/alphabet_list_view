@@ -1,7 +1,6 @@
 import 'package:alphabet_list_view/src/options.dart';
 import 'package:alphabet_list_view/src/scrollbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class AlphabetListView extends StatefulWidget {
