@@ -22,23 +22,24 @@ class AlphabetScrollbar extends StatefulWidget {
 }
 
 class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
-  String? selectedSymbol;
+ late  String selectedSymbol;
   late Map<String, GlobalKey> symbolKeys;
+
+
 
   @override
   void initState() {
     super.initState();
-    widget.symbolChangeNotifierList.addListener(() {
-      setState(() {
-        selectedSymbol = widget.symbolChangeNotifierList.value;
-      });
-    });
-    widget.symbolChangeNotifierScrollbar.addListener(() {
-      setState(() {});
-    });
+    selectedSymbol = widget.items.first.tag;
     symbolKeys = {
       for (var k in widget.alphabetScrollbarOptions.symbols) k: GlobalKey(),
     };
+    widget.symbolChangeNotifierList.addListener(() {
+      setState(() {
+
+        selectedSymbol = widget.symbolChangeNotifierList.value ?? selectedSymbol ;
+      });
+    });
   }
 
   @override

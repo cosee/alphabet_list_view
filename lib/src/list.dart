@@ -30,18 +30,19 @@ class _AlphabetListState extends State<AlphabetList> {
   void initState() {
     super.initState();
     widget.scrollController.addListener(() {
-      RenderBox? box;
-
-      box = customScrollKey.currentContext?.findRenderObject() as RenderBox;
-
-      widget.symbolChangeNotifierList.value =
-          _getFirstSymbol(box, widget.items);
+      RenderBox? customScrollViewRenderBox;
+      try {
+        customScrollViewRenderBox =
+            customScrollKey.currentContext?.findRenderObject() as RenderBox;
+        widget.symbolChangeNotifierList.value = _getFirstVisibleItemGroupSymbol(
+            customScrollViewRenderBox, widget.items,);
+      } catch (_) {}
     });
     widget.symbolChangeNotifierScrollbar.addListener(
       () {
         final String? tag = widget.symbolChangeNotifierScrollbar.value;
         if (tag != null) {
-          _showValue(tag);
+          _showGroup(tag);
         }
       },
     );
@@ -62,6 +63,7 @@ class _AlphabetListState extends State<AlphabetList> {
                   ),
                 ),
                 SliverStickyHeader(
+                  sticky: false,
                   header: Container(
                     height: 60.0,
                     color: Colors.lightBlue,
@@ -78,19 +80,42 @@ class _AlphabetListState extends State<AlphabetList> {
               ];
             },
           )
-          .expand((element) => element)
+          .expand((slivers) => slivers)
           .toList(),
     );
   }
 
-  void _showValue(String tag) {
-    if (widget.items.where((element) => element.tag == tag).isNotEmpty) {
+  void _showGroup(String symbol) {
+    if (widget.items.where((element) => element.tag == symbol).isNotEmpty) {
       widget.scrollController.position.ensureVisible(
-        (widget.items.firstWhere((element) => element.tag == tag).key)
+        (widget.items.firstWhere((element) => element.tag == symbol).key)
             .currentContext!
             .findRenderObject()!,
       );
     }
+  }
+
+  String? _getFirstVisibleItemGroupSymbol(
+    RenderBox renderBoxScrollView,
+    List<AlphabetListViewItemGroup> items,
+  ) {
+    String? hit;
+
+    final result = BoxHitTestResult();
+    for (var item in items) {
+      try {
+        RenderBox renderBox =
+            item.key.currentContext?.findRenderObject() as RenderBox;
+
+        Offset localLocation = renderBox
+            .globalToLocal(renderBoxScrollView.localToGlobal(Offset.zero));
+
+        if (renderBoxScrollView.hitTest(result, position: localLocation)) {
+          hit = item.tag;
+        }
+      } catch (_) {}
+    }
+    return hit;
   }
 }
 
@@ -116,25 +141,4 @@ class SectionHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => false;
-}
-
-String? _getFirstSymbol(
-  RenderBox r,
-  List<AlphabetListViewItemGroup> items,
-) {
-  String? touchedSymbol;
-
-  final result = BoxHitTestResult();
-  for (var item in items) {
-    RenderBox renderBox =
-        item.key.currentContext?.findRenderObject() as RenderBox;
-
-    Offset localLocation =
-        renderBox.globalToLocal(r.localToGlobal(Offset.zero));
-
-    if (r.hitTest(result, position: localLocation)) {
-      touchedSymbol = item.tag;
-    }
-  }
-  return touchedSymbol;
 }
