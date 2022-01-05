@@ -1,4 +1,5 @@
 import 'package:alphabet_list_view/alphabet_list_view.dart';
+import 'package:alphabet_list_view/src/controller.dart';
 import 'package:alphabet_list_view/src/options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -15,8 +16,8 @@ class AlphabetList extends StatefulWidget {
   }) : super(key: key);
   final List<AlphabetListViewItemGroup> items;
   final ScrollController scrollController;
-  final ValueNotifier<String?> symbolChangeNotifierList;
-  final ValueNotifier<String?> symbolChangeNotifierScrollbar;
+  final SymbolChangeNotifier symbolChangeNotifierList;
+  final SymbolChangeNotifier symbolChangeNotifierScrollbar;
   final AlphabetListOptions alphabetListOptions;
 
   @override
@@ -63,7 +64,7 @@ class _AlphabetListState extends State<AlphabetList> {
                   ),
                 ),
                 SliverStickyHeader(
-                  sticky: false,
+                  sticky: true,
                   header: Container(
                     height: 60.0,
                     color: Colors.lightBlue,

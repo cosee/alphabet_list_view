@@ -1,4 +1,5 @@
 import 'package:alphabet_list_view/alphabet_list_view.dart';
+import 'package:alphabet_list_view/src/controller.dart';
 import 'package:alphabet_list_view/src/options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -14,8 +15,8 @@ class AlphabetScrollbar extends StatefulWidget {
 
   final List<AlphabetListViewItemGroup> items;
   final AlphabetScrollbarOptions alphabetScrollbarOptions;
-  final ValueNotifier<String?> symbolChangeNotifierScrollbar;
-  final ValueNotifier<String?> symbolChangeNotifierList;
+  final SymbolChangeNotifier symbolChangeNotifierScrollbar;
+  final SymbolChangeNotifier symbolChangeNotifierList;
 
   @override
   _AlphabetScrollbarState createState() => _AlphabetScrollbarState();
@@ -35,8 +36,8 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
       for (var k in widget.alphabetScrollbarOptions.symbols) k: GlobalKey(),
     };
     widget.symbolChangeNotifierList.addListener(() {
+widget.symbolChangeNotifierScrollbar.value = null;
       setState(() {
-
         selectedSymbol = widget.symbolChangeNotifierList.value ?? selectedSymbol ;
       });
     });
@@ -100,6 +101,7 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   }
 
   void _onSymbolTriggered(String symbol) {
+    print("ertzui");
     widget.symbolChangeNotifierScrollbar.value = symbol;
     setState(() {
       selectedSymbol = symbol;

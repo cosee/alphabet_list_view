@@ -3,6 +3,8 @@ import 'package:alphabet_list_view/src/options.dart';
 import 'package:alphabet_list_view/src/scrollbar.dart';
 import 'package:flutter/material.dart';
 
+import 'controller.dart';
+
 class AlphabetListView extends StatefulWidget {
   const AlphabetListView({
     Key? key,
@@ -21,8 +23,8 @@ class AlphabetListView extends StatefulWidget {
 
 class _AlphabetListViewState extends State<AlphabetListView> {
   late ScrollController scrollController;
-  ValueNotifier<String?> symbolChangeNotifierScrollbar = ValueNotifier(null);
-  ValueNotifier<String?> symbolChangeNotifierList = ValueNotifier(null);
+  SymbolChangeNotifier symbolChangeNotifierScrollbar = SymbolChangeNotifier(null);
+  SymbolChangeNotifier symbolChangeNotifierList = SymbolChangeNotifier(null);
 
   @override
   void initState() {
