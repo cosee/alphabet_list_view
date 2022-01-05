@@ -1,36 +1,44 @@
-import 'package:flutter/foundation.dart';
+import 'package:alphabet_list_view/alphabet_list_view.dart';
+import 'package:alphabet_list_view/src/options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:alphabet_list_view/src/options.dart';
-import 'package:alphabet_list_view/alphabet_list_view.dart';
 
 class AlphabetScrollbar extends StatefulWidget {
   const AlphabetScrollbar({
     Key? key,
     required this.items,
+    required this.symbolChangeNotifierScrollbar,
+    required this.symbolChangeNotifierList,
     this.alphabetScrollbarOptions = const AlphabetScrollbarOptions(),
-    this.indexBarDragNotifier,
-    this.controller,
   }) : super(key: key);
 
   final List<AlphabetListViewItemGroup> items;
   final AlphabetScrollbarOptions alphabetScrollbarOptions;
-  final AlphabetScrollbarDragNotifier? indexBarDragNotifier;
-  final AlphabetScrollbarController? controller;
+  final ValueNotifier<String?> symbolChangeNotifierScrollbar;
+  final ValueNotifier<String?> symbolChangeNotifierList;
 
   @override
   _AlphabetScrollbarState createState() => _AlphabetScrollbarState();
 }
 
 class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
+  String? selectedSymbol;
   late Map<String, GlobalKey> symbolKeys;
 
   @override
   void initState() {
     super.initState();
-    symbolKeys = {for (var k in widget.alphabetScrollbarOptions.symbols) k: GlobalKey()};
-
-    widget.controller?._indexBarState = this;
+    widget.symbolChangeNotifierList.addListener(() {
+      setState(() {
+        selectedSymbol = widget.symbolChangeNotifierList.value;
+      });
+    });
+    widget.symbolChangeNotifierScrollbar.addListener(() {
+      setState(() {});
+    });
+    symbolKeys = {
+      for (var k in widget.alphabetScrollbarOptions.symbols) k: GlobalKey(),
+    };
   }
 
   @override
@@ -38,26 +46,19 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
     return SizedBox(
       width: 20,
       child: Listener(
-        onPointerMove: (event) {
-          String? symbol = _identifyTouchedSymbol(event, symbolKeys);
-          if (symbol != null) {
-            _onSymbolTriggered(symbol);
-          }
-        },
-        onPointerDown: (event) {
-          String? symbol = _identifyTouchedSymbol(event, symbolKeys);
-          if (symbol != null) {
-            _onSymbolTriggered(symbol);
-          }
-        },
+        onPointerMove: _pointerMoveEventHandler,
+        onPointerDown: _pointerMoveEventHandler,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: widget.alphabetScrollbarOptions.symbols
-              .map((e) => _IndexBarItem(
-                    key: symbolKeys[e],
-                    symbol: e,
-                    selected: false,
+              .map((symbol) => SizedBox(
+                    width: double.infinity,
+                    key: symbolKeys[symbol],
+                    child: _IndexBarItem(
+                      symbol: symbol,
+                      selected: selectedSymbol == symbol,
+                    ),
                   ))
               .toList(),
         ),
@@ -67,8 +68,14 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
 
   @override
   void dispose() {
-    widget.controller?._detach();
     super.dispose();
+  }
+
+  void _pointerMoveEventHandler(PointerEvent event) {
+    String? symbol = _identifyTouchedSymbol(event, symbolKeys);
+    if (symbol != null) {
+      _onSymbolTriggered(symbol);
+    }
   }
 
   String? _identifyTouchedSymbol(
@@ -92,13 +99,10 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   }
 
   void _onSymbolTriggered(String symbol) {
-    widget.indexBarDragNotifier?.dragDetails.value = IndexBarDragDetails(
-      action: 2,
-      index: 2,
-      tag: symbol,
-      localPositionY: 0,
-      globalPositionY: 0,
-    );
+    widget.symbolChangeNotifierScrollbar.value = symbol;
+    setState(() {
+      selectedSymbol = symbol;
+    });
   }
 }
 
@@ -114,56 +118,9 @@ class _IndexBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(symbol);
-  }
-}
-
-
-abstract class IndexBarDragListener {
-  /// Creates an [IndexBarDragListener] that can be used by a
-  /// [AlphabetScrollbar] to return the drag listener.
-  factory IndexBarDragListener.create() => AlphabetScrollbarDragNotifier();
-
-  /// drag details.
-  ValueListenable<IndexBarDragDetails> get dragDetails;
-}
-
-/// Internal implementation of [ItemPositionsListener].
-class AlphabetScrollbarDragNotifier implements IndexBarDragListener {
-  @override
-  final ValueNotifier<IndexBarDragDetails> dragDetails =
-      ValueNotifier(IndexBarDragDetails());
-}
-
-class IndexBarDragDetails {
-  static const int actionDown = 0;
-  static const int actionUp = 1;
-  static const int actionUpdate = 2;
-  static const int actionEnd = 3;
-  static const int actionCancel = 4;
-
-  int? action;
-  int? index;
-  String? tag;
-
-  double? localPositionY;
-  double? globalPositionY;
-
-  IndexBarDragDetails({
-    this.action,
-    this.index,
-    this.tag,
-    this.localPositionY,
-    this.globalPositionY,
-  });
-}
-
-class AlphabetScrollbarController {
-  _AlphabetScrollbarState? _indexBarState;
-
-  bool get isAttached => _indexBarState != null;
-
-  void _detach() {
-    _indexBarState = null;
+    return Text(
+      symbol,
+      style: TextStyle(color: selected ? Colors.red : Colors.black),
+    );
   }
 }

@@ -8,28 +8,26 @@ class AlphabetListView extends StatefulWidget {
     Key? key,
     required this.items,
     this.alphabetListViewOptions = const AlphabetListViewOptions(),
-    this.itemScrollController,
+    this.scrollController,
   }) : super(key: key);
 
   final List<AlphabetListViewItemGroup> items;
   final AlphabetListViewOptions alphabetListViewOptions;
-  final ScrollController? itemScrollController;
+  final ScrollController? scrollController;
 
   @override
   _AlphabetListViewState createState() => _AlphabetListViewState();
 }
 
 class _AlphabetListViewState extends State<AlphabetListView> {
-  late ScrollController itemScrollController;
-  IndexBarDragListener dragListener = IndexBarDragListener.create();
-  final AlphabetScrollbarController indexBarController =
-      AlphabetScrollbarController();
+  late ScrollController scrollController;
+  ValueNotifier<String?> symbolChangeNotifierScrollbar = ValueNotifier(null);
+  ValueNotifier<String?> symbolChangeNotifierList = ValueNotifier(null);
 
   @override
   void initState() {
     super.initState();
-    itemScrollController = widget.itemScrollController ?? ScrollController();
-    dragListener.dragDetails.addListener(_valueChanged);
+    scrollController = widget.scrollController ?? ScrollController();
   }
 
   @override
@@ -39,57 +37,38 @@ class _AlphabetListViewState extends State<AlphabetListView> {
         Expanded(
           child: AlphabetList(
             items: widget.items,
-            itemScrollController: itemScrollController,
+            scrollController: scrollController,
+            symbolChangeNotifierList: symbolChangeNotifierList,
+            symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
           ),
         ),
         AlphabetScrollbar(
           items: widget.items,
           alphabetScrollbarOptions:
               widget.alphabetListViewOptions.alphabetScrollbarOptions,
-          indexBarDragNotifier: dragListener as AlphabetScrollbarDragNotifier,
-          controller: indexBarController,
+          symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
+          symbolChangeNotifierList: symbolChangeNotifierList,
         ),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    dragListener.dragDetails.removeListener(_valueChanged);
-    super.dispose();
-  }
-
-  void _valueChanged() {
-    final IndexBarDragDetails details = dragListener.dragDetails.value;
-    final String tag = details.tag!;
-    if (details.action == IndexBarDragDetails.actionDown ||
-        details.action == IndexBarDragDetails.actionUpdate) {
-      if (widget.items.where((element) => element.tag == tag).isNotEmpty) {
-        itemScrollController.position.ensureVisible(
-          (widget.items.firstWhere((element) => element.tag == tag).key)
-              .currentContext!
-              .findRenderObject()!,
-        );
-      }
-    }
   }
 }
 
 class AlphabetListViewItemGroup {
   AlphabetListViewItemGroup({
-    required this.key,
     required this.tag,
     required List<Widget> children,
-  }) : childrenDelegate = SliverChildListDelegate(
+  })  : key = GlobalKey(),
+        childrenDelegate = SliverChildListDelegate(
           children,
         );
 
   AlphabetListViewItemGroup.builder({
-    required this.key,
     required this.tag,
     required int itemCount,
     required IndexedWidgetBuilder itemBuilder,
   })  : assert(itemCount >= 0),
+        key = GlobalKey(),
         childrenDelegate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,

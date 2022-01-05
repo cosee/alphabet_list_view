@@ -10,7 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  scrollable_positioned_list: ^0.2.3
+  flutter_sticky_header: ^0.6.0
+  inview_notifier_list: ^3.0.0
 
 dev_dependencies:
   flutter_test:
