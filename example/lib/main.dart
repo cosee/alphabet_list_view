@@ -32,40 +32,41 @@ class Home extends StatelessWidget {
 }
 
 List<AlphabetListViewItemGroup> items = [
-  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'A', items: [
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'A', children: [
     for (var i = 0; i < 10; i++) const TestText('AAA'),
   ]),
-  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'B', items: [
-    for (var i = 0; i < 20; i++) const TestText('BBB'),
-  ]),
-  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'C', items: [
+  AlphabetListViewItemGroup.builder(key: GlobalKey(), tag: 'B',
+  itemBuilder: (context, index) => Text(index.toString()), itemCount: 10
+    ,
+  ),
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'C', children: [
     for (var i = 0; i < 5; i++) const TestText('CCC'),
   ]),
-  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'D', items: [
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'D', children: [
     for (var i = 0; i < 1; i++) const TestText('DDD'),
   ]),
-  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'E', items: [
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'E', children: [
     for (var i = 0; i < 2; i++) const TestText('EEE'),
   ]),
-  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'F', items: [
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'F', children: [
     for (var i = 0; i < 31; i++) const TestText('FFF'),
   ]),
-  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'G', items: [
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'G', children: [
     for (var i = 0; i < 2; i++) const TestText('GGG'),
   ]),
-  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'H', items: [
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'H', children: [
     for (var i = 0; i < 33; i++) const TestText('HHH'),
   ]),
-  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'I', items: [
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'I', children: [
     for (var i = 0; i < 0; i++) const TestText('III'),
   ]),
-  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'J', items: [
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'J', children: [
     for (var i = 0; i < 4; i++) const TestText('JJJ'),
   ]),
-  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'K', items: [
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'K', children: [
     for (var i = 0; i < 8; i++) const TestText('KKK'),
   ]),
-  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'L', items: [
+  AlphabetListViewItemGroup(key: GlobalKey(), tag: 'L', children: [
     for (var i = 0; i < 2; i++) const TestText('LLL'),
   ]),
 ];
