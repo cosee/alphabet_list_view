@@ -32,41 +32,42 @@ class Home extends StatelessWidget {
 }
 
 List<AlphabetListViewItemGroup> items = [
-  AlphabetListViewItemGroup( tag: 'A', children: [
+  AlphabetListViewItemGroup(tag: 'A', children: [
     for (var i = 0; i < 10; i++) const TestText('AAA'),
   ]),
-  AlphabetListViewItemGroup.builder( tag: 'B',
-  itemBuilder: (context, index) => Text(index.toString()), itemCount: 10
-    ,
+  AlphabetListViewItemGroup.builder(
+    tag: 'B',
+    itemBuilder: (context, index) => Text(index.toString()),
+    itemCount: 10,
   ),
-  AlphabetListViewItemGroup( tag: 'C', children: [
+  AlphabetListViewItemGroup(tag: 'C', children: [
     for (var i = 0; i < 5; i++) const TestText('CCC'),
   ]),
-  AlphabetListViewItemGroup( tag: 'D', children: [
+  AlphabetListViewItemGroup(tag: 'D', children: [
     for (var i = 0; i < 1; i++) const TestText('DDD'),
   ]),
-  AlphabetListViewItemGroup( tag: 'E', children: [
+  AlphabetListViewItemGroup(tag: 'E', children: [
     for (var i = 0; i < 2; i++) const TestText('EEE'),
   ]),
-  AlphabetListViewItemGroup( tag: 'F', children: [
+  AlphabetListViewItemGroup(tag: 'F', children: [
     for (var i = 0; i < 31; i++) const TestText('FFF'),
   ]),
-  AlphabetListViewItemGroup( tag: 'G', children: [
+  AlphabetListViewItemGroup(tag: 'G', children: [
     for (var i = 0; i < 2; i++) const TestText('GGG'),
   ]),
-  AlphabetListViewItemGroup( tag: 'H', children: [
+  AlphabetListViewItemGroup(tag: 'H', children: [
     for (var i = 0; i < 33; i++) const TestText('HHH'),
   ]),
-  AlphabetListViewItemGroup( tag: 'I', children: [
+  AlphabetListViewItemGroup(tag: 'I', children: [
     for (var i = 0; i < 0; i++) const TestText('III'),
   ]),
-  AlphabetListViewItemGroup( tag: 'J', children: [
+  AlphabetListViewItemGroup(tag: 'J', children: [
     for (var i = 0; i < 4; i++) const TestText('JJJ'),
   ]),
-  AlphabetListViewItemGroup( tag: 'K', children: [
+  AlphabetListViewItemGroup(tag: 'K', children: [
     for (var i = 0; i < 8; i++) const TestText('KKK'),
   ]),
-  AlphabetListViewItemGroup( tag: 'L', children: [
+  AlphabetListViewItemGroup(tag: 'L', children: [
     for (var i = 0; i < 2; i++) const TestText('LLL'),
   ]),
 ];
