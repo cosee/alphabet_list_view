@@ -1,9 +1,8 @@
+import 'package:alphabet_list_view/src/controller.dart';
 import 'package:alphabet_list_view/src/list.dart';
 import 'package:alphabet_list_view/src/options.dart';
 import 'package:alphabet_list_view/src/scrollbar.dart';
 import 'package:flutter/material.dart';
-
-import 'controller.dart';
 
 class AlphabetListView extends StatefulWidget {
   const AlphabetListView({
@@ -23,13 +22,15 @@ class AlphabetListView extends StatefulWidget {
 
 class _AlphabetListViewState extends State<AlphabetListView> {
   late ScrollController scrollController;
-  SymbolChangeNotifier symbolChangeNotifierScrollbar = SymbolChangeNotifier(null);
-  SymbolChangeNotifier symbolChangeNotifierList = SymbolChangeNotifier(null);
+  late SymbolChangeNotifier symbolChangeNotifierScrollbar;
+  late SymbolChangeNotifier symbolChangeNotifierList;
 
   @override
   void initState() {
     super.initState();
     scrollController = widget.scrollController ?? ScrollController();
+    symbolChangeNotifierScrollbar = SymbolChangeNotifier();
+    symbolChangeNotifierList = SymbolChangeNotifier();
   }
 
   @override
@@ -53,6 +54,16 @@ class _AlphabetListViewState extends State<AlphabetListView> {
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    symbolChangeNotifierList.dispose();
+    symbolChangeNotifierScrollbar.dispose();
+    if (widget.scrollController == null) {
+      scrollController.dispose();
+    }
+    super.dispose();
   }
 }
 

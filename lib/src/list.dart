@@ -25,28 +25,14 @@ class AlphabetList extends StatefulWidget {
 }
 
 class _AlphabetListState extends State<AlphabetList> {
-  GlobalKey customScrollKey = GlobalKey();
+  late GlobalKey customScrollKey;
 
   @override
   void initState() {
     super.initState();
-    widget.scrollController.addListener(() {
-      RenderBox? customScrollViewRenderBox;
-      try {
-        customScrollViewRenderBox =
-            customScrollKey.currentContext?.findRenderObject() as RenderBox;
-        widget.symbolChangeNotifierList.value = _getFirstVisibleItemGroupSymbol(
-            customScrollViewRenderBox, widget.items,);
-      } catch (_) {}
-    });
-    widget.symbolChangeNotifierScrollbar.addListener(
-      () {
-        final String? tag = widget.symbolChangeNotifierScrollbar.value;
-        if (tag != null) {
-          _showGroup(tag);
-        }
-      },
-    );
+    customScrollKey = GlobalKey();
+    widget.scrollController.addListener(_scrollControllerListener);
+    widget.symbolChangeNotifierScrollbar.addListener(_symbolChangeNotifierScrollbarListener);
   }
 
   @override
@@ -86,6 +72,33 @@ class _AlphabetListState extends State<AlphabetList> {
     );
   }
 
+  @override
+  void dispose() {
+    widget.symbolChangeNotifierScrollbar.removeListener(_symbolChangeNotifierScrollbarListener);
+    widget.scrollController.removeListener(_scrollControllerListener);
+    super.dispose();
+  }
+
+
+  void _scrollControllerListener() {
+    RenderBox? customScrollViewRenderBox;
+    try {
+      customScrollViewRenderBox =
+      customScrollKey.currentContext?.findRenderObject() as RenderBox;
+      widget.symbolChangeNotifierList.value = _getFirstVisibleItemGroupSymbol(
+        customScrollViewRenderBox,
+        widget.items,
+      );
+    } catch (_) {}
+  }
+
+  void _symbolChangeNotifierScrollbarListener() {
+    final String? tag = widget.symbolChangeNotifierScrollbar.value;
+    if (tag != null) {
+      _showGroup(tag);
+    }
+  }
+
   void _showGroup(String symbol) {
     if (widget.items.where((element) => element.tag == symbol).isNotEmpty) {
       widget.scrollController.position.ensureVisible(
@@ -118,28 +131,4 @@ class _AlphabetListState extends State<AlphabetList> {
     }
     return hit;
   }
-}
-
-class SectionHeaderDelegate extends SliverPersistentHeaderDelegate {
-  SectionHeaderDelegate(this.title, [this.height = 50]);
-
-  final String title;
-  final double height;
-
-  @override
-  Widget build(context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      alignment: Alignment.center,
-      child: Text(title),
-    );
-  }
-
-  @override
-  double get maxExtent => height;
-
-  @override
-  double get minExtent => height;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => false;
 }

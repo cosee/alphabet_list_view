@@ -23,24 +23,18 @@ class AlphabetScrollbar extends StatefulWidget {
 }
 
 class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
- late  String selectedSymbol;
+  late String selectedSymbol;
   late Map<String, GlobalKey> symbolKeys;
-
-
 
   @override
   void initState() {
     super.initState();
     selectedSymbol = widget.items.first.tag;
     symbolKeys = {
-      for (var k in widget.alphabetScrollbarOptions.symbols) k: GlobalKey(),
+      for (var symbol in widget.alphabetScrollbarOptions.symbols) symbol: GlobalKey(),
     };
-    widget.symbolChangeNotifierList.addListener(() {
-widget.symbolChangeNotifierScrollbar.value = null;
-      setState(() {
-        selectedSymbol = widget.symbolChangeNotifierList.value ?? selectedSymbol ;
-      });
-    });
+    widget.symbolChangeNotifierList
+        .addListener(_symbolChangeNotifierListListener);
   }
 
   @override
@@ -70,7 +64,16 @@ widget.symbolChangeNotifierScrollbar.value = null;
 
   @override
   void dispose() {
+    widget.symbolChangeNotifierList
+        .removeListener(_symbolChangeNotifierListListener);
     super.dispose();
+  }
+
+  void _symbolChangeNotifierListListener() {
+    widget.symbolChangeNotifierScrollbar.value = null;
+    setState(() {
+      selectedSymbol = widget.symbolChangeNotifierList.value ?? selectedSymbol;
+    });
   }
 
   void _pointerMoveEventHandler(PointerEvent event) {
@@ -101,7 +104,6 @@ widget.symbolChangeNotifierScrollbar.value = null;
   }
 
   void _onSymbolTriggered(String symbol) {
-    print("ertzui");
     widget.symbolChangeNotifierScrollbar.value = symbol;
     setState(() {
       selectedSymbol = symbol;

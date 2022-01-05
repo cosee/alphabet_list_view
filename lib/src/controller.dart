@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 class SymbolChangeNotifier extends ChangeNotifier
     implements ValueListenable<String?> {
-  SymbolChangeNotifier(this._value);
+  SymbolChangeNotifier([this._value]);
 
   @override
   String? get value => _value;
