@@ -1,6 +1,5 @@
 import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:alphabet_list_view/src/controller.dart';
-import 'package:alphabet_list_view/src/options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
@@ -32,7 +31,8 @@ class _AlphabetListState extends State<AlphabetList> {
     super.initState();
     customScrollKey = GlobalKey();
     widget.scrollController.addListener(_scrollControllerListener);
-    widget.symbolChangeNotifierScrollbar.addListener(_symbolChangeNotifierScrollbarListener);
+    widget.symbolChangeNotifierScrollbar
+        .addListener(_symbolChangeNotifierScrollbarListener);
   }
 
   @override
@@ -41,6 +41,16 @@ class _AlphabetListState extends State<AlphabetList> {
       key: customScrollKey,
       controller: widget.scrollController,
       slivers: widget.items
+          .where(
+            (element) {
+              if (widget
+                  .alphabetListOptions.showSectionHeaderForEmptySections) {
+                return true;
+              } else {
+                return (element.childrenDelegate.estimatedChildCount ?? 0) > 0;
+              }
+            },
+          )
           .map(
             (item) {
               return [
@@ -50,16 +60,18 @@ class _AlphabetListState extends State<AlphabetList> {
                   ),
                 ),
                 SliverStickyHeader(
-                  sticky: true,
-                  header: Container(
-                    height: 60.0,
-                    color: Colors.lightBlue,
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      item.tag,
-                    ),
-                  ),
+                  sticky: widget.alphabetListOptions.stickySectionHeader,
+                  header: widget.alphabetListOptions.showSectionHeader
+                      ? Container(
+                          height: 60.0,
+                          color: Colors.lightBlue,
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            item.tag,
+                          ),
+                        )
+                      : const SizedBox.shrink(),
                   sliver: SliverList(
                     delegate: item.childrenDelegate,
                   ),
@@ -74,17 +86,17 @@ class _AlphabetListState extends State<AlphabetList> {
 
   @override
   void dispose() {
-    widget.symbolChangeNotifierScrollbar.removeListener(_symbolChangeNotifierScrollbarListener);
+    widget.symbolChangeNotifierScrollbar
+        .removeListener(_symbolChangeNotifierScrollbarListener);
     widget.scrollController.removeListener(_scrollControllerListener);
     super.dispose();
   }
-
 
   void _scrollControllerListener() {
     RenderBox? customScrollViewRenderBox;
     try {
       customScrollViewRenderBox =
-      customScrollKey.currentContext?.findRenderObject() as RenderBox;
+          customScrollKey.currentContext?.findRenderObject() as RenderBox;
       widget.symbolChangeNotifierList.value = _getFirstVisibleItemGroupSymbol(
         customScrollViewRenderBox,
         widget.items,

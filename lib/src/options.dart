@@ -11,8 +11,15 @@ class AlphabetListViewOptions {
 }
 
 class AlphabetListOptions {
-  const AlphabetListOptions({this.showSectionHeader = true});
+  const AlphabetListOptions({
+    this.showSectionHeader = true,
+    this.stickySectionHeader = true,
+    this.showSectionHeaderForEmptySections = false,
+  });
+
   final bool showSectionHeader;
+  final bool stickySectionHeader;
+  final bool showSectionHeaderForEmptySections;
 }
 
 class AlphabetScrollbarOptions {

@@ -25,6 +25,13 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: AlphabetListView(
+        alphabetListViewOptions: const AlphabetListViewOptions(
+          alphabetListOptions: AlphabetListOptions(
+            showSectionHeader: true,
+            showSectionHeaderForEmptySections: true,
+            stickySectionHeader: true,
+          ),
+        ),
         items: items,
       ),
     );
@@ -40,8 +47,8 @@ List<AlphabetListViewItemGroup> items = [
     itemBuilder: (context, index) => Text(index.toString()),
     itemCount: 10,
   ),
-  AlphabetListViewItemGroup(tag: 'C', children: [
-    for (var i = 0; i < 5; i++) const TestText('CCC'),
+  AlphabetListViewItemGroup(tag: 'Z', children: [
+    for (var i = 0; i < 5; i++) const TestText('ZZZ'),
   ]),
   AlphabetListViewItemGroup(tag: 'D', children: [
     for (var i = 0; i < 1; i++) const TestText('DDD'),

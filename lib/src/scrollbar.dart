@@ -1,6 +1,5 @@
 import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:alphabet_list_view/src/controller.dart';
-import 'package:alphabet_list_view/src/options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 

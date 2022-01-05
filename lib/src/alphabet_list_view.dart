@@ -12,7 +12,7 @@ class AlphabetListView extends StatefulWidget {
     this.scrollController,
   }) : super(key: key);
 
-  final List<AlphabetListViewItemGroup> items;
+  final Iterable<AlphabetListViewItemGroup> items;
   final AlphabetListViewOptions alphabetListViewOptions;
   final ScrollController? scrollController;
 
@@ -21,13 +21,19 @@ class AlphabetListView extends StatefulWidget {
 }
 
 class _AlphabetListViewState extends State<AlphabetListView> {
+  late List<AlphabetListViewItemGroup> sortedItems;
   late ScrollController scrollController;
+
   late SymbolChangeNotifier symbolChangeNotifierScrollbar;
   late SymbolChangeNotifier symbolChangeNotifierList;
 
   @override
   void initState() {
     super.initState();
+    sortedItems = _generateAfterSymbolsSortedList(
+      widget.items,
+      widget.alphabetListViewOptions.alphabetScrollbarOptions.symbols,
+    );
     scrollController = widget.scrollController ?? ScrollController();
     symbolChangeNotifierScrollbar = SymbolChangeNotifier();
     symbolChangeNotifierList = SymbolChangeNotifier();
@@ -39,14 +45,15 @@ class _AlphabetListViewState extends State<AlphabetListView> {
       children: [
         Expanded(
           child: AlphabetList(
-            items: widget.items,
+            items: sortedItems,
             scrollController: scrollController,
+            alphabetListOptions: widget.alphabetListViewOptions.alphabetListOptions,
             symbolChangeNotifierList: symbolChangeNotifierList,
             symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
           ),
         ),
         AlphabetScrollbar(
-          items: widget.items,
+          items: sortedItems,
           alphabetScrollbarOptions:
               widget.alphabetListViewOptions.alphabetScrollbarOptions,
           symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
@@ -64,6 +71,21 @@ class _AlphabetListViewState extends State<AlphabetListView> {
       scrollController.dispose();
     }
     super.dispose();
+  }
+
+  List<AlphabetListViewItemGroup> _generateAfterSymbolsSortedList(
+    Iterable<AlphabetListViewItemGroup> items,
+    List<String> symbols,
+  ) {
+    return [
+      for (String symbol in symbols)
+        items.firstWhere(
+          (item) {
+            return item.tag == symbol;
+          },
+          orElse: () => AlphabetListViewItemGroup(tag: symbol, children: []),
+        ),
+    ];
   }
 }
 
