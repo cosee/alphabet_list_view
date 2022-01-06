@@ -1,6 +1,5 @@
 import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:alphabet_list_view/src/controller.dart';
-import 'package:alphabet_list_view/src/enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -25,14 +24,15 @@ class AlphabetScrollbar extends StatefulWidget {
 class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   late String selectedSymbol;
   late Map<String, GlobalKey> symbolKeys;
+  late List<String> uniqueItems;
 
   @override
   void initState() {
     super.initState();
-    selectedSymbol = widget.items.first.tag;
+    uniqueItems = widget.alphabetScrollbarOptions.symbols.toSet().toList();
+    selectedSymbol = widget.items.isEmpty ? '' : widget.items.first.tag;
     symbolKeys = {
-      for (var symbol in widget.alphabetScrollbarOptions.symbols)
-        symbol: GlobalKey(),
+      for (var symbol in uniqueItems) symbol: GlobalKey(),
     };
     widget.symbolChangeNotifierList
         .addListener(_symbolChangeNotifierListListener);
@@ -40,24 +40,32 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 20,
-      child: Listener(
-        onPointerMove: _pointerMoveEventHandler,
-        onPointerDown: _pointerMoveEventHandler,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: widget.alphabetScrollbarOptions.symbols.map((symbol) {
-            return SizedBox(
-              width: double.infinity,
-              key: symbolKeys[symbol],
-              child: _IndexBarItem(
-                symbol: symbol,
-                state: _getSymbolState(symbol),
-              ),
-            );
-          }).toList(),
+    return Container(
+      color: widget.alphabetScrollbarOptions.backgroundColor,
+      alignment: Alignment.center,
+      child: FittedBox(
+        child: SizedBox(
+          width: widget.alphabetScrollbarOptions.width,
+          child: Listener(
+            onPointerMove: _pointerMoveEventHandler,
+            onPointerDown: _pointerMoveEventHandler,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: uniqueItems.map((symbol) {
+                return SizedBox(
+                  key: symbolKeys[symbol],
+                  child: widget.alphabetScrollbarOptions
+                          .alphabetScrollbarSymbolBuilder
+                          ?.call(context, symbol, _getSymbolState(symbol)) ??
+                      _DefaultScrollbarSymbol(
+                        symbol: symbol,
+                        state: _getSymbolState(symbol),
+                      ),
+                );
+              }).toList(),
+            ),
+          ),
         ),
       ),
     );
@@ -141,8 +149,8 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   }
 }
 
-class _IndexBarItem extends StatelessWidget {
-  const _IndexBarItem({
+class _DefaultScrollbarSymbol extends StatelessWidget {
+  const _DefaultScrollbarSymbol({
     Key? key,
     required this.symbol,
     required this.state,

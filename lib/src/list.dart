@@ -33,6 +33,8 @@ class _AlphabetListState extends State<AlphabetList> {
     widget.scrollController.addListener(_scrollControllerListener);
     widget.symbolChangeNotifierScrollbar
         .addListener(_symbolChangeNotifierScrollbarListener);
+    WidgetsBinding.instance
+        ?.addPostFrameCallback((_) =>     _scrollControllerListener());
   }
 
   @override

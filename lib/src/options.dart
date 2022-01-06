@@ -1,3 +1,4 @@
+import 'package:alphabet_list_view/src/enum.dart';
 import 'package:flutter/material.dart';
 
 class AlphabetListViewOptions {
@@ -24,14 +25,24 @@ class AlphabetListOptions {
 
 class AlphabetScrollbarOptions {
   const AlphabetScrollbarOptions({
+    this.width = 40,
+    this.backgroundColor,
     this.alphabetHintOptions,
     this.symbols = defaultSymbols,
     this.jumpToSymbolsWithNoEntries = false,
+    this.alphabetScrollbarSymbolBuilder,
   });
 
+  final double width;
+  final Color? backgroundColor;
   final AlphabetHintOptions? alphabetHintOptions;
-  final List<String> symbols;
+  final Iterable<String> symbols;
   final bool jumpToSymbolsWithNoEntries;
+  final Widget Function(
+    BuildContext context,
+    String symbol,
+    ScrollbarItemState state,
+  )? alphabetScrollbarSymbolBuilder;
 }
 
 class AlphabetHintOptions {

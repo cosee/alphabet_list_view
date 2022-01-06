@@ -32,7 +32,7 @@ class _AlphabetListViewState extends State<AlphabetListView> {
     super.initState();
     sortedItems = _generateAfterSymbolsSortedList(
       widget.items,
-      widget.alphabetListViewOptions.alphabetScrollbarOptions.symbols,
+      widget.alphabetListViewOptions.alphabetScrollbarOptions.symbols.toSet().toList(),
     );
     scrollController = widget.scrollController ?? ScrollController();
     symbolChangeNotifierScrollbar = SymbolChangeNotifier();
@@ -41,7 +41,7 @@ class _AlphabetListViewState extends State<AlphabetListView> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Row(crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
           child: AlphabetList(
