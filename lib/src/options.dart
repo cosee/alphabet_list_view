@@ -26,10 +26,12 @@ class AlphabetScrollbarOptions {
   const AlphabetScrollbarOptions({
     this.alphabetHintOptions,
     this.symbols = defaultSymbols,
+    this.jumpToSymbolsWithNoEntries = false,
   });
 
   final AlphabetHintOptions? alphabetHintOptions;
   final List<String> symbols;
+  final bool jumpToSymbolsWithNoEntries;
 }
 
 class AlphabetHintOptions {

@@ -27,11 +27,13 @@ class Home extends StatelessWidget {
       body: AlphabetListView(
         alphabetListViewOptions: const AlphabetListViewOptions(
           alphabetListOptions: AlphabetListOptions(
-            showSectionHeader: true,
+            showSectionHeader: false,
             showSectionHeaderForEmptySections: false,
             stickySectionHeader: true,
           ),
+          alphabetScrollbarOptions: AlphabetScrollbarOptions(jumpToSymbolsWithNoEntries: false),
         ),
+
         items: items,
       ),
     );

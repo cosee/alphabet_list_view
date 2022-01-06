@@ -1,5 +1,6 @@
 import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:alphabet_list_view/src/controller.dart';
+import 'package:alphabet_list_view/src/enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -47,19 +48,36 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
-          children: widget.alphabetScrollbarOptions.symbols
-              .map((symbol) => SizedBox(
-                    width: double.infinity,
-                    key: symbolKeys[symbol],
-                    child: _IndexBarItem(
-                      symbol: symbol,
-                      selected: selectedSymbol == symbol,
-                    ),
-                  ))
-              .toList(),
+          children: widget.alphabetScrollbarOptions.symbols.map((symbol) {
+            return SizedBox(
+              width: double.infinity,
+              key: symbolKeys[symbol],
+              child: _IndexBarItem(
+                symbol: symbol,
+                state: _getSymbolState(symbol),
+              ),
+            );
+          }).toList(),
         ),
       ),
     );
+  }
+
+  ScrollbarItemState _getSymbolState(String symbol) {
+    Iterable<AlphabetListViewItemGroup> result =
+        widget.items.where((item) => item.tag == symbol);
+    if (result.isNotEmpty) {
+      if ((result.first.childrenDelegate.estimatedChildCount ?? 0) == 0 &&
+          !widget.alphabetScrollbarOptions.jumpToSymbolsWithNoEntries) {
+        return ScrollbarItemState.deactivated;
+      } else if (result.first.tag == selectedSymbol) {
+        return ScrollbarItemState.active;
+      } else {
+        return ScrollbarItemState.inactive;
+      }
+    } else {
+      return ScrollbarItemState.deactivated;
+    }
   }
 
   @override
@@ -105,10 +123,21 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   }
 
   void _onSymbolTriggered(String symbol) {
-    widget.symbolChangeNotifierScrollbar.value = symbol;
-    setState(() {
-      selectedSymbol = symbol;
-    });
+    Iterable<AlphabetListViewItemGroup> result =
+        widget.items.where((item) => item.tag == symbol);
+
+    if (!widget.alphabetScrollbarOptions.jumpToSymbolsWithNoEntries) {
+      result = result.where(
+        (item) => (item.childrenDelegate.estimatedChildCount ?? 0) > 0,
+      );
+    }
+
+    if (result.isNotEmpty) {
+      widget.symbolChangeNotifierScrollbar.value = symbol;
+      setState(() {
+        selectedSymbol = symbol;
+      });
+    }
   }
 }
 
@@ -116,17 +145,32 @@ class _IndexBarItem extends StatelessWidget {
   const _IndexBarItem({
     Key? key,
     required this.symbol,
-    required this.selected,
+    required this.state,
   }) : super(key: key);
 
   final String symbol;
-  final bool selected;
+  final ScrollbarItemState state;
 
   @override
   Widget build(BuildContext context) {
+    Color color;
+    switch (state) {
+      case (ScrollbarItemState.active):
+        color = Colors.red;
+        break;
+      case (ScrollbarItemState.inactive):
+        color = Colors.black;
+        break;
+      case (ScrollbarItemState.deactivated):
+        color = Colors.grey;
+        break;
+      default:
+        color = Colors.black;
+    }
+
     return Text(
       symbol,
-      style: TextStyle(color: selected ? Colors.red : Colors.black),
+      style: TextStyle(color: color),
     );
   }
 }
