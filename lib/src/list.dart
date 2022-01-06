@@ -113,11 +113,13 @@ class _AlphabetListState extends State<AlphabetList> {
 
   void _showGroup(String symbol) {
     if (widget.items.where((element) => element.tag == symbol).isNotEmpty) {
-      widget.scrollController.position.ensureVisible(
-        (widget.items.firstWhere((element) => element.tag == symbol).key)
-            .currentContext!
-            .findRenderObject()!,
-      );
+      try {
+        widget.scrollController.position.ensureVisible(
+          (widget.items.firstWhere((element) => element.tag == symbol).key)
+              .currentContext!
+              .findRenderObject()!,
+        );
+      } catch (_) {}
     }
   }
 

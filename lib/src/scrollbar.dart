@@ -30,7 +30,8 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
     super.initState();
     selectedSymbol = widget.items.first.tag;
     symbolKeys = {
-      for (var symbol in widget.alphabetScrollbarOptions.symbols) symbol: GlobalKey(),
+      for (var symbol in widget.alphabetScrollbarOptions.symbols)
+        symbol: GlobalKey(),
     };
     widget.symbolChangeNotifierList
         .addListener(_symbolChangeNotifierListListener);
@@ -89,16 +90,17 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
     String? touchedSymbol;
 
     final result = BoxHitTestResult();
-    symbolKeys.forEach((symbol, key) {
+    for (var entry in symbolKeys.entries) {
       try {
         RenderBox renderBox =
-            key.currentContext?.findRenderObject() as RenderBox;
+            entry.value.currentContext?.findRenderObject() as RenderBox;
         Offset localLocation = renderBox.globalToLocal(details.position);
         if (renderBox.hitTest(result, position: localLocation)) {
-          touchedSymbol = symbol;
+          touchedSymbol = entry.key;
+          break;
         }
       } catch (_) {}
-    });
+    }
     return touchedSymbol;
   }
 

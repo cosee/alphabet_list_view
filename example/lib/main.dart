@@ -28,7 +28,7 @@ class Home extends StatelessWidget {
         alphabetListViewOptions: const AlphabetListViewOptions(
           alphabetListOptions: AlphabetListOptions(
             showSectionHeader: true,
-            showSectionHeaderForEmptySections: true,
+            showSectionHeaderForEmptySections: false,
             stickySectionHeader: true,
           ),
         ),
