@@ -13,13 +13,15 @@ class AlphabetListViewOptions {
 
 class AlphabetListOptions {
   const AlphabetListOptions({
+    this.backgroundColor,
     this.physics,
     this.showSectionHeader = true,
     this.stickySectionHeader = true,
     this.showSectionHeaderForEmptySections = false,
-    this.alphabetListSymbolBuilder,
+    this.alphabetListHeaderBuilder,
   });
 
+  final Color? backgroundColor;
   final ScrollPhysics? physics;
   final bool showSectionHeader;
   final bool stickySectionHeader;
@@ -27,7 +29,7 @@ class AlphabetListOptions {
   final Widget Function(
       BuildContext context,
       String symbol,
-      )? alphabetListSymbolBuilder;
+      )? alphabetListHeaderBuilder;
 }
 
 class AlphabetScrollbarOptions {

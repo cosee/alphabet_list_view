@@ -42,8 +42,8 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   Widget build(BuildContext context) {
     return Container(
       color: widget.alphabetScrollbarOptions.backgroundColor,
-      alignment: Alignment.center,
       child: FittedBox(
+        fit:BoxFit.scaleDown,
         child: SizedBox(
           width: widget.alphabetScrollbarOptions.width,
           child: Listener(
@@ -51,10 +51,12 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
             onPointerMove: _pointerMoveEventHandler,
             onPointerDown: _pointerMoveEventHandler,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
               mainAxisSize: MainAxisSize.min,
               children: uniqueItems.map((symbol) {
-                return SizedBox(
+                return Container(
+                  color: Colors.transparent,
+                  width: double.infinity,
                   key: symbolKeys[symbol],
                   child: widget.alphabetScrollbarOptions
                           .alphabetScrollbarSymbolBuilder
@@ -177,14 +179,12 @@ class _DefaultScrollbarSymbol extends StatelessWidget {
         color = Colors.black;
     }
 
-    return Container(
-      color: Colors.transparent,
-      width: double.infinity,
-      child: Center(
-        child: Text(
-          symbol,
-          style: TextStyle(color: color),
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Text(
+        symbol,
+        style: TextStyle(color: color),
+        textAlign: TextAlign.center,
       ),
     );
   }

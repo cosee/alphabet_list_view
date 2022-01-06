@@ -39,47 +39,51 @@ class _AlphabetListState extends State<AlphabetList> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      key: customScrollKey,
-      controller: widget.scrollController,
-      physics: widget.alphabetListOptions.physics,
-      slivers: widget.items
-          .where(
-            (element) {
-              if (widget
-                  .alphabetListOptions.showSectionHeaderForEmptySections) {
-                return true;
-              } else {
-                return (element.childrenDelegate.estimatedChildCount ?? 0) > 0;
-              }
-            },
-          )
-          .map(
-            (item) {
-              return [
-                SliverToBoxAdapter(
-                  child: Container(
-                    key: item.key,
+    return Container(
+      color: widget.alphabetListOptions.backgroundColor,
+      child: CustomScrollView(
+        key: customScrollKey,
+        controller: widget.scrollController,
+        physics: widget.alphabetListOptions.physics,
+        slivers: widget.items
+            .where(
+              (element) {
+                if (widget
+                    .alphabetListOptions.showSectionHeaderForEmptySections) {
+                  return true;
+                } else {
+                  return (element.childrenDelegate.estimatedChildCount ?? 0) >
+                      0;
+                }
+              },
+            )
+            .map(
+              (item) {
+                return [
+                  SliverToBoxAdapter(
+                    child: Container(
+                      key: item.key,
+                    ),
                   ),
-                ),
-                SliverStickyHeader(
-                  sticky: widget.alphabetListOptions.stickySectionHeader,
-                  header: widget.alphabetListOptions.showSectionHeader
-                      ? widget.alphabetListOptions.alphabetListSymbolBuilder
-                              ?.call(context, item.tag) ??
-                          _DefaultAlphabetListHeader(
-                            symbol: item.tag,
-                          )
-                      : const SizedBox.shrink(),
-                  sliver: SliverList(
-                    delegate: item.childrenDelegate,
+                  SliverStickyHeader(
+                    sticky: widget.alphabetListOptions.stickySectionHeader,
+                    header: widget.alphabetListOptions.showSectionHeader
+                        ? widget.alphabetListOptions.alphabetListHeaderBuilder
+                                ?.call(context, item.tag) ??
+                            _DefaultAlphabetListHeader(
+                              symbol: item.tag,
+                            )
+                        : const SizedBox.shrink(),
+                    sliver: SliverList(
+                      delegate: item.childrenDelegate,
+                    ),
                   ),
-                ),
-              ];
-            },
-          )
-          .expand((slivers) => slivers)
-          .toList(),
+                ];
+              },
+            )
+            .expand((slivers) => slivers)
+            .toList(),
+      ),
     );
   }
 

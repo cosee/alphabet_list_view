@@ -24,41 +24,29 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: AlphabetListView(
-        alphabetListViewOptions: AlphabetListViewOptions(
-          alphabetListOptions: AlphabetListOptions(
-            physics: const AlwaysScrollableScrollPhysics(),
-            showSectionHeader: true,
-            showSectionHeaderForEmptySections: false,
-            stickySectionHeader: true,
-            alphabetListSymbolBuilder: (context, symbol) {
-              return Container(
-                color: Colors.red,
-                child: Text('#$symbol'),
-              );
-            },
+      body: SafeArea(
+        child: AlphabetListView(
+          alphabetListViewOptions: AlphabetListViewOptions(
+            alphabetListOptions: AlphabetListOptions(
+              backgroundColor: Colors.green,
+              physics: const AlwaysScrollableScrollPhysics(),
+              showSectionHeader: true,
+              showSectionHeaderForEmptySections: false,
+              stickySectionHeader: true,
+              alphabetListHeaderBuilder: (context, symbol) {
+                return Container(
+                  color: Colors.red,
+                  child: Text('#$symbol'),
+                );
+              },
+            ),
+            alphabetScrollbarOptions: const AlphabetScrollbarOptions(
+              jumpToSymbolsWithNoEntries: false,
+              backgroundColor: Colors.white54,
+            ),
           ),
-          alphabetScrollbarOptions: const AlphabetScrollbarOptions(
-            jumpToSymbolsWithNoEntries: false,
-            symbols: [
-              'A',
-              'A',
-              'B',
-              'Z',
-              'C',
-              'D',
-              'E',
-              'F',
-              'G',
-              'H',
-              'I',
-              '😔',
-              '1',
-            ],
-            backgroundColor: Colors.white60,
-          ),
+          items: items,
         ),
-        items: items,
       ),
     );
   }
@@ -66,7 +54,7 @@ class Home extends StatelessWidget {
 
 List<AlphabetListViewItemGroup> items = [
   AlphabetListViewItemGroup(tag: '1', children: [
-    for (var i = 0; i < 10; i++) const TestText('AAA'),
+    for (var i = 0; i < 10; i++) const Text('AAA'),
   ]),
   AlphabetListViewItemGroup.builder(
     tag: 'B',
@@ -78,61 +66,34 @@ List<AlphabetListViewItemGroup> items = [
       const Align(alignment: Alignment.centerLeft, child: Icon(Icons.work)),
   ]),
   AlphabetListViewItemGroup(tag: '😔', children: [
-    for (var i = 0; i < 1; i++) const TestText('DDD'),
+    for (var i = 0; i < 1; i++) const Text('DDD'),
   ]),
   AlphabetListViewItemGroup(tag: 'E', children: [
-    for (var i = 0; i < 10; i++)
+    for (var i = 0; i < 5; i++)
       const Align(
         alignment: Alignment.centerLeft,
-        child: CircularProgressIndicator(),
+        child: Text('EEE'),
       ),
   ]),
   AlphabetListViewItemGroup(tag: 'F', children: [
-    for (var i = 0; i < 31; i++) const TestText('FFF'),
+    for (var i = 0; i < 31; i++) const Text('FFF'),
   ]),
   AlphabetListViewItemGroup(tag: 'G', children: [
-    for (var i = 0; i < 2; i++) const TestText('GGG'),
+    for (var i = 0; i < 2; i++) const Text('GGG'),
   ]),
   AlphabetListViewItemGroup(tag: 'H', children: [
-    for (var i = 0; i < 33; i++) const TestText('HHH'),
+    for (var i = 0; i < 33; i++) const Text('HHH'),
   ]),
   AlphabetListViewItemGroup(tag: 'I', children: [
-    for (var i = 0; i < 0; i++) const TestText('III'),
+    for (var i = 0; i < 0; i++) const Text('III'),
   ]),
   AlphabetListViewItemGroup(tag: 'J', children: [
-    for (var i = 0; i < 4; i++) const TestText('JJJ'),
+    for (var i = 0; i < 4; i++) const Text('JJJ'),
   ]),
   AlphabetListViewItemGroup(tag: 'K', children: [
-    for (var i = 0; i < 8; i++) const TestText('KKK'),
+    for (var i = 0; i < 8; i++) const Text('KKK'),
   ]),
   AlphabetListViewItemGroup(tag: 'L', children: [
-    for (var i = 0; i < 2; i++) const TestText('LLL'),
+    for (var i = 0; i < 2; i++) const Text('LLL'),
   ]),
 ];
-
-class TestText extends StatefulWidget {
-  const TestText(this.string, {Key? key}) : super(key: key);
-  final String string;
-
-  @override
-  _TestTextState createState() => _TestTextState();
-}
-
-class _TestTextState extends State<TestText> {
-  @override
-  void initState() {
-    super.initState();
-    //print("INIT");
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(widget.string);
-  }
-
-  @override
-  void dispose() {
-    //print("DISPOSE");
-    super.dispose();
-  }
-}
