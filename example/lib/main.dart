@@ -26,14 +26,35 @@ class Home extends StatelessWidget {
       appBar: AppBar(),
       body: AlphabetListView(
         alphabetListViewOptions: AlphabetListViewOptions(
-          alphabetListOptions: const AlphabetListOptions(
+          alphabetListOptions: AlphabetListOptions(
+            physics: const AlwaysScrollableScrollPhysics(),
             showSectionHeader: true,
             showSectionHeaderForEmptySections: false,
             stickySectionHeader: true,
+            alphabetListSymbolBuilder: (context, symbol) {
+              return Container(
+                color: Colors.red,
+                child: Text('#$symbol'),
+              );
+            },
           ),
-          alphabetScrollbarOptions: AlphabetScrollbarOptions(
+          alphabetScrollbarOptions: const AlphabetScrollbarOptions(
             jumpToSymbolsWithNoEntries: false,
-            symbols: [for (var i = 0; i < 2; i++) i.toString()],
+            symbols: [
+              'A',
+              'A',
+              'B',
+              'Z',
+              'C',
+              'D',
+              'E',
+              'F',
+              'G',
+              'H',
+              'I',
+              '😔',
+              '1',
+            ],
             backgroundColor: Colors.white60,
           ),
         ),
@@ -53,13 +74,18 @@ List<AlphabetListViewItemGroup> items = [
     itemCount: 10,
   ),
   AlphabetListViewItemGroup(tag: 'Z', children: [
-    for (var i = 0; i < 5; i++) const TestText('ZZZ'),
+    for (var i = 0; i < 5; i++)
+      const Align(alignment: Alignment.centerLeft, child: Icon(Icons.work)),
   ]),
   AlphabetListViewItemGroup(tag: '😔', children: [
     for (var i = 0; i < 1; i++) const TestText('DDD'),
   ]),
   AlphabetListViewItemGroup(tag: 'E', children: [
-    for (var i = 0; i < 2; i++) const TestText('EEE'),
+    for (var i = 0; i < 10; i++)
+      const Align(
+        alignment: Alignment.centerLeft,
+        child: CircularProgressIndicator(),
+      ),
   ]),
   AlphabetListViewItemGroup(tag: 'F', children: [
     for (var i = 0; i < 31; i++) const TestText('FFF'),

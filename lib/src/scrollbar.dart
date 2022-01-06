@@ -47,6 +47,7 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
         child: SizedBox(
           width: widget.alphabetScrollbarOptions.width,
           child: Listener(
+            behavior: HitTestBehavior.translucent,
             onPointerMove: _pointerMoveEventHandler,
             onPointerDown: _pointerMoveEventHandler,
             child: Column(
@@ -164,7 +165,7 @@ class _DefaultScrollbarSymbol extends StatelessWidget {
     Color color;
     switch (state) {
       case (ScrollbarItemState.active):
-        color = Colors.red;
+        color = Theme.of(context).colorScheme.secondary;
         break;
       case (ScrollbarItemState.inactive):
         color = Colors.black;
@@ -176,9 +177,15 @@ class _DefaultScrollbarSymbol extends StatelessWidget {
         color = Colors.black;
     }
 
-    return Text(
-      symbol,
-      style: TextStyle(color: color),
+    return Container(
+      color: Colors.transparent,
+      width: double.infinity,
+      child: Center(
+        child: Text(
+          symbol,
+          style: TextStyle(color: color),
+        ),
+      ),
     );
   }
 }

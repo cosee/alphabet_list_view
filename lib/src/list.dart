@@ -34,7 +34,7 @@ class _AlphabetListState extends State<AlphabetList> {
     widget.symbolChangeNotifierScrollbar
         .addListener(_symbolChangeNotifierScrollbarListener);
     WidgetsBinding.instance
-        ?.addPostFrameCallback((_) =>     _scrollControllerListener());
+        ?.addPostFrameCallback((_) => _scrollControllerListener());
   }
 
   @override
@@ -42,6 +42,7 @@ class _AlphabetListState extends State<AlphabetList> {
     return CustomScrollView(
       key: customScrollKey,
       controller: widget.scrollController,
+      physics: widget.alphabetListOptions.physics,
       slivers: widget.items
           .where(
             (element) {
@@ -64,15 +65,11 @@ class _AlphabetListState extends State<AlphabetList> {
                 SliverStickyHeader(
                   sticky: widget.alphabetListOptions.stickySectionHeader,
                   header: widget.alphabetListOptions.showSectionHeader
-                      ? Container(
-                          height: 60.0,
-                          color: Colors.lightBlue,
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            item.tag,
-                          ),
-                        )
+                      ? widget.alphabetListOptions.alphabetListSymbolBuilder
+                              ?.call(context, item.tag) ??
+                          _DefaultAlphabetListHeader(
+                            symbol: item.tag,
+                          )
                       : const SizedBox.shrink(),
                   sliver: SliverList(
                     delegate: item.childrenDelegate,
@@ -146,5 +143,25 @@ class _AlphabetListState extends State<AlphabetList> {
       } catch (_) {}
     }
     return hit;
+  }
+}
+
+class _DefaultAlphabetListHeader extends StatelessWidget {
+  const _DefaultAlphabetListHeader({Key? key, required this.symbol})
+      : super(key: key);
+
+  final String symbol;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 60.0,
+      color: Colors.lightBlue,
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      alignment: Alignment.centerLeft,
+      child: Text(
+        symbol,
+      ),
+    );
   }
 }
