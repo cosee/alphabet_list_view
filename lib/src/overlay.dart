@@ -32,17 +32,19 @@ class _AlphabetSymbolOverlayState extends State<AlphabetSymbolOverlay> {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: widget.alphabetOverlayOptions.alignment,
-      child: IgnorePointer(
-        child: AnimatedOpacity(
-          opacity: symbol == null ? .0 : opacity,
-          duration: const Duration(milliseconds: 100),
-          child: widget.alphabetOverlayOptions.alphabetOverlayBuilder
-                  ?.call(context, symbol ?? '?') ??
-              _DefaultAlphabetOverlay(
-                symbol: symbol ?? '?',
-              ),
+    return ExcludeSemantics(
+      child: Align(
+        alignment: widget.alphabetOverlayOptions.alignment,
+        child: IgnorePointer(
+          child: AnimatedOpacity(
+            opacity: symbol == null ? .0 : opacity,
+            duration: const Duration(milliseconds: 100),
+            child: widget.alphabetOverlayOptions.alphabetOverlayBuilder
+                    ?.call(context, symbol ?? '?') ??
+                _DefaultAlphabetOverlay(
+                  symbol: symbol ?? '?',
+                ),
+          ),
         ),
       ),
     );

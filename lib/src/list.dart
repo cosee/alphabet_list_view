@@ -67,13 +67,16 @@ class _AlphabetListState extends State<AlphabetList> {
                   ),
                   SliverStickyHeader(
                     sticky: widget.alphabetListOptions.stickySectionHeader,
-                    header: widget.alphabetListOptions.showSectionHeader
-                        ? widget.alphabetListOptions.alphabetListHeaderBuilder
-                                ?.call(context, item.tag) ??
-                            _DefaultAlphabetListHeader(
-                              symbol: item.tag,
-                            )
-                        : const SizedBox.shrink(),
+                    header: Semantics(
+                      header: true,
+                      child: widget.alphabetListOptions.showSectionHeader
+                          ? widget.alphabetListOptions.alphabetListHeaderBuilder
+                                  ?.call(context, item.tag) ??
+                              _DefaultAlphabetListHeader(
+                                symbol: item.tag,
+                              )
+                          : const SizedBox.shrink(),
+                    ),
                     sliver: SliverList(
                       delegate: item.childrenDelegate,
                     ),
@@ -162,9 +165,12 @@ class _DefaultAlphabetListHeader extends StatelessWidget {
       height: 50.0,
       color: Theme.of(context).colorScheme.primary,
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      alignment: Alignment.centerLeft,
-      child: Text(
-        symbol, style: const TextStyle(fontWeight: FontWeight.bold),
+      child: Center(
+        child: SizedBox(width: double.infinity,
+          child: Text(
+            symbol, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+        ),
       ),
     );
   }

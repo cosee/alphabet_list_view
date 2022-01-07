@@ -42,29 +42,32 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   Widget build(BuildContext context) {
     return Container(
       color: widget.alphabetScrollbarOptions.backgroundColor,
-      child: FittedBox(
-        fit:BoxFit.scaleDown,
-        child: SizedBox(
-          width: widget.alphabetScrollbarOptions.width,
-          child: Listener(
-            behavior: HitTestBehavior.translucent,
-            onPointerMove: _pointerMoveEventHandler,
-            onPointerDown: _pointerMoveEventHandler,
+      child: SizedBox(
+        width: widget.alphabetScrollbarOptions.width,
+        child: Listener(
+          behavior: HitTestBehavior.translucent,
+          onPointerMove: _pointerMoveEventHandler,
+          onPointerDown: _pointerMoveEventHandler,
+          child: Semantics(
+          explicitChildNodes: true,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               mainAxisSize: MainAxisSize.min,
               children: uniqueItems.map((symbol) {
-                return Container(
-                  color: Colors.transparent,
-                  width: double.infinity,
-                  key: symbolKeys[symbol],
-                  child: widget.alphabetScrollbarOptions
-                          .alphabetScrollbarSymbolBuilder
-                          ?.call(context, symbol, _getSymbolState(symbol)) ??
-                      _DefaultScrollbarSymbol(
-                        symbol: symbol,
-                        state: _getSymbolState(symbol),
-                      ),
+                return Semantics(
+                  button: true,
+                  child: Container(
+                    color: Colors.transparent,
+                    width: double.infinity,
+                    key: symbolKeys[symbol],
+                    child: widget.alphabetScrollbarOptions
+                            .alphabetScrollbarSymbolBuilder
+                            ?.call(context, symbol, _getSymbolState(symbol)) ??
+                        _DefaultScrollbarSymbol(
+                          symbol: symbol,
+                          state: _getSymbolState(symbol),
+                        ),
+                  ),
                 );
               }).toList(),
             ),
