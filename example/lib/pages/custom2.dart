@@ -38,7 +38,7 @@ class ExampleCustom2 extends StatelessWidget {
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    color: state == ScrollbarItemState.active
+                    color: state == AlphabetScrollbarItemState.active
                         ? Theme.of(context).colorScheme.primary
                         : Colors.transparent,
                   ),

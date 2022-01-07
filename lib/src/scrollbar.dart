@@ -78,20 +78,20 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
     );
   }
 
-  ScrollbarItemState _getSymbolState(String symbol) {
+  AlphabetScrollbarItemState _getSymbolState(String symbol) {
     Iterable<AlphabetListViewItemGroup> result =
         widget.items.where((item) => item.tag == symbol);
     if (result.isNotEmpty) {
       if ((result.first.childrenDelegate.estimatedChildCount ?? 0) == 0 &&
           !widget.alphabetScrollbarOptions.jumpToSymbolsWithNoEntries) {
-        return ScrollbarItemState.deactivated;
+        return AlphabetScrollbarItemState.deactivated;
       } else if (result.first.tag == selectedSymbol) {
-        return ScrollbarItemState.active;
+        return AlphabetScrollbarItemState.active;
       } else {
-        return ScrollbarItemState.inactive;
+        return AlphabetScrollbarItemState.inactive;
       }
     } else {
-      return ScrollbarItemState.deactivated;
+      return AlphabetScrollbarItemState.deactivated;
     }
   }
 
@@ -163,19 +163,19 @@ class _DefaultScrollbarSymbol extends StatelessWidget {
   }) : super(key: key);
 
   final String symbol;
-  final ScrollbarItemState state;
+  final AlphabetScrollbarItemState state;
 
   @override
   Widget build(BuildContext context) {
     Color color;
     switch (state) {
-      case (ScrollbarItemState.active):
+      case (AlphabetScrollbarItemState.active):
         color = Theme.of(context).colorScheme.secondary;
         break;
-      case (ScrollbarItemState.inactive):
+      case (AlphabetScrollbarItemState.inactive):
         color = Colors.black;
         break;
-      case (ScrollbarItemState.deactivated):
+      case (AlphabetScrollbarItemState.deactivated):
         color = Colors.grey;
         break;
       default:

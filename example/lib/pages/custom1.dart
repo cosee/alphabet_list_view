@@ -54,9 +54,9 @@ class ExampleCustom1 extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
           alphabetScrollbarSymbolBuilder: (context, symbol, state) {
             Color color;
-            if (state == ScrollbarItemState.active) {
+            if (state == AlphabetScrollbarItemState.active) {
               color = Colors.black;
-            } else if (state == ScrollbarItemState.deactivated) {
+            } else if (state == AlphabetScrollbarItemState.deactivated) {
               color = Colors.lightGreen;
             } else {
               color = Colors.white;
@@ -68,7 +68,7 @@ class ExampleCustom1 extends StatelessWidget {
                   borderRadius: const BorderRadius.horizontal(
                     left: Radius.circular(100.0),
                   ),
-                  color: state == ScrollbarItemState.active
+                  color: state == AlphabetScrollbarItemState.active
                       ? Colors.lightGreen
                       : null,
                 ),

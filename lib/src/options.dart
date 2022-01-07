@@ -52,7 +52,7 @@ class AlphabetScrollbarOptions {
   final Widget Function(
     BuildContext context,
     String symbol,
-    ScrollbarItemState state,
+    AlphabetScrollbarItemState state,
   )? alphabetScrollbarSymbolBuilder;
 }
 

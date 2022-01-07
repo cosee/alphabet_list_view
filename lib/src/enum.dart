@@ -1,4 +1,4 @@
-enum ScrollbarItemState {
+enum AlphabetScrollbarItemState {
   active,
   inactive,
   deactivated,
