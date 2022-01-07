@@ -1,0 +1,51 @@
+stages:
+  - generation
+  - check
+
+.cache: &cache
+  key:
+    files:
+      - pubspec.lock
+  paths:
+    - .dart_tool/
+
+generation:
+  stage: generation
+  cache: *cache
+  tags:
+    - flutter
+  script:
+    - flutter pub get
+    - flutter pub run build_runner build
+    - flutter format lib
+  artifacts:
+    paths:
+      - lib/**/*.g.dart
+      - lib/**/*.i18n.dart
+      - lib/**/*.config.dart
+      - test/**/*.config.dart
+    expire_in: 2 days
+
+test:
+  stage: check
+  cache: *cache
+  tags:
+    - flutter
+  script:
+    - flutter pub get
+    - flutter test
+
+check_style:
+  stage: check
+  tags:
+    - flutter
+  script:
+    - flutter format --set-exit-if-changed --dry-run lib
+
+lint:
+  stage: check
+  cache: *cache
+  tags:
+    - flutter
+  script:
+    - flutter analyze

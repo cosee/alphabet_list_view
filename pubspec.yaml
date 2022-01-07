@@ -1,6 +1,7 @@
 name: alphabet_list_view
 description: A scrollable list with sidebar
 version: 0.1.0
+
 publish_to: 'none'
 
 environment:

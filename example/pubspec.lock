@@ -14,7 +14,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.1.0"
   analyzer:
     dependency: transitive
     description:
@@ -186,13 +186,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
-  inview_notifier_list:
-    dependency: transitive
-    description:
-      name: inview_notifier_list
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
   lints:
     dependency: transitive
     description:
@@ -261,13 +254,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  stream_transform:
-    dependency: transitive
-    description:
-      name: stream_transform
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   string_scanner:
     dependency: transitive
     description:
