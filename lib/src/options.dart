@@ -39,7 +39,6 @@ class AlphabetScrollbarOptions {
   const AlphabetScrollbarOptions({
     this.width = 40,
     this.backgroundColor,
-    this.alphabetHintOptions,
     this.symbols = defaultSymbols,
     this.jumpToSymbolsWithNoEntries = false,
     this.alphabetScrollbarSymbolBuilder,
@@ -47,7 +46,6 @@ class AlphabetScrollbarOptions {
 
   final double width;
   final Color? backgroundColor;
-  final AlphabetOverlayOptions? alphabetHintOptions;
   final Iterable<String> symbols;
   final bool jumpToSymbolsWithNoEntries;
   final Widget Function(

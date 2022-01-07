@@ -1,6 +1,3 @@
-import 'package:alphabet_list_view/alphabet_list_view.dart';
-import 'package:flutter/material.dart';
-
 const Map<String, List<String>> animals = {
   'A': [
     'Admiral, indian red',
@@ -572,7 +569,6 @@ const Map<String, List<String>> animals = {
     'Worm snake (unidentified)',
     'Woylie',
   ],
-  'X': [],
   'Y': [
     'Yak',
     'Yellow baboon',
@@ -587,10 +583,56 @@ const Map<String, List<String>> animals = {
   ],
 };
 
-final List<AlphabetListViewItemGroup> apples = [
-  for (var animalLetter in animals.entries)
-    AlphabetListViewItemGroup(
-      tag: animalLetter.key,
-      children: animalLetter.value.map((animal) => Text(animal)).toList(),
-    ),
-];
+const List<String> emojiHeaders = ['😀', '🐶', '🍏'];
+const Map<String, List<String>> emojis = {
+  '😀': [
+    '😀',
+    '😃',
+    '😄',
+    '😁',
+    '😆',
+    '😅',
+    '😂',
+    '😊',
+    '😇',
+    '🙂',
+    '🙃',
+    '😉',
+  ],
+  '🐶': [
+    '🐶',
+    '🐱',
+    '🐭',
+    '🐹',
+    '🐰',
+    '🦊',
+    '🐻',
+    '🐼',
+    '🐻',
+    '‍❄',
+    '️🐨',
+    '🐯',
+    '🦁',
+    '🐮',
+    '🐷',
+    '🐽',
+    '🐸',
+    '🐵',
+    '🙈',
+    '🙉',
+    '🙊',
+  ],
+  '🍏': [
+    '🍏',
+    '🍎',
+    '🍐',
+    '🍊',
+    '🍋',
+    '🍌',
+    '🍉',
+    '🍇',
+    '🍓',
+    '🫐',
+    '🍈',
+  ],
+};

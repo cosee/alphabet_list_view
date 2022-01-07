@@ -1,4 +1,5 @@
 import 'package:alphabet_list_view_example/pages/custom1.dart';
+import 'package:alphabet_list_view_example/pages/custom2.dart';
 import 'package:alphabet_list_view_example/pages/default.dart';
 import 'package:alphabet_list_view_example/pages/rtl.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('AlphabetListView'),
@@ -36,16 +37,18 @@ class Home extends StatelessWidget {
               Tab(text: 'Default'),
               Tab(text: 'RTL'),
               Tab(text: 'Custom1'),
+              Tab(text: 'Custom2'),
             ],
           ),
         ),
-        body: const SafeArea(
+        body: SafeArea(
           child: TabBarView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               ExampleDefault(),
               ExampleRTL(),
               ExampleCustom1(),
+              ExampleCustom2(),
             ],
           ),
         ),

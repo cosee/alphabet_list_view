@@ -1,14 +1,22 @@
 import 'package:alphabet_list_view/alphabet_list_view.dart';
-import 'package:alphabet_list_view_example/items.dart' as items;
+import 'package:alphabet_list_view_example/repository.dart' as repo;
 import 'package:flutter/material.dart';
 
 class ExampleDefault extends StatelessWidget {
-  const ExampleDefault({Key? key}) : super(key: key);
+  ExampleDefault({Key? key}) : super(key: key);
+
+  final List<AlphabetListViewItemGroup> apples = [
+    for (var animalLetter in repo.animals.entries)
+      AlphabetListViewItemGroup(
+        tag: animalLetter.key,
+        children: animalLetter.value.map((animal) => Text(animal)).toList(),
+      ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return AlphabetListView(
-      items: items.apples,
+      items: apples,
     );
   }
 }
