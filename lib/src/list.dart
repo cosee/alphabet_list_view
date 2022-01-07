@@ -166,9 +166,11 @@ class _DefaultAlphabetListHeader extends StatelessWidget {
       color: Theme.of(context).colorScheme.primary,
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Center(
-        child: SizedBox(width: double.infinity,
+        child: SizedBox(
+          width: double.infinity,
           child: Text(
-            symbol, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            symbol,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ),
       ),
