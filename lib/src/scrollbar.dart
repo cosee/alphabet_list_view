@@ -30,7 +30,7 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   void initState() {
     super.initState();
     uniqueItems = widget.alphabetScrollbarOptions.symbols.toSet().toList();
-    selectedSymbol = widget.items.isEmpty ? '' : widget.items.first.tag;
+    selectedSymbol = widget.items.isEmpty ? '#' : widget.items.first.tag;
     symbolKeys = {
       for (var symbol in uniqueItems) symbol: GlobalKey(),
     };
@@ -99,7 +99,6 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   }
 
   void _symbolChangeNotifierListListener() {
-    widget.symbolChangeNotifierScrollbar.value = null;
     setState(() {
       selectedSymbol = widget.symbolChangeNotifierList.value ?? selectedSymbol;
     });

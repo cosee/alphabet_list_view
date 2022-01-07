@@ -27,6 +27,17 @@ class Home extends StatelessWidget {
       body: SafeArea(
         child: AlphabetListView(
           alphabetListViewOptions: AlphabetListViewOptions(
+            alphabetOverlayOptions: AlphabetOverlayOptions(
+              alignment: Alignment.topCenter,
+              showOverlay: true,
+              alphabetOverlayBuilder: (context, symbol) {
+                return Container(
+                  child: Text(symbol),
+                  color: Colors.pink,
+                  padding: const EdgeInsets.all(30),
+                );
+              },
+            ),
             alphabetListOptions: AlphabetListOptions(
               backgroundColor: Colors.green,
               physics: const AlwaysScrollableScrollPhysics(),

@@ -5,10 +5,12 @@ class AlphabetListViewOptions {
   const AlphabetListViewOptions({
     this.alphabetListOptions = const AlphabetListOptions(),
     this.alphabetScrollbarOptions = const AlphabetScrollbarOptions(),
+    this.alphabetOverlayOptions = const AlphabetOverlayOptions(),
   });
 
   final AlphabetListOptions alphabetListOptions;
   final AlphabetScrollbarOptions alphabetScrollbarOptions;
+  final AlphabetOverlayOptions alphabetOverlayOptions;
 }
 
 class AlphabetListOptions {
@@ -27,9 +29,9 @@ class AlphabetListOptions {
   final bool stickySectionHeader;
   final bool showSectionHeaderForEmptySections;
   final Widget Function(
-      BuildContext context,
-      String symbol,
-      )? alphabetListHeaderBuilder;
+    BuildContext context,
+    String symbol,
+  )? alphabetListHeaderBuilder;
 }
 
 class AlphabetScrollbarOptions {
@@ -44,7 +46,7 @@ class AlphabetScrollbarOptions {
 
   final double width;
   final Color? backgroundColor;
-  final AlphabetHintOptions? alphabetHintOptions;
+  final AlphabetOverlayOptions? alphabetHintOptions;
   final Iterable<String> symbols;
   final bool jumpToSymbolsWithNoEntries;
   final Widget Function(
@@ -54,30 +56,19 @@ class AlphabetScrollbarOptions {
   )? alphabetScrollbarSymbolBuilder;
 }
 
-class AlphabetHintOptions {
-  const AlphabetHintOptions({
-    this.indexHintWidth = 72,
-    this.indexHintHeight = 72,
-    this.indexHintDecoration = const BoxDecoration(
-      color: Colors.black87,
-      borderRadius: BorderRadius.all(Radius.circular(6)),
-    ),
-    this.indexHintTextStyle =
-        const TextStyle(fontSize: 24.0, color: Colors.white),
-    this.indexHintChildAlignment = Alignment.center,
-    this.indexHintAlignment = Alignment.center,
-    this.indexHintPosition,
-    this.indexHintOffset = Offset.zero,
+class AlphabetOverlayOptions {
+  const AlphabetOverlayOptions({
+    this.showOverlay = true,
+    this.alignment = Alignment.center,
+    this.alphabetOverlayBuilder,
   });
 
-  final double indexHintWidth;
-  final double indexHintHeight;
-  final Decoration indexHintDecoration;
-  final Alignment indexHintAlignment;
-  final Alignment indexHintChildAlignment;
-  final TextStyle indexHintTextStyle;
-  final Offset? indexHintPosition;
-  final Offset indexHintOffset;
+  final bool showOverlay;
+  final Alignment alignment;
+  final Widget Function(
+    BuildContext context,
+    String symbol,
+  )? alphabetOverlayBuilder;
 }
 
 const List<String> defaultSymbols = [

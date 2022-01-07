@@ -1,8 +1,9 @@
 import 'package:alphabet_list_view/src/controller.dart';
 import 'package:alphabet_list_view/src/list.dart';
 import 'package:alphabet_list_view/src/options.dart';
+import 'package:alphabet_list_view/src/overlay.dart';
 import 'package:alphabet_list_view/src/scrollbar.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class AlphabetListView extends StatefulWidget {
   const AlphabetListView({
@@ -32,7 +33,9 @@ class _AlphabetListViewState extends State<AlphabetListView> {
     super.initState();
     sortedItems = _generateAfterSymbolsSortedList(
       widget.items,
-      widget.alphabetListViewOptions.alphabetScrollbarOptions.symbols.toSet().toList(),
+      widget.alphabetListViewOptions.alphabetScrollbarOptions.symbols
+          .toSet()
+          .toList(),
     );
     scrollController = widget.scrollController ?? ScrollController();
     symbolChangeNotifierScrollbar = SymbolChangeNotifier();
@@ -41,15 +44,26 @@ class _AlphabetListViewState extends State<AlphabetListView> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
-          child: AlphabetList(
-            items: sortedItems,
-            scrollController: scrollController,
-            alphabetListOptions: widget.alphabetListViewOptions.alphabetListOptions,
-            symbolChangeNotifierList: symbolChangeNotifierList,
-            symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
+          child: Stack(
+            children: [
+              AlphabetList(
+                items: sortedItems,
+                scrollController: scrollController,
+                alphabetListOptions:
+                    widget.alphabetListViewOptions.alphabetListOptions,
+                symbolChangeNotifierList: symbolChangeNotifierList,
+                symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
+              ),
+              AlphabetSymbolOverlay(
+                alphabetOverlayOptions:
+                    widget.alphabetListViewOptions.alphabetOverlayOptions,
+                symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
+              ),
+            ],
           ),
         ),
         AlphabetScrollbar(
