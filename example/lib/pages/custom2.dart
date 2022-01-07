@@ -27,10 +27,14 @@ class ExampleCustom2 extends StatelessWidget {
         alphabetScrollbarOptions: AlphabetScrollbarOptions(
           symbols: repo.emojiHeaders,
           width: 60,
+          mainAxisAlignment: MainAxisAlignment.start,
           alphabetScrollbarSymbolBuilder: (context, symbol, state) {
-            return Text(
-              symbol,
-              style: const TextStyle(fontSize: 30),
+            return FittedBox(
+              child: Text(
+                symbol,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 30),
+              ),
             );
           },
         ),

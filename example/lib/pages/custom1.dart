@@ -62,7 +62,7 @@ class ExampleCustom1 extends StatelessWidget {
               color = Colors.white;
             }
             return Padding(
-              padding: const EdgeInsets.only(left: 8.0, top: 4.0, bottom: 4.0),
+              padding: const EdgeInsets.only(left: 4.0, top: 2.0, bottom: 2.0),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.horizontal(
@@ -73,9 +73,11 @@ class ExampleCustom1 extends StatelessWidget {
                       : null,
                 ),
                 child: Center(
-                  child: Text(
-                    symbol,
-                    style: TextStyle(color: color, fontSize: 20),
+                  child: FittedBox(
+                    child: Text(
+                      symbol,
+                      style: TextStyle(color: color, fontSize: 20),
+                    ),
                   ),
                 ),
               ),

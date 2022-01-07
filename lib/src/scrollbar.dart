@@ -42,23 +42,24 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   Widget build(BuildContext context) {
     return Container(
       color: widget.alphabetScrollbarOptions.backgroundColor,
-      child: SizedBox(
-        width: widget.alphabetScrollbarOptions.width,
+      width: widget.alphabetScrollbarOptions.width,
+      child: Semantics(
+        explicitChildNodes: true,
         child: Listener(
           behavior: HitTestBehavior.translucent,
           onPointerMove: _pointerMoveEventHandler,
           onPointerDown: _pointerMoveEventHandler,
-          child: Semantics(
-          explicitChildNodes: true,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              mainAxisSize: MainAxisSize.min,
-              children: uniqueItems.map((symbol) {
-                return Semantics(
+          child: Column(
+            mainAxisAlignment:
+                widget.alphabetScrollbarOptions.mainAxisAlignment,
+            mainAxisSize: MainAxisSize.min,
+            children: uniqueItems.map((symbol) {
+              return Flexible(
+                child: Semantics(
                   button: true,
                   child: Container(
                     color: Colors.transparent,
-                    width: double.infinity,
+                    width: widget.alphabetScrollbarOptions.width,
                     key: symbolKeys[symbol],
                     child: widget.alphabetScrollbarOptions
                             .alphabetScrollbarSymbolBuilder
@@ -68,9 +69,9 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
                           state: _getSymbolState(symbol),
                         ),
                   ),
-                );
-              }).toList(),
-            ),
+                ),
+              );
+            }).toList(),
           ),
         ),
       ),
@@ -181,8 +182,8 @@ class _DefaultScrollbarSymbol extends StatelessWidget {
         color = Colors.black;
     }
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+    return FittedBox(
+      fit: BoxFit.scaleDown,
       child: Text(
         symbol,
         style: TextStyle(color: color),

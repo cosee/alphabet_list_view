@@ -6,7 +6,6 @@ class AlphabetListViewOptions {
     this.alphabetListOptions = const AlphabetListOptions(),
     this.alphabetScrollbarOptions = const AlphabetScrollbarOptions(),
     this.alphabetOverlayOptions = const AlphabetOverlayOptions(),
-
   });
 
   final AlphabetListOptions alphabetListOptions;
@@ -38,6 +37,7 @@ class AlphabetListOptions {
 class AlphabetScrollbarOptions {
   const AlphabetScrollbarOptions({
     this.width = 40,
+    this.mainAxisAlignment = MainAxisAlignment.spaceEvenly,
     this.backgroundColor,
     this.symbols = defaultSymbols,
     this.jumpToSymbolsWithNoEntries = false,
@@ -45,6 +45,7 @@ class AlphabetScrollbarOptions {
   });
 
   final double width;
+  final MainAxisAlignment mainAxisAlignment;
   final Color? backgroundColor;
   final Iterable<String> symbols;
   final bool jumpToSymbolsWithNoEntries;
