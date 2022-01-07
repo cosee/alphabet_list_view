@@ -6,6 +6,7 @@ class AlphabetListViewOptions {
     this.alphabetListOptions = const AlphabetListOptions(),
     this.alphabetScrollbarOptions = const AlphabetScrollbarOptions(),
     this.alphabetOverlayOptions = const AlphabetOverlayOptions(),
+
   });
 
   final AlphabetListOptions alphabetListOptions;

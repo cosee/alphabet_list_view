@@ -159,12 +159,12 @@ class _DefaultAlphabetListHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60.0,
+      height: 50.0,
       color: Theme.of(context).colorScheme.primary,
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       alignment: Alignment.centerLeft,
       child: Text(
-        symbol,
+        symbol, style: const TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }
