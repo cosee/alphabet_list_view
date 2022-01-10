@@ -3,3 +3,8 @@ enum AlphabetScrollbarItemState {
   inactive,
   deactivated,
 }
+
+enum AlphabetScrollbarPosition {
+  left,
+  right,
+}

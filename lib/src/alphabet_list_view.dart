@@ -1,6 +1,6 @@
+import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:alphabet_list_view/src/controller.dart';
 import 'package:alphabet_list_view/src/list.dart';
-import 'package:alphabet_list_view/src/options.dart';
 import 'package:alphabet_list_view/src/overlay.dart';
 import 'package:alphabet_list_view/src/scrollbar.dart';
 import 'package:flutter/widgets.dart';
@@ -44,8 +44,19 @@ class _AlphabetListViewState extends State<AlphabetListView> {
 
   @override
   Widget build(BuildContext context) {
+    TextDirection? rowTextDirection;
+    if (widget.alphabetListViewOptions.alphabetScrollbarOptions.forcePosition ==
+        AlphabetScrollbarPosition.left) {
+      rowTextDirection = TextDirection.rtl;
+    } else if (widget
+            .alphabetListViewOptions.alphabetScrollbarOptions.forcePosition ==
+        AlphabetScrollbarPosition.right) {
+      rowTextDirection = TextDirection.ltr;
+    }
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.stretch,
+      textDirection: rowTextDirection,
       children: [
         Expanded(
           child: Stack(

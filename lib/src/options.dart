@@ -41,6 +41,7 @@ class AlphabetScrollbarOptions {
     this.backgroundColor,
     this.symbols = defaultSymbols,
     this.jumpToSymbolsWithNoEntries = false,
+    this.forcePosition,
     this.alphabetScrollbarSymbolBuilder,
   });
 
@@ -49,6 +50,7 @@ class AlphabetScrollbarOptions {
   final Color? backgroundColor;
   final Iterable<String> symbols;
   final bool jumpToSymbolsWithNoEntries;
+  final AlphabetScrollbarPosition? forcePosition;
   final Widget Function(
     BuildContext context,
     String symbol,
