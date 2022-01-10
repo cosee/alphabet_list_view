@@ -1,4 +1,5 @@
 import 'package:alphabet_list_view/alphabet_list_view.dart';
+import 'package:alphabet_list_view/src/scrollbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -28,25 +29,28 @@ void main() {
     expect(symbolAFinder, findsOneWidget);
   });
 
-  testWidgets('DoNotShowItemsThatAreNotInSymbols', (WidgetTester tester) async {
-    await tester.pumpWidget(
-      TestWidget(
-        items: [
-          AlphabetListViewItemGroup(
-            tag: 'ɣ',
-            children: [
-              const Text('A'),
-            ],
-          ),
-        ],
-      ),
-    );
+  testWidgets(
+    'TagsThatAreNotInSymbolsAreNotVisible',
+    (WidgetTester tester) async {
+      await tester.pumpWidget(
+        TestWidget(
+          items: [
+            AlphabetListViewItemGroup(
+              tag: 'ɣ',
+              children: [
+                const Text('A'),
+              ],
+            ),
+          ],
+        ),
+      );
 
-    final symbolGammaFinder = find.text('ɣ');
-    expect(symbolGammaFinder, findsNothing);
-  });
+      final symbolGammaFinder = find.text('ɣ');
+      expect(symbolGammaFinder, findsNothing);
+    },
+  );
 
-  testWidgets('DisplayItems', (WidgetTester tester) async {
+  testWidgets('ItemsAreDisplayed', (WidgetTester tester) async {
     await tester.pumpWidget(
       TestWidget(
         items: [
@@ -59,6 +63,85 @@ void main() {
         ],
       ),
     );
+    final itemFinder = find.text('TARGET');
+    expect(itemFinder, findsOneWidget);
+  });
+
+  testWidgets('JumpToLocationAfterTapOnSidebar', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      TestWidget(
+        items: [
+          AlphabetListViewItemGroup(
+            tag: 'A',
+            children: [
+              for (var i = 0; i < 99; i++)
+                const SizedBox(
+                  height: 100,
+                  width: 100,
+                ),
+            ],
+          ),
+          AlphabetListViewItemGroup(
+            tag: 'B',
+            children: [
+              const Text('TARGET'),
+            ],
+          ),
+        ],
+      ),
+    );
+
+    await tester.tap(
+      find.descendant(
+        of: find.byType(AlphabetScrollbar),
+        matching: find.text('B'),
+      ),
+    );
+    await tester.pump();
+
+    final itemFinder = find.text('TARGET');
+    expect(itemFinder, findsOneWidget);
+  });
+
+  testWidgets('JumpToLocationAfterDragOnSidebar', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      TestWidget(
+        items: [
+          AlphabetListViewItemGroup(
+            tag: 'A',
+            children: [
+              for (var i = 0; i < 99; i++)
+                const SizedBox(
+                  height: 100,
+                  width: 100,
+                ),
+            ],
+          ),
+          AlphabetListViewItemGroup(
+            tag: 'B',
+            children: [
+              const Text('TARGET'),
+            ],
+          ),
+        ],
+      ),
+    );
+
+    var buttonA = find.descendant(
+      of: find.byType(AlphabetScrollbar),
+      matching: find.text('A'),
+    );
+    var buttonB = find.descendant(
+      of: find.byType(AlphabetScrollbar),
+      matching: find.text('B'),
+    );
+
+    await tester.drag(
+      buttonA,
+      tester.getCenter(buttonB) - tester.getCenter(buttonA),
+    );
+
+    await tester.pump();
 
     final itemFinder = find.text('TARGET');
     expect(itemFinder, findsOneWidget);
