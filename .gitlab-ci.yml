@@ -22,6 +22,9 @@ generation:
       - lib/**/*.g.dart
       - lib/**/*.i18n.dart
       - lib/**/*.config.dart
+      - example/lib/**/*.g.dart
+      - example/lib/**/*.i18n.dart
+      - example/lib/**/*.config.dart
       - test/**/*.config.dart
     expire_in: 2 days
 
