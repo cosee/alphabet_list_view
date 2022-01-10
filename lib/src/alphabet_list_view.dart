@@ -5,6 +5,9 @@ import 'package:alphabet_list_view/src/overlay.dart';
 import 'package:alphabet_list_view/src/scrollbar.dart';
 import 'package:flutter/widgets.dart';
 
+/// A ListView with sticky headers and an iOS-like clickable sidebar.
+///
+/// Add [AlphabetListViewOptions] to make adjustments.
 class AlphabetListView extends StatefulWidget {
   const AlphabetListView({
     Key? key,
@@ -114,6 +117,7 @@ class _AlphabetListViewState extends State<AlphabetListView> {
   }
 }
 
+/// Item groups shown in the list.
 class AlphabetListViewItemGroup {
   AlphabetListViewItemGroup({
     required this.tag,
@@ -135,6 +139,11 @@ class AlphabetListViewItemGroup {
         );
 
   final GlobalKey key;
+
+  /// String to identify this group.
+  ///
+  /// Must be unique and included in the symbols of the sidebar.
+  /// Typically only 1 character e.g. 'A'.
   final String tag;
   final SliverChildDelegate childrenDelegate;
 }

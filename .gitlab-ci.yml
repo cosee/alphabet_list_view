@@ -51,4 +51,4 @@ lint:
   tags:
     - flutter
   script:
-    - flutter analyze lib
+    - flutter analyze

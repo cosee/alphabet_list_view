@@ -8,8 +8,13 @@ class AlphabetListViewOptions {
     this.alphabetOverlayOptions = const AlphabetOverlayOptions(),
   });
 
+  /// Customisation options for the list.
   final AlphabetListOptions alphabetListOptions;
+
+  /// Customisation options for the scrollbar.
   final AlphabetScrollbarOptions alphabetScrollbarOptions;
+
+  /// Customisation options for the overlay.
   final AlphabetOverlayOptions alphabetOverlayOptions;
 }
 
@@ -23,11 +28,22 @@ class AlphabetListOptions {
     this.alphabetListHeaderBuilder,
   });
 
+  /// Optional background color.
   final Color? backgroundColor;
+
+  /// Custom scroll physics.
   final ScrollPhysics? physics;
+
+  /// Show the header above the items.
   final bool showSectionHeader;
+
+  /// Use sticky headers.
   final bool stickySectionHeader;
+
+  /// Show headers for sections without child widgets.
   final bool showSectionHeaderForEmptySections;
+
+  /// Builder function for headers.
   final Widget Function(
     BuildContext context,
     String symbol,
@@ -45,12 +61,31 @@ class AlphabetScrollbarOptions {
     this.alphabetScrollbarSymbolBuilder,
   });
 
+  /// The width of the sidebar.
   final double width;
+
+  /// Placement of the children in the sidebar.
   final MainAxisAlignment mainAxisAlignment;
+
+  /// Optional background color for the sidebar.
   final Color? backgroundColor;
+
+  /// A [List] of [String] representing the symbols to be shown.
+  ///
+  /// Strings must be unique.
   final Iterable<String> symbols;
+
+  /// Activates symbols without children.
+  ///
+  /// Enables jumping to the position even if there are no entries present.
   final bool jumpToSymbolsWithNoEntries;
+
+  /// Force the position of the sidebar.
+  ///
+  /// If set, [Directionality] will be ignored.
   final AlphabetScrollbarPosition? forcePosition;
+
+  /// Builder function for sidebar symbols.
   final Widget Function(
     BuildContext context,
     String symbol,
@@ -65,14 +100,22 @@ class AlphabetOverlayOptions {
     this.alphabetOverlayBuilder,
   });
 
+  /// Showing an overlay of the current icon when swiping across the sidebar.
   final bool showOverlay;
+
+  /// The [Alignment] of the overlay.
   final Alignment alignment;
+
+  /// Builder function for the overlay.
   final Widget Function(
     BuildContext context,
     String symbol,
   )? alphabetOverlayBuilder;
 }
 
+/// Default symbols used by the sidebar.
+///
+/// 'A'-'Z' and '#'
 const List<String> defaultSymbols = [
   'A',
   'B',
