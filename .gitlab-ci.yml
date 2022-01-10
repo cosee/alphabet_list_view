@@ -1,6 +1,6 @@
 stages:
-#  - generation
-#  - check
+  - generation
+  - check
 
 .cache: &cache
   key:
