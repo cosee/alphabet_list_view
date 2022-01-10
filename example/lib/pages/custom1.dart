@@ -51,6 +51,7 @@ class ExampleCustom1 extends StatelessWidget {
           },
         ),
         alphabetScrollbarOptions: AlphabetScrollbarOptions(
+          jumpToSymbolsWithNoEntries: true,
           backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
           alphabetScrollbarSymbolBuilder: (context, symbol, state) {
             Color color;
