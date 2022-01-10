@@ -6,6 +6,7 @@ stages:
   key:
     files:
       - pubspec.lock
+      - example/pubspec.lock
   paths:
     - .dart_tool/
 
@@ -50,4 +51,4 @@ lint:
   tags:
     - flutter
   script:
-    - flutter analyze
+    - flutter analyze lib
