@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class ExampleCustom1 extends StatelessWidget {
   ExampleCustom1({Key? key}) : super(key: key);
-  final List<AlphabetListViewItemGroup> apples = [
+  final List<AlphabetListViewItemGroup> animals = [
     for (var animalLetter in repo.animals.entries)
       AlphabetListViewItemGroup(
         tag: animalLetter.key,
@@ -20,7 +20,7 @@ class ExampleCustom1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlphabetListView(
-      items: apples,
+      items: animals,
       alphabetListViewOptions: AlphabetListViewOptions(
         alphabetOverlayOptions: AlphabetOverlayOptions(
           alignment: Alignment.centerRight,

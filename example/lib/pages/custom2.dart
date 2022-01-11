@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ExampleCustom2 extends StatelessWidget {
   ExampleCustom2({Key? key}) : super(key: key);
 
-  final List<AlphabetListViewItemGroup> apples = [
+  final List<AlphabetListViewItemGroup> animals = [
     for (var emojiType in repo.emojis.entries)
       AlphabetListViewItemGroup(
         tag: emojiType.key,
@@ -25,7 +25,7 @@ class ExampleCustom2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlphabetListView(
-      items: apples,
+      items: animals,
       alphabetListViewOptions: AlphabetListViewOptions(
         alphabetScrollbarOptions: AlphabetScrollbarOptions(
           symbols: repo.emojiHeaders,

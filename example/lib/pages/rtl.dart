@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 
 class ExampleRTL extends StatelessWidget {
   ExampleRTL({Key? key}) : super(key: key);
-  final List<AlphabetListViewItemGroup> apples = [
+  final List<AlphabetListViewItemGroup> animals = [
     for (var animalLetter in repo.animals.entries)
       AlphabetListViewItemGroup(
         tag: animalLetter.key,
@@ -18,7 +18,7 @@ class ExampleRTL extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: AlphabetListView(
-        items: apples,
+        items: animals,
       ),
     );
   }
