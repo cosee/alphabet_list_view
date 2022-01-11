@@ -1,6 +1,9 @@
 import 'package:alphabet_list_view/src/enum.dart';
 import 'package:flutter/material.dart';
 
+/// Options class.
+///
+/// Optional class containing all options for the AlphabetListView.
 class AlphabetListViewOptions {
   const AlphabetListViewOptions({
     this.alphabetListOptions = const AlphabetListOptions(),
@@ -18,6 +21,7 @@ class AlphabetListViewOptions {
   final AlphabetOverlayOptions alphabetOverlayOptions;
 }
 
+/// Options for the list of the AlphabetListView.
 class AlphabetListOptions {
   const AlphabetListOptions({
     this.backgroundColor,
@@ -50,6 +54,7 @@ class AlphabetListOptions {
   )? alphabetListHeaderBuilder;
 }
 
+/// Options for the scrollbar of the AlphabetListView
 class AlphabetScrollbarOptions {
   const AlphabetScrollbarOptions({
     this.width = 40,
@@ -93,6 +98,7 @@ class AlphabetScrollbarOptions {
   )? alphabetScrollbarSymbolBuilder;
 }
 
+/// Options for the overlay of the AlphabetListView
 class AlphabetOverlayOptions {
   const AlphabetOverlayOptions({
     this.showOverlay = true,
