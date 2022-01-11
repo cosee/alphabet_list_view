@@ -1,6 +1,7 @@
 name: alphabet_list_view
 description: A scrollable list with sidebar
 version: 0.1.0
+repository: https://github.com/cosee/alphabet_list_view
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
