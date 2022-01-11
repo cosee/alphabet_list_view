@@ -106,11 +106,13 @@ class _AlphabetListState extends State<AlphabetList> {
     RenderBox? customScrollViewRenderBox;
     try {
       customScrollViewRenderBox =
-          customScrollKey.currentContext?.findRenderObject() as RenderBox;
-      widget.symbolChangeNotifierList.value = _getFirstVisibleItemGroupSymbol(
-        customScrollViewRenderBox,
-        widget.items,
-      );
+          customScrollKey.currentContext?.findRenderObject() as RenderBox?;
+      if (customScrollViewRenderBox != null) {
+        widget.symbolChangeNotifierList.value = _getFirstVisibleItemGroupSymbol(
+          customScrollViewRenderBox,
+          widget.items,
+        );
+      }
     } catch (_) {}
   }
 
@@ -124,11 +126,15 @@ class _AlphabetListState extends State<AlphabetList> {
   void _showGroup(String symbol) {
     if (widget.items.where((element) => element.tag == symbol).isNotEmpty) {
       try {
-        widget.scrollController.position.ensureVisible(
-          (widget.items.firstWhere((element) => element.tag == symbol).key)
-              .currentContext!
-              .findRenderObject()!,
-        );
+        final RenderObject? renderObject = widget.items
+            .firstWhere((element) => element.tag == symbol)
+            .key
+            .currentContext
+            ?.findRenderObject();
+
+        if (renderObject != null) {
+          widget.scrollController.position.ensureVisible(renderObject);
+        }
       } catch (_) {}
     }
   }
@@ -140,15 +146,16 @@ class _AlphabetListState extends State<AlphabetList> {
     String? hit;
 
     final result = BoxHitTestResult();
-    for (var item in items) {
+    for (final item in items) {
       try {
-        RenderBox renderBox =
-            item.key.currentContext?.findRenderObject() as RenderBox;
+        final RenderBox? renderBox =
+            item.key.currentContext?.findRenderObject() as RenderBox?;
 
-        Offset localLocation = renderBox
-            .globalToLocal(renderBoxScrollView.localToGlobal(Offset.zero));
+        final Offset? localLocation = renderBox
+            ?.globalToLocal(renderBoxScrollView.localToGlobal(Offset.zero));
 
-        if (renderBoxScrollView.hitTest(result, position: localLocation)) {
+        if (localLocation != null &&
+            renderBoxScrollView.hitTest(result, position: localLocation)) {
           hit = item.tag;
         }
       } catch (_) {}

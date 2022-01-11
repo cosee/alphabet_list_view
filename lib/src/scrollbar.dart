@@ -78,8 +78,15 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
     );
   }
 
+  @override
+  void dispose() {
+    widget.symbolChangeNotifierList
+        .removeListener(_symbolChangeNotifierListListener);
+    super.dispose();
+  }
+
   AlphabetScrollbarItemState _getSymbolState(String symbol) {
-    Iterable<AlphabetListViewItemGroup> result =
+    final Iterable<AlphabetListViewItemGroup> result =
         widget.items.where((item) => item.tag == symbol);
     if (result.isNotEmpty) {
       if ((result.first.childrenDelegate.estimatedChildCount ?? 0) == 0 &&
@@ -95,13 +102,6 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
     }
   }
 
-  @override
-  void dispose() {
-    widget.symbolChangeNotifierList
-        .removeListener(_symbolChangeNotifierListListener);
-    super.dispose();
-  }
-
   void _symbolChangeNotifierListListener() {
     setState(() {
       selectedSymbol = widget.symbolChangeNotifierList.value ?? selectedSymbol;
@@ -109,7 +109,7 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   }
 
   void _pointerMoveEventHandler(PointerEvent event) {
-    String? symbol = _identifyTouchedSymbol(event, symbolKeys);
+    final String? symbol = _identifyTouchedSymbol(event, symbolKeys);
     if (symbol != null) {
       _onSymbolTriggered(symbol);
     }
@@ -124,10 +124,13 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
     final result = BoxHitTestResult();
     for (var entry in symbolKeys.entries) {
       try {
-        RenderBox renderBox =
-            entry.value.currentContext?.findRenderObject() as RenderBox;
-        Offset localLocation = renderBox.globalToLocal(details.position);
-        if (renderBox.hitTest(result, position: localLocation)) {
+        RenderBox? renderBox =
+            entry.value.currentContext?.findRenderObject() as RenderBox?;
+        Offset? localLocation = renderBox?.globalToLocal(details.position);
+
+        if (localLocation != null &&
+            renderBox != null &&
+            renderBox.hitTest(result, position: localLocation)) {
           touchedSymbol = entry.key;
           break;
         }

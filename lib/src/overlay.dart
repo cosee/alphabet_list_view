@@ -10,6 +10,7 @@ class AlphabetSymbolOverlay extends StatefulWidget {
     required this.symbolChangeNotifierScrollbar,
     this.alphabetOverlayOptions = const AlphabetOverlayOptions(),
   }) : super(key: key);
+
   final AlphabetOverlayOptions alphabetOverlayOptions;
   final SymbolChangeNotifier symbolChangeNotifierScrollbar;
 
