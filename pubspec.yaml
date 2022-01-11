@@ -1,5 +1,5 @@
 name: alphabet_list_view
-description: A scrollable list with sidebar
+description: A ListView with sticky headers and an iOS-like clickable sidebar.
 version: 0.1.0
 repository: https://github.com/cosee/alphabet_list_view
 
