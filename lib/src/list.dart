@@ -48,7 +48,11 @@ class _AlphabetListState extends State<AlphabetList> {
           controller: widget.scrollController,
           physics: widget.alphabetListOptions.physics,
           slivers: [
-            const SliverPadding(padding: EdgeInsets.all(0)),
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 0,
+              ),
+            ),
             ...widget.items.map(
               (item) {
                 return SliverStickyHeader(
@@ -65,7 +69,7 @@ class _AlphabetListState extends State<AlphabetList> {
                                       0))
                           ? widget.alphabetListOptions.listHeaderBuilder
                                   ?.call(context, item.tag) ??
-                              _DefaultAlphabetListHeader(
+                              DefaultAlphabetListHeader(
                                 symbol: item.tag,
                               )
                           : const SizedBox.shrink(),
@@ -77,6 +81,7 @@ class _AlphabetListState extends State<AlphabetList> {
                 );
               },
             ),
+            const SliverAppBar(),
           ],
         ),
       ),
@@ -142,30 +147,5 @@ class _AlphabetListState extends State<AlphabetList> {
     }
 
     return hit;
-  }
-}
-
-class _DefaultAlphabetListHeader extends StatelessWidget {
-  const _DefaultAlphabetListHeader({Key? key, required this.symbol})
-      : super(key: key);
-
-  final String symbol;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 50.0,
-      color: Theme.of(context).colorScheme.primary,
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Center(
-        child: SizedBox(
-          width: double.infinity,
-          child: Text(
-            symbol,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-        ),
-      ),
-    );
   }
 }

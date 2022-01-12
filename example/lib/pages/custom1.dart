@@ -53,7 +53,7 @@ class ExampleCustom1 extends StatelessWidget {
         scrollbarOptions: ScrollbarOptions(
           jumpToSymbolsWithNoEntries: true,
           backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
-          scrollbarSymbolBuilder: (context, symbol, state) {
+          symbolBuilder: (context, symbol, state) {
             Color color;
             if (state == AlphabetScrollbarItemState.active) {
               color = Colors.black;

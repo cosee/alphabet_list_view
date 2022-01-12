@@ -1,4 +1,5 @@
 import 'package:alphabet_list_view/src/enum.dart';
+import 'package:alphabet_list_view/src/typedef.dart';
 import 'package:flutter/material.dart';
 
 /// Options class.
@@ -48,10 +49,7 @@ class ListOptions {
   final bool showSectionHeaderForEmptySections;
 
   /// Builder function for headers.
-  final Widget Function(
-    BuildContext context,
-    String symbol,
-  )? listHeaderBuilder;
+  final SymbolBuilder? listHeaderBuilder;
 }
 
 /// Options for the scrollbar of the AlphabetListView
@@ -63,7 +61,7 @@ class ScrollbarOptions {
     this.symbols = defaultSymbols,
     this.jumpToSymbolsWithNoEntries = false,
     this.forcePosition,
-    this.scrollbarSymbolBuilder,
+    this.symbolBuilder,
   });
 
   /// The width of the sidebar.
@@ -91,11 +89,7 @@ class ScrollbarOptions {
   final AlphabetScrollbarPosition? forcePosition;
 
   /// Builder function for sidebar symbols.
-  final Widget Function(
-    BuildContext context,
-    String symbol,
-    AlphabetScrollbarItemState state,
-  )? scrollbarSymbolBuilder;
+  final SymbolStateBuilder? symbolBuilder;
 }
 
 /// Options for the overlay of the AlphabetListView
@@ -113,10 +107,7 @@ class OverlayOptions {
   final Alignment alignment;
 
   /// Builder function for the overlay.
-  final Widget Function(
-    BuildContext context,
-    String symbol,
-  )? overlayBuilder;
+  final SymbolBuilder? overlayBuilder;
 }
 
 /// Default symbols used by the sidebar.

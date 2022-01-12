@@ -36,9 +36,7 @@ class _AlphabetListViewState extends State<AlphabetListView> {
     super.initState();
     sortedItems = _generateAfterSymbolsSortedList(
       widget.items,
-      widget.alphabetListViewOptions.scrollbarOptions.symbols
-          .toSet()
-          .toList(),
+      widget.alphabetListViewOptions.scrollbarOptions.symbols.toSet().toList(),
     );
     scrollController = widget.scrollController ?? ScrollController();
     symbolChangeNotifierScrollbar = SymbolChangeNotifier();
@@ -51,8 +49,7 @@ class _AlphabetListViewState extends State<AlphabetListView> {
     if (widget.alphabetListViewOptions.scrollbarOptions.forcePosition ==
         AlphabetScrollbarPosition.left) {
       rowTextDirection = TextDirection.rtl;
-    } else if (widget
-            .alphabetListViewOptions.scrollbarOptions.forcePosition ==
+    } else if (widget.alphabetListViewOptions.scrollbarOptions.forcePosition ==
         AlphabetScrollbarPosition.right) {
       rowTextDirection = TextDirection.ltr;
     }
@@ -67,8 +64,7 @@ class _AlphabetListViewState extends State<AlphabetListView> {
               AlphabetList(
                 items: sortedItems,
                 scrollController: scrollController,
-                alphabetListOptions:
-                    widget.alphabetListViewOptions.listOptions,
+                alphabetListOptions: widget.alphabetListViewOptions.listOptions,
                 symbolChangeNotifierList: symbolChangeNotifierList,
                 symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
               ),

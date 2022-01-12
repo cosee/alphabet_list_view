@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:alphabet_list_view/src/controller.dart';
-import 'package:alphabet_list_view/src/options.dart';
 import 'package:flutter/material.dart';
 
 class AlphabetSymbolOverlay extends StatefulWidget {
@@ -42,7 +42,7 @@ class _AlphabetSymbolOverlayState extends State<AlphabetSymbolOverlay> {
             duration: const Duration(milliseconds: 100),
             child: widget.alphabetOverlayOptions.overlayBuilder
                     ?.call(context, symbol ?? '?') ??
-                _DefaultAlphabetOverlay(
+                DefaultAlphabetOverlay(
                   symbol: symbol ?? '?',
                 ),
           ),
@@ -81,31 +81,5 @@ class _AlphabetSymbolOverlayState extends State<AlphabetSymbolOverlay> {
         opacity = .0;
       });
     });
-  }
-}
-
-class _DefaultAlphabetOverlay extends StatelessWidget {
-  const _DefaultAlphabetOverlay({Key? key, required this.symbol})
-      : super(key: key);
-  final String symbol;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Theme.of(context).colorScheme.secondary.withOpacity(.8),
-      ),
-      height: 100,
-      width: 100,
-      child: FittedBox(
-        child: Center(
-          child: Text(
-            symbol,
-            textScaleFactor: 1,
-          ),
-        ),
-      ),
-    );
   }
 }

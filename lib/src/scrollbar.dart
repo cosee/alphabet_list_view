@@ -61,10 +61,9 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
                     color: Colors.transparent,
                     width: widget.alphabetScrollbarOptions.width,
                     key: symbolKeys[symbol],
-                    child: widget.alphabetScrollbarOptions
-                            .scrollbarSymbolBuilder
+                    child: widget.alphabetScrollbarOptions.symbolBuilder
                             ?.call(context, symbol, _getSymbolState(symbol)) ??
-                        _DefaultScrollbarSymbol(
+                        DefaultScrollbarSymbol(
                           symbol: symbol,
                           state: _getSymbolState(symbol),
                         ),
@@ -155,43 +154,5 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
         selectedSymbol = symbol;
       });
     }
-  }
-}
-
-class _DefaultScrollbarSymbol extends StatelessWidget {
-  const _DefaultScrollbarSymbol({
-    Key? key,
-    required this.symbol,
-    required this.state,
-  }) : super(key: key);
-
-  final String symbol;
-  final AlphabetScrollbarItemState state;
-
-  @override
-  Widget build(BuildContext context) {
-    Color color;
-    switch (state) {
-      case (AlphabetScrollbarItemState.active):
-        color = Theme.of(context).colorScheme.secondary;
-        break;
-      case (AlphabetScrollbarItemState.inactive):
-        color = Colors.black;
-        break;
-      case (AlphabetScrollbarItemState.deactivated):
-        color = Colors.grey;
-        break;
-      default:
-        color = Colors.black;
-    }
-
-    return FittedBox(
-      fit: BoxFit.scaleDown,
-      child: Text(
-        symbol,
-        style: TextStyle(color: color),
-        textAlign: TextAlign.center,
-      ),
-    );
   }
 }

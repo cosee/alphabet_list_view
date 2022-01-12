@@ -31,7 +31,7 @@ class ExampleCustom2 extends StatelessWidget {
           symbols: repo.emojiHeaders,
           width: 60,
           mainAxisAlignment: MainAxisAlignment.start,
-          scrollbarSymbolBuilder: (context, symbol, state) {
+          symbolBuilder: (context, symbol, state) {
             return FittedBox(
               child: Padding(
                 padding: const EdgeInsets.all(2.0),

@@ -17,6 +17,26 @@ class ExampleDefault extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlphabetListView(
       items: animals,
+      alphabetListViewOptions: AlphabetListViewOptions(
+        overlayOptions: OverlayOptions(
+          overlayBuilder: (context, symbol) => DefaultAlphabetOverlay(
+            symbol: symbol,
+            decoration: const BoxDecoration(color: Colors.black),
+            style: const TextStyle(
+              color: Colors.red,
+            ),
+          ),
+        ),
+        listOptions: ListOptions(
+          listHeaderBuilder: (context, symbol) => DefaultAlphabetListHeader(
+            symbol: symbol,
+            backgroundColor: Colors.red,
+            style: const TextStyle(
+              color: Colors.yellow,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
