@@ -49,17 +49,7 @@ class _AlphabetListState extends State<AlphabetList> {
           physics: widget.alphabetListOptions.physics,
           slivers: [
             const SliverPadding(padding: EdgeInsets.all(0)),
-            ...widget.items.where(
-              (element) {
-                if (widget
-                    .alphabetListOptions.showSectionHeaderForEmptySections) {
-                  return true;
-                } else {
-                  return (element.childrenDelegate.estimatedChildCount ?? 0) >
-                      0;
-                }
-              },
-            ).map(
+            ...widget.items.map(
               (item) {
                 return SliverStickyHeader(
                   sticky: widget.alphabetListOptions.stickySectionHeader,
@@ -67,7 +57,12 @@ class _AlphabetListState extends State<AlphabetList> {
                     key: item.key,
                     child: Semantics(
                       header: true,
-                      child: widget.alphabetListOptions.showSectionHeader
+                      child: widget.alphabetListOptions.showSectionHeader &&
+                              !(!widget.alphabetListOptions
+                                      .showSectionHeaderForEmptySections &&
+                                  ((item.childrenDelegate.estimatedChildCount ??
+                                          0) ==
+                                      0))
                           ? widget.alphabetListOptions.alphabetListHeaderBuilder
                                   ?.call(context, item.tag) ??
                               _DefaultAlphabetListHeader(
@@ -118,18 +113,13 @@ class _AlphabetListState extends State<AlphabetList> {
   }
 
   void _showGroup(String symbol) {
-    if (widget.items.where((element) => element.tag == symbol).isNotEmpty) {
-      try {
-        final RenderObject? renderObject = widget.items
-            .firstWhere((element) => element.tag == symbol)
-            .key
-            .currentContext
-            ?.findRenderObject();
-
-        if (renderObject != null) {
-          widget.scrollController.position.ensureVisible(renderObject);
-        }
-      } catch (_) {}
+    final RenderObject? renderObject = widget.items
+        .firstWhere((element) => element.tag == symbol)
+        .key
+        .currentContext
+        ?.findRenderObject();
+    if (renderObject != null) {
+      widget.scrollController.position.ensureVisible(renderObject);
     }
   }
 
