@@ -26,15 +26,25 @@ class AlphabetListViewOptions {
 class ListOptions {
   const ListOptions({
     this.backgroundColor,
+    this.topOffset,
+    this.padding,
     this.physics,
     this.showSectionHeader = true,
     this.stickySectionHeader = true,
     this.showSectionHeaderForEmptySections = false,
+    this.beforeList,
+    this.afterList,
     this.listHeaderBuilder,
   });
 
   /// Optional background color.
   final Color? backgroundColor;
+
+  // TODO
+  final double? topOffset;
+
+  /// Padding around the list.
+  final EdgeInsets? padding;
 
   /// Custom scroll physics.
   final ScrollPhysics? physics;
@@ -48,6 +58,12 @@ class ListOptions {
   /// Show headers for sections without child widgets.
   final bool showSectionHeaderForEmptySections;
 
+  /// Optional [Widget] before the list.
+  final Widget? beforeList;
+
+  /// Optional [Widget] after the list.
+  final Widget? afterList;
+
   /// Builder function for headers.
   final SymbolBuilder? listHeaderBuilder;
 }
@@ -56,6 +72,7 @@ class ListOptions {
 class ScrollbarOptions {
   const ScrollbarOptions({
     this.width = 40,
+    this.padding,
     this.mainAxisAlignment = MainAxisAlignment.spaceEvenly,
     this.backgroundColor,
     this.symbols = defaultSymbols,
@@ -66,6 +83,9 @@ class ScrollbarOptions {
 
   /// The width of the sidebar.
   final double width;
+
+  /// Padding around the sidebar.
+  final EdgeInsets? padding;
 
   /// Placement of the children in the sidebar.
   final MainAxisAlignment mainAxisAlignment;

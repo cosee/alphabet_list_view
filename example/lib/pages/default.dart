@@ -7,32 +7,49 @@ class ExampleDefault extends StatelessWidget {
 
   final List<AlphabetListViewItemGroup> animals = [
     for (var animalLetter in repo.animals.entries)
-      AlphabetListViewItemGroup(
-        tag: animalLetter.key,
-        children: animalLetter.value.map((animal) => Text(animal)).toList(),
-      ),
+        AlphabetListViewItemGroup(
+          tag: animalLetter.key,
+          children: animalLetter.value.map((animal) => Text(animal)).toList(),
+        ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return AlphabetListView(
-      items: animals,
-      alphabetListViewOptions: AlphabetListViewOptions(
-        overlayOptions: OverlayOptions(
-          overlayBuilder: (context, symbol) => DefaultAlphabetOverlay(
-            symbol: symbol,
-            decoration: const BoxDecoration(color: Colors.black),
-            style: const TextStyle(
-              color: Colors.red,
+
+    AppBar a = AppBar(backgroundColor: Color.fromRGBO(200, 255, 200, 0.5),);
+    return Scaffold(extendBodyBehindAppBar: true,
+      appBar: a,
+      body: AlphabetListView(
+        items: animals,
+        alphabetListViewOptions: AlphabetListViewOptions(
+          overlayOptions: OverlayOptions(
+            overlayBuilder: (context, symbol) => DefaultAlphabetOverlay(
+              symbol: symbol,
+              decoration: const BoxDecoration(color: Colors.black),
+              style: const TextStyle(
+                color: Colors.red,
+              ),
             ),
           ),
-        ),
-        listOptions: ListOptions(
-          listHeaderBuilder: (context, symbol) => DefaultAlphabetListHeader(
-            symbol: symbol,
-            backgroundColor: Colors.red,
-            style: const TextStyle(
+          
+          listOptions: ListOptions(
+            //topOffset: a.preferredSize.height,
+            beforeList: Container(
+              color: Colors.blue,
+              height: 200,
+              width: 200,
+            ),
+            afterList: Container(
               color: Colors.yellow,
+              height: 200,
+              width: 200,
+            ),
+            listHeaderBuilder: (context, symbol) => DefaultAlphabetListHeader(
+              symbol: symbol,
+              backgroundColor: Colors.red,
+              style: const TextStyle(
+                color: Colors.yellow,
+              ),
             ),
           ),
         ),
