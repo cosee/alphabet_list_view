@@ -47,48 +47,42 @@ class _AlphabetListState extends State<AlphabetList> {
           key: customScrollKey,
           controller: widget.scrollController,
           physics: widget.alphabetListOptions.physics,
-          slivers: widget.items
-              .where(
-                (element) {
-                  if (widget
-                      .alphabetListOptions.showSectionHeaderForEmptySections) {
-                    return true;
-                  } else {
-                    return (element.childrenDelegate.estimatedChildCount ?? 0) >
-                        0;
-                  }
-                },
-              )
-              .map(
-                (item) {
-                  return [
-                    SliverToBoxAdapter(
-                      child: Container(
-                        key: item.key,
-                      ),
+          slivers: [
+            const SliverPadding(padding: EdgeInsets.all(0)),
+            ...widget.items.where(
+              (element) {
+                if (widget
+                    .alphabetListOptions.showSectionHeaderForEmptySections) {
+                  return true;
+                } else {
+                  return (element.childrenDelegate.estimatedChildCount ?? 0) >
+                      0;
+                }
+              },
+            ).map(
+              (item) {
+                return SliverStickyHeader(
+                  sticky: widget.alphabetListOptions.stickySectionHeader,
+                  header: KeyedSubtree(
+                    key: item.key,
+                    child: Semantics(
+                      header: true,
+                      child: widget.alphabetListOptions.showSectionHeader
+                          ? widget.alphabetListOptions.alphabetListHeaderBuilder
+                                  ?.call(context, item.tag) ??
+                              _DefaultAlphabetListHeader(
+                                symbol: item.tag,
+                              )
+                          : const SizedBox.shrink(),
                     ),
-                    SliverStickyHeader(
-                      sticky: widget.alphabetListOptions.stickySectionHeader,
-                      header: Semantics(
-                        header: true,
-                        child: widget.alphabetListOptions.showSectionHeader
-                            ? widget.alphabetListOptions
-                                    .alphabetListHeaderBuilder
-                                    ?.call(context, item.tag) ??
-                                _DefaultAlphabetListHeader(
-                                  symbol: item.tag,
-                                )
-                            : const SizedBox.shrink(),
-                      ),
-                      sliver: SliverList(
-                        delegate: item.childrenDelegate,
-                      ),
-                    ),
-                  ];
-                },
-              )
-              .expand((slivers) => slivers)
-              .toList(),
+                  ),
+                  sliver: SliverList(
+                    delegate: item.childrenDelegate,
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
@@ -147,19 +141,16 @@ class _AlphabetListState extends State<AlphabetList> {
 
     final result = BoxHitTestResult();
     for (final item in items) {
-      try {
-        final RenderBox? renderBox =
-            item.key.currentContext?.findRenderObject() as RenderBox?;
-
-        final Offset? localLocation = renderBox
-            ?.globalToLocal(renderBoxScrollView.localToGlobal(Offset.zero));
-
-        if (localLocation != null &&
-            renderBoxScrollView.hitTest(result, position: localLocation)) {
-          hit = item.tag;
-        }
-      } catch (_) {}
+      final RenderBox? renderBoxItem =
+          item.key.currentContext?.findRenderObject() as RenderBox?;
+      final Offset? localLocationItem = renderBoxItem
+          ?.globalToLocal(renderBoxScrollView.localToGlobal(Offset.zero));
+      if (localLocationItem != null &&
+          renderBoxScrollView.hitTest(result, position: localLocationItem)) {
+        hit = item.tag;
+      }
     }
+
     return hit;
   }
 }
