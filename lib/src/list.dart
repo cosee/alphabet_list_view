@@ -11,13 +11,13 @@ class AlphabetList extends StatefulWidget {
     required this.scrollController,
     required this.symbolChangeNotifierList,
     required this.symbolChangeNotifierScrollbar,
-    this.alphabetListOptions = const AlphabetListOptions(),
+    this.alphabetListOptions = const ListOptions(),
   }) : super(key: key);
   final List<AlphabetListViewItemGroup> items;
   final ScrollController scrollController;
   final SymbolChangeNotifier symbolChangeNotifierList;
   final SymbolChangeNotifier symbolChangeNotifierScrollbar;
-  final AlphabetListOptions alphabetListOptions;
+  final ListOptions alphabetListOptions;
 
   @override
   State<AlphabetList> createState() => _AlphabetListState();
@@ -63,7 +63,7 @@ class _AlphabetListState extends State<AlphabetList> {
                                   ((item.childrenDelegate.estimatedChildCount ??
                                           0) ==
                                       0))
-                          ? widget.alphabetListOptions.alphabetListHeaderBuilder
+                          ? widget.alphabetListOptions.listHeaderBuilder
                                   ?.call(context, item.tag) ??
                               _DefaultAlphabetListHeader(
                                 symbol: item.tag,

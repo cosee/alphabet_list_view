@@ -22,9 +22,9 @@ class ExampleCustom1 extends StatelessWidget {
     return AlphabetListView(
       items: animals,
       alphabetListViewOptions: AlphabetListViewOptions(
-        alphabetOverlayOptions: AlphabetOverlayOptions(
+        overlayOptions: OverlayOptions(
           alignment: Alignment.centerRight,
-          alphabetOverlayBuilder: (context, symbol) {
+          overlayBuilder: (context, symbol) {
             return Container(
               width: 100,
               height: 100,
@@ -50,10 +50,10 @@ class ExampleCustom1 extends StatelessWidget {
             );
           },
         ),
-        alphabetScrollbarOptions: AlphabetScrollbarOptions(
+        scrollbarOptions: ScrollbarOptions(
           jumpToSymbolsWithNoEntries: true,
           backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
-          alphabetScrollbarSymbolBuilder: (context, symbol, state) {
+          scrollbarSymbolBuilder: (context, symbol, state) {
             Color color;
             if (state == AlphabetScrollbarItemState.active) {
               color = Colors.black;
@@ -85,11 +85,11 @@ class ExampleCustom1 extends StatelessWidget {
             );
           },
         ),
-        alphabetListOptions: AlphabetListOptions(
+        listOptions: ListOptions(
           backgroundColor: const Color.fromRGBO(210, 255, 210, 1.0),
           stickySectionHeader: false,
           showSectionHeaderForEmptySections: true,
-          alphabetListHeaderBuilder: (context, symbol) {
+          listHeaderBuilder: (context, symbol) {
             return Padding(
               padding:
                   const EdgeInsets.only(right: 18.0, top: 4.0, bottom: 4.0),

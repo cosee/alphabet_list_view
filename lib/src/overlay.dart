@@ -8,10 +8,10 @@ class AlphabetSymbolOverlay extends StatefulWidget {
   const AlphabetSymbolOverlay({
     Key? key,
     required this.symbolChangeNotifierScrollbar,
-    this.alphabetOverlayOptions = const AlphabetOverlayOptions(),
+    this.alphabetOverlayOptions = const OverlayOptions(),
   }) : super(key: key);
 
-  final AlphabetOverlayOptions alphabetOverlayOptions;
+  final OverlayOptions alphabetOverlayOptions;
   final SymbolChangeNotifier symbolChangeNotifierScrollbar;
 
   @override
@@ -40,7 +40,7 @@ class _AlphabetSymbolOverlayState extends State<AlphabetSymbolOverlay> {
           child: AnimatedOpacity(
             opacity: symbol == null ? .0 : opacity,
             duration: const Duration(milliseconds: 100),
-            child: widget.alphabetOverlayOptions.alphabetOverlayBuilder
+            child: widget.alphabetOverlayOptions.overlayBuilder
                     ?.call(context, symbol ?? '?') ??
                 _DefaultAlphabetOverlay(
                   symbol: symbol ?? '?',

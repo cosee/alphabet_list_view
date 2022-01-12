@@ -18,7 +18,7 @@ void main() {
           ),
         ],
         options: const AlphabetListViewOptions(
-          alphabetListOptions: AlphabetListOptions(
+          listOptions: ListOptions(
             showSectionHeader: false,
           ),
         ),

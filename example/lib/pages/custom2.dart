@@ -27,11 +27,11 @@ class ExampleCustom2 extends StatelessWidget {
     return AlphabetListView(
       items: animals,
       alphabetListViewOptions: AlphabetListViewOptions(
-        alphabetScrollbarOptions: AlphabetScrollbarOptions(
+        scrollbarOptions: ScrollbarOptions(
           symbols: repo.emojiHeaders,
           width: 60,
           mainAxisAlignment: MainAxisAlignment.start,
-          alphabetScrollbarSymbolBuilder: (context, symbol, state) {
+          scrollbarSymbolBuilder: (context, symbol, state) {
             return FittedBox(
               child: Padding(
                 padding: const EdgeInsets.all(2.0),
@@ -55,8 +55,8 @@ class ExampleCustom2 extends StatelessWidget {
             );
           },
         ),
-        alphabetListOptions: AlphabetListOptions(
-          alphabetListHeaderBuilder: (context, symbol) {
+        listOptions: ListOptions(
+          listHeaderBuilder: (context, symbol) {
             return DecoratedBox(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -75,7 +75,7 @@ class ExampleCustom2 extends StatelessWidget {
           },
           physics: const ClampingScrollPhysics(),
         ),
-        alphabetOverlayOptions: const AlphabetOverlayOptions(
+        overlayOptions: const OverlayOptions(
           showOverlay: false,
         ),
       ),

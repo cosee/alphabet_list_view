@@ -6,30 +6,30 @@ import 'package:flutter/material.dart';
 /// Optional class containing all options for the AlphabetListView.
 class AlphabetListViewOptions {
   const AlphabetListViewOptions({
-    this.alphabetListOptions = const AlphabetListOptions(),
-    this.alphabetScrollbarOptions = const AlphabetScrollbarOptions(),
-    this.alphabetOverlayOptions = const AlphabetOverlayOptions(),
+    this.listOptions = const ListOptions(),
+    this.scrollbarOptions = const ScrollbarOptions(),
+    this.overlayOptions = const OverlayOptions(),
   });
 
   /// Customisation options for the list.
-  final AlphabetListOptions alphabetListOptions;
+  final ListOptions listOptions;
 
   /// Customisation options for the scrollbar.
-  final AlphabetScrollbarOptions alphabetScrollbarOptions;
+  final ScrollbarOptions scrollbarOptions;
 
   /// Customisation options for the overlay.
-  final AlphabetOverlayOptions alphabetOverlayOptions;
+  final OverlayOptions overlayOptions;
 }
 
 /// Options for the list of the AlphabetListView.
-class AlphabetListOptions {
-  const AlphabetListOptions({
+class ListOptions {
+  const ListOptions({
     this.backgroundColor,
     this.physics,
     this.showSectionHeader = true,
     this.stickySectionHeader = true,
     this.showSectionHeaderForEmptySections = false,
-    this.alphabetListHeaderBuilder,
+    this.listHeaderBuilder,
   });
 
   /// Optional background color.
@@ -51,19 +51,19 @@ class AlphabetListOptions {
   final Widget Function(
     BuildContext context,
     String symbol,
-  )? alphabetListHeaderBuilder;
+  )? listHeaderBuilder;
 }
 
 /// Options for the scrollbar of the AlphabetListView
-class AlphabetScrollbarOptions {
-  const AlphabetScrollbarOptions({
+class ScrollbarOptions {
+  const ScrollbarOptions({
     this.width = 40,
     this.mainAxisAlignment = MainAxisAlignment.spaceEvenly,
     this.backgroundColor,
     this.symbols = defaultSymbols,
     this.jumpToSymbolsWithNoEntries = false,
     this.forcePosition,
-    this.alphabetScrollbarSymbolBuilder,
+    this.scrollbarSymbolBuilder,
   });
 
   /// The width of the sidebar.
@@ -95,15 +95,15 @@ class AlphabetScrollbarOptions {
     BuildContext context,
     String symbol,
     AlphabetScrollbarItemState state,
-  )? alphabetScrollbarSymbolBuilder;
+  )? scrollbarSymbolBuilder;
 }
 
 /// Options for the overlay of the AlphabetListView
-class AlphabetOverlayOptions {
-  const AlphabetOverlayOptions({
+class OverlayOptions {
+  const OverlayOptions({
     this.showOverlay = true,
     this.alignment = Alignment.center,
-    this.alphabetOverlayBuilder,
+    this.overlayBuilder,
   });
 
   /// Showing an overlay of the current icon when swiping across the sidebar.
@@ -116,7 +116,7 @@ class AlphabetOverlayOptions {
   final Widget Function(
     BuildContext context,
     String symbol,
-  )? alphabetOverlayBuilder;
+  )? overlayBuilder;
 }
 
 /// Default symbols used by the sidebar.

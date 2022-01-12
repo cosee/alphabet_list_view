@@ -36,7 +36,7 @@ class _AlphabetListViewState extends State<AlphabetListView> {
     super.initState();
     sortedItems = _generateAfterSymbolsSortedList(
       widget.items,
-      widget.alphabetListViewOptions.alphabetScrollbarOptions.symbols
+      widget.alphabetListViewOptions.scrollbarOptions.symbols
           .toSet()
           .toList(),
     );
@@ -48,11 +48,11 @@ class _AlphabetListViewState extends State<AlphabetListView> {
   @override
   Widget build(BuildContext context) {
     TextDirection? rowTextDirection;
-    if (widget.alphabetListViewOptions.alphabetScrollbarOptions.forcePosition ==
+    if (widget.alphabetListViewOptions.scrollbarOptions.forcePosition ==
         AlphabetScrollbarPosition.left) {
       rowTextDirection = TextDirection.rtl;
     } else if (widget
-            .alphabetListViewOptions.alphabetScrollbarOptions.forcePosition ==
+            .alphabetListViewOptions.scrollbarOptions.forcePosition ==
         AlphabetScrollbarPosition.right) {
       rowTextDirection = TextDirection.ltr;
     }
@@ -68,13 +68,13 @@ class _AlphabetListViewState extends State<AlphabetListView> {
                 items: sortedItems,
                 scrollController: scrollController,
                 alphabetListOptions:
-                    widget.alphabetListViewOptions.alphabetListOptions,
+                    widget.alphabetListViewOptions.listOptions,
                 symbolChangeNotifierList: symbolChangeNotifierList,
                 symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
               ),
               AlphabetSymbolOverlay(
                 alphabetOverlayOptions:
-                    widget.alphabetListViewOptions.alphabetOverlayOptions,
+                    widget.alphabetListViewOptions.overlayOptions,
                 symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
               ),
             ],
@@ -83,7 +83,7 @@ class _AlphabetListViewState extends State<AlphabetListView> {
         AlphabetScrollbar(
           items: sortedItems,
           alphabetScrollbarOptions:
-              widget.alphabetListViewOptions.alphabetScrollbarOptions,
+              widget.alphabetListViewOptions.scrollbarOptions,
           symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
           symbolChangeNotifierList: symbolChangeNotifierList,
         ),

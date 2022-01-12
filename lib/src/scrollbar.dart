@@ -9,11 +9,11 @@ class AlphabetScrollbar extends StatefulWidget {
     required this.items,
     required this.symbolChangeNotifierScrollbar,
     required this.symbolChangeNotifierList,
-    this.alphabetScrollbarOptions = const AlphabetScrollbarOptions(),
+    this.alphabetScrollbarOptions = const ScrollbarOptions(),
   }) : super(key: key);
 
   final List<AlphabetListViewItemGroup> items;
-  final AlphabetScrollbarOptions alphabetScrollbarOptions;
+  final ScrollbarOptions alphabetScrollbarOptions;
   final SymbolChangeNotifier symbolChangeNotifierScrollbar;
   final SymbolChangeNotifier symbolChangeNotifierList;
 
@@ -62,7 +62,7 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
                     width: widget.alphabetScrollbarOptions.width,
                     key: symbolKeys[symbol],
                     child: widget.alphabetScrollbarOptions
-                            .alphabetScrollbarSymbolBuilder
+                            .scrollbarSymbolBuilder
                             ?.call(context, symbol, _getSymbolState(symbol)) ??
                         _DefaultScrollbarSymbol(
                           symbol: symbol,
