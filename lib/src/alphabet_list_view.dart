@@ -69,8 +69,7 @@ class _AlphabetListViewState extends State<AlphabetListView> {
                 symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
               ),
               AlphabetSymbolOverlay(
-                alphabetOverlayOptions:
-                    widget.options.overlayOptions,
+                alphabetOverlayOptions: widget.options.overlayOptions,
                 symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
               ),
             ],
@@ -78,8 +77,7 @@ class _AlphabetListViewState extends State<AlphabetListView> {
         ),
         AlphabetScrollbar(
           items: sortedItems,
-          alphabetScrollbarOptions:
-              widget.options.scrollbarOptions,
+          alphabetScrollbarOptions: widget.options.scrollbarOptions,
           symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
           symbolChangeNotifierList: symbolChangeNotifierList,
         ),

@@ -63,13 +63,12 @@ class _AlphabetListState extends State<AlphabetList> {
               ),
               ...widget.items.map(
                 (item) {
-                  bool headerForEmptySection = widget.alphabetListOptions
+                  bool useHeaderForEmptySection = widget.alphabetListOptions
                           .showSectionHeaderForEmptySections ||
                       !((item.childrenDelegate.estimatedChildCount ?? 0) == 0);
-
                   Widget header = widget
                               .alphabetListOptions.showSectionHeader &&
-                          headerForEmptySection
+                          useHeaderForEmptySection
                       ? Semantics(
                           header: true,
                           child: widget.alphabetListOptions.listHeaderBuilder
@@ -80,24 +79,22 @@ class _AlphabetListState extends State<AlphabetList> {
                         )
                       : const SizedBox.shrink();
 
-                  return [
-                    SliverStickyHeader(
-                      header: Container(
-                        key: item.key,
-                      ),
-                      sliver: SliverStickyHeader(
-                        header: Container(
-                          child: header,
-                        ),
-                        sliver: SliverList(
-                          delegate: item.childrenDelegate,
-                        ),
-                        sticky: widget.alphabetListOptions.stickySectionHeader,
-                      ),
+                  return SliverStickyHeader(
+                    header: Container(
+                      key: item.key,
                     ),
-                  ];
+                    sliver: SliverStickyHeader(
+                      header: Container(
+                        child: header,
+                      ),
+                      sliver: SliverList(
+                        delegate: item.childrenDelegate,
+                      ),
+                      sticky: widget.alphabetListOptions.stickySectionHeader,
+                    ),
+                  );
                 },
-              ).expand((element) => element),
+              ),
               SliverToBoxAdapter(
                 child: widget.alphabetListOptions.afterList,
               ),
