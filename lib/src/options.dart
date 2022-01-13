@@ -40,7 +40,10 @@ class ListOptions {
   /// Optional background color.
   final Color? backgroundColor;
 
-  // TODO
+  /// Sets an offset to the upper edge.
+  ///
+  /// Must be >= 0 or [null]
+  /// Does not work in combination with [stickySectionHeader] set to true.
   final double? topOffset;
 
   /// Padding around the list.
