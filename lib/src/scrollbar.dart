@@ -64,13 +64,16 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
                       color: Colors.transparent,
                       width: widget.alphabetScrollbarOptions.width,
                       key: symbolKeys[symbol],
-                      child: widget.alphabetScrollbarOptions.symbolBuilder
-                              ?.call(
-                                  context, symbol, _getSymbolState(symbol)) ??
-                          DefaultScrollbarSymbol(
-                            symbol: symbol,
-                            state: _getSymbolState(symbol),
-                          ),
+                      child:
+                          widget.alphabetScrollbarOptions.symbolBuilder?.call(
+                                context,
+                                symbol,
+                                _getSymbolState(symbol),
+                              ) ??
+                              DefaultScrollbarSymbol(
+                                symbol: symbol,
+                                state: _getSymbolState(symbol),
+                              ),
                     ),
                   ),
                 );

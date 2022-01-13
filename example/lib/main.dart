@@ -1,4 +1,4 @@
-import 'package:alphabet_list_view_example/pages/widgetBuilder.dart';
+import 'package:alphabet_list_view_example/pages/widget_builder.dart';
 import 'package:alphabet_list_view_example/pages/unicode.dart';
 import 'package:alphabet_list_view_example/pages/offset.dart';
 import 'package:alphabet_list_view_example/pages/default.dart';
