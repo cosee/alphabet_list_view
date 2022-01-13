@@ -144,13 +144,7 @@ class _AlphabetListState extends State<AlphabetList> {
         .currentContext
         ?.findRenderObject();
     if (renderObject != null) {
-      await widget.scrollController.position.ensureVisible(renderObject);
-      if (widget.alphabetListOptions.topOffset != null) {
-        widget.scrollController.position.jumpTo(
-          widget.scrollController.position.pixels -
-              widget.alphabetListOptions.topOffset!,
-        );
-      }
+      _jumpTo(renderObject);
     }
   }
 
@@ -176,5 +170,19 @@ class _AlphabetListState extends State<AlphabetList> {
     }
 
     return hit;
+  }
+
+  void _jumpTo(RenderObject object) {
+    final RenderAbstractViewport viewport = RenderAbstractViewport.of(object)!;
+    double? target;
+
+    target = viewport.getOffsetToReveal(object, .0).offset.clamp(
+          widget.alphabetListOptions.topOffset ?? 0,
+          widget.scrollController.position.maxScrollExtent +
+              (widget.alphabetListOptions.topOffset ?? 0),
+        );
+    widget.scrollController.jumpTo(
+      target - (widget.alphabetListOptions.topOffset ?? 0),
+    );
   }
 }

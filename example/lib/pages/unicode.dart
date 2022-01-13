@@ -2,8 +2,8 @@ import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:alphabet_list_view_example/repository.dart' as repo;
 import 'package:flutter/material.dart';
 
-class ExampleCustom2 extends StatelessWidget {
-  ExampleCustom2({Key? key}) : super(key: key);
+class ExampleUnicode extends StatelessWidget {
+  ExampleUnicode({Key? key}) : super(key: key);
 
   final List<AlphabetListViewItemGroup> animals = [
     for (var emojiType in repo.emojis.entries)
