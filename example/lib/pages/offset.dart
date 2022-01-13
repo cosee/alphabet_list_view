@@ -27,7 +27,7 @@ class ExampleOffset extends StatelessWidget {
       body: Builder(builder: (context) {
         return AlphabetListView(
           items: animals,
-          alphabetListViewOptions: AlphabetListViewOptions(
+          options: AlphabetListViewOptions(
             listOptions: ListOptions(
               stickySectionHeader: false,
               topOffset: MediaQuery.of(context).padding.top,

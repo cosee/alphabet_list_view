@@ -35,7 +35,7 @@ class ListOptions {
     this.beforeList,
     this.afterList,
     this.listHeaderBuilder,
-  });
+  }): assert((topOffset ?? 0) >= 0);
 
   /// Optional background color.
   final Color? backgroundColor;

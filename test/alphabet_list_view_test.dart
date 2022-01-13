@@ -160,7 +160,7 @@ class TestWidget extends StatelessWidget {
       home: Scaffold(
         body: AlphabetListView(
           items: items,
-          alphabetListViewOptions: options ?? const AlphabetListViewOptions(),
+          options: options ?? const AlphabetListViewOptions(),
         ),
       ),
     );

@@ -26,7 +26,7 @@ class ExampleUnicode extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlphabetListView(
       items: animals,
-      alphabetListViewOptions: AlphabetListViewOptions(
+      options: AlphabetListViewOptions(
         scrollbarOptions: ScrollbarOptions(
           symbols: repo.emojiHeaders,
           width: 60,

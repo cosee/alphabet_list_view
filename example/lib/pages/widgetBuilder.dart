@@ -21,7 +21,7 @@ class ExampleWidgetBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlphabetListView(
       items: animals,
-      alphabetListViewOptions: AlphabetListViewOptions(
+      options: AlphabetListViewOptions(
         overlayOptions: OverlayOptions(
           alignment: Alignment.centerRight,
           overlayBuilder: (context, symbol) {
