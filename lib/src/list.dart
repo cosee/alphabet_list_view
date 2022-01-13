@@ -27,6 +27,8 @@ class AlphabetList extends StatefulWidget {
 class _AlphabetListState extends State<AlphabetList> {
   late GlobalKey customScrollKey;
 
+  late SliverChildBuilderDelegate d;
+
   @override
   void initState() {
     super.initState();
@@ -48,11 +50,14 @@ class _AlphabetListState extends State<AlphabetList> {
           behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
           child: CustomScrollView(
             key: customScrollKey,
-            // TODO
-            clipBehavior: Clip.none,
             controller: widget.scrollController,
             physics: widget.alphabetListOptions.physics,
             slivers: [
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: widget.alphabetListOptions.topOffset,
+                ),
+              ),
               SliverToBoxAdapter(
                 child: widget.alphabetListOptions.beforeList,
               ),
@@ -76,20 +81,18 @@ class _AlphabetListState extends State<AlphabetList> {
                       : const SizedBox.shrink();
 
                   return [
-                    SliverToBoxAdapter(
-                      child: widget.alphabetListOptions.stickySectionHeader
-                          ? const SizedBox.shrink()
-                          : header,
-                    ),
                     SliverStickyHeader(
-                      header: KeyedSubtree(
+                      header: Container(
                         key: item.key,
-                        child: widget.alphabetListOptions.stickySectionHeader
-                            ? header
-                            : const SizedBox.shrink(),
                       ),
-                      sliver: SliverList(
-                        delegate: item.childrenDelegate,
+                      sliver: SliverStickyHeader(
+                        header: Container(
+                          child: header,
+                        ),
+                        sliver: SliverList(
+                          delegate: item.childrenDelegate,
+                        ),
+                        sticky: widget.alphabetListOptions.stickySectionHeader,
                       ),
                     ),
                   ];
@@ -134,14 +137,20 @@ class _AlphabetListState extends State<AlphabetList> {
     }
   }
 
-  void _showGroup(String symbol) {
+  Future<void> _showGroup(String symbol) async {
     final RenderObject? renderObject = widget.items
         .firstWhere((element) => element.tag == symbol)
         .key
         .currentContext
         ?.findRenderObject();
     if (renderObject != null) {
-      widget.scrollController.position.ensureVisible(renderObject);
+      await widget.scrollController.position.ensureVisible(renderObject);
+      if (widget.alphabetListOptions.topOffset != null) {
+        widget.scrollController.position.jumpTo(
+          widget.scrollController.position.pixels -
+              widget.alphabetListOptions.topOffset!,
+        );
+      }
     }
   }
 

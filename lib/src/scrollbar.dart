@@ -41,7 +41,8 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: widget.alphabetScrollbarOptions.padding??  const EdgeInsets.all(.0),
+      padding:
+          widget.alphabetScrollbarOptions.padding ?? const EdgeInsets.all(.0),
       child: Container(
         color: widget.alphabetScrollbarOptions.backgroundColor,
         width: widget.alphabetScrollbarOptions.width,
@@ -64,7 +65,8 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
                       width: widget.alphabetScrollbarOptions.width,
                       key: symbolKeys[symbol],
                       child: widget.alphabetScrollbarOptions.symbolBuilder
-                              ?.call(context, symbol, _getSymbolState(symbol)) ??
+                              ?.call(
+                                  context, symbol, _getSymbolState(symbol)) ??
                           DefaultScrollbarSymbol(
                             symbol: symbol,
                             state: _getSymbolState(symbol),
