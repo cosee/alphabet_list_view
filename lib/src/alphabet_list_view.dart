@@ -115,10 +115,10 @@ class _AlphabetListViewState extends State<AlphabetListView> {
 class AlphabetListViewItemGroup {
   AlphabetListViewItemGroup({
     required this.tag,
-    required List<Widget> children,
+    required Iterable<Widget> children,
   })  : key = GlobalKey(),
         childrenDelegate = SliverChildListDelegate(
-          children,
+          children.toList(),
         );
 
   AlphabetListViewItemGroup.builder({
