@@ -28,7 +28,7 @@ import 'package:alphabet_list_view/alphabet_list_view.dart';
 
 Example:
 
-```dart  
+```dart
 final List<AlphabetListViewItemGroup> tech = [
     AlphabetListViewItemGroup(tag: 'A', children: const [
     Text('Apple'),
@@ -49,45 +49,45 @@ AlphabetListView(
 ## Customization options
 
 ```dart
- final List<AlphabetListViewItemGroup> tech = [
-      AlphabetListViewItemGroup(tag: 'A', children: const [
-        Text('Apple'),
-        Text('Amazon'),
-        Text('Alibaba'),
-      ]),
-      AlphabetListViewItemGroup(tag: 'I', children: const [
-        Text('Intel'),
-        Text('IBM'),
-      ]),
-    ];
+final List<AlphabetListViewItemGroup> tech = [
+  AlphabetListViewItemGroup(tag: 'A', children: const [
+    Text('Apple'),
+    Text('Amazon'),
+    Text('Alibaba'),
+  ]),
+  AlphabetListViewItemGroup(tag: 'I', children: const [
+    Text('Intel'),
+    Text('IBM'),
+  ]),
+];
 
-    final AlphabetListViewOptions options = AlphabetListViewOptions(
-      alphabetListOptions: AlphabetListOptions(
-        alphabetListHeaderBuilder: (context, symbol) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Text(symbol),
-            ),
-          );
-        },
-      ),
-      alphabetScrollbarOptions:
-          const AlphabetScrollbarOptions(
-            backgroundColor: Colors.yellow,
+final AlphabetListViewOptions options = AlphabetListViewOptions(
+  listOptions: ListOptions(
+    listHeaderBuilder: (context, symbol) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: Colors.grey,
+            borderRadius: BorderRadius.circular(100),
           ),
-      alphabetOverlayOptions: const AlphabetOverlayOptions(
-        showOverlay: false,
-      ),
-    );
+          child: Text(symbol),
+        ),
+      );
+    },
+  ),
+  scrollbarOptions:
+  const ScrollbarOptions(
+    backgroundColor: Colors.yellow,
+  ),
+  overlayOptions: const OverlayOptions(
+    showOverlay: false,
+  ),
+);
 
-    AlphabetListView(
-      items: tech,
-      alphabetListViewOptions: options,
-    );
+AlphabetListView(
+  items: tech,
+  options: options,
+);
 ```  
