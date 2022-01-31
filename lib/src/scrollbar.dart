@@ -22,7 +22,7 @@ class AlphabetScrollbar extends StatefulWidget {
 }
 
 class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
-  late String selectedSymbol;
+  String? selectedSymbol;
   late Map<String, GlobalKey> symbolKeys;
   late List<String> uniqueItems;
 
@@ -30,7 +30,6 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   void initState() {
     super.initState();
     uniqueItems = widget.alphabetScrollbarOptions.symbols.toSet().toList();
-    selectedSymbol = _getFirstActiveSymbol() ?? '?';
     symbolKeys = {
       for (var symbol in uniqueItems) symbol: GlobalKey(),
     };
@@ -90,17 +89,6 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
     widget.symbolChangeNotifierList
         .removeListener(_symbolChangeNotifierListListener);
     super.dispose();
-  }
-
-  String? _getFirstActiveSymbol() {
-    final Iterable<AlphabetListViewItemGroup> result = widget.items.where(
-      (item) => !((item.childrenDelegate.estimatedChildCount ?? 0) == 0 &&
-          !widget.alphabetScrollbarOptions.jumpToSymbolsWithNoEntries),
-    );
-
-    if (result.isNotEmpty) {
-      return result.first.tag;
-    }
   }
 
   AlphabetScrollbarItemState _getSymbolState(String symbol) {

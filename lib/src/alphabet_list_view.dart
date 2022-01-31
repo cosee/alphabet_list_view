@@ -25,7 +25,6 @@ class AlphabetListView extends StatefulWidget {
 }
 
 class _AlphabetListViewState extends State<AlphabetListView> {
-  late List<AlphabetListViewItemGroup> sortedItems;
   late ScrollController scrollController;
 
   late SymbolChangeNotifier symbolChangeNotifierScrollbar;
@@ -34,10 +33,6 @@ class _AlphabetListViewState extends State<AlphabetListView> {
   @override
   void initState() {
     super.initState();
-    sortedItems = _generateAfterSymbolsSortedList(
-      widget.items,
-      widget.options.scrollbarOptions.symbols.toSet().toList(),
-    );
     scrollController = widget.scrollController ?? ScrollController();
     symbolChangeNotifierScrollbar = SymbolChangeNotifier();
     symbolChangeNotifierList = SymbolChangeNotifier();
@@ -45,6 +40,11 @@ class _AlphabetListViewState extends State<AlphabetListView> {
 
   @override
   Widget build(BuildContext context) {
+    late List<AlphabetListViewItemGroup> sortedItems =
+        _generateAfterSymbolsSortedList(
+      widget.items,
+      widget.options.scrollbarOptions.symbols.toSet().toList(),
+    );
     TextDirection? rowTextDirection;
     if (widget.options.scrollbarOptions.forcePosition ==
         AlphabetScrollbarPosition.left) {
