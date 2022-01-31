@@ -1,8 +1,8 @@
-import 'package:alphabet_list_view_example/pages/widget_builder.dart';
-import 'package:alphabet_list_view_example/pages/unicode.dart';
-import 'package:alphabet_list_view_example/pages/offset.dart';
 import 'package:alphabet_list_view_example/pages/default.dart';
+import 'package:alphabet_list_view_example/pages/offset.dart';
 import 'package:alphabet_list_view_example/pages/rtl.dart';
+import 'package:alphabet_list_view_example/pages/unicode.dart';
+import 'package:alphabet_list_view_example/pages/widget_builder.dart';
 import 'package:flutter/material.dart';
 
 void main() {

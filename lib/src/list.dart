@@ -42,6 +42,10 @@ class _AlphabetListState extends State<AlphabetList> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance?.addPostFrameCallback(
+      (_) => _scrollControllerListener(),
+    );
+
     return Padding(
       padding: widget.alphabetListOptions.padding ?? const EdgeInsets.all(.0),
       child: Container(
