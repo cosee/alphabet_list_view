@@ -2,25 +2,49 @@ import 'dart:async';
 
 import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:alphabet_list_view/src/controller.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+/// ScrollBar Overlay
 class AlphabetSymbolOverlay extends StatefulWidget {
+  /// Constructor of AlphabetSymbolOverlay
   const AlphabetSymbolOverlay({
-    Key? key,
+    super.key,
     required this.symbolChangeNotifierScrollbar,
     this.alphabetOverlayOptions = const OverlayOptions(),
-  }) : super(key: key);
+  });
 
+  /// Overlay options
   final OverlayOptions alphabetOverlayOptions;
+
+  /// ChangeNotifier for ScrollBar
   final SymbolChangeNotifier symbolChangeNotifierScrollbar;
 
   @override
   State<AlphabetSymbolOverlay> createState() => _AlphabetSymbolOverlayState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+        DiagnosticsProperty<OverlayOptions>(
+          'alphabetOverlayOptions',
+          alphabetOverlayOptions,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<SymbolChangeNotifier>(
+          'symbolChangeNotifierScrollbar',
+          symbolChangeNotifierScrollbar,
+        ),
+      );
+  }
 }
 
 class _AlphabetSymbolOverlayState extends State<AlphabetSymbolOverlay> {
   String? symbol;
-  double opacity = 1.0;
+  double opacity = 1;
   Timer? timer;
 
   @override
@@ -81,5 +105,14 @@ class _AlphabetSymbolOverlayState extends State<AlphabetSymbolOverlay> {
         opacity = .0;
       });
     });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty('symbol', symbol))
+      ..add(DoubleProperty('opacity', opacity))
+      ..add(DiagnosticsProperty<Timer?>('timer', timer));
   }
 }

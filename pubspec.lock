@@ -9,13 +9,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "52.0.0"
-  alphabet_list_view:
-    dependency: "direct main"
-    description:
-      path: ".."
-      relative: true
-    source: path
-    version: "0.1.5"
   analyzer:
     dependency: transitive
     description:
@@ -96,6 +89,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
+  cosee_lints:
+    dependency: "direct dev"
+    description:
+      name: cosee_lints
+      sha256: "46086622924acf4feec22d48309f57cf3d9e1badc4865f6352603194c589a45f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
   crypto:
     dependency: transitive
     description:
@@ -166,7 +167,7 @@ packages:
     source: hosted
     version: "2.0.1"
   flutter_sticky_header:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_sticky_header
       sha256: "017f398fbb45a589e01491861ca20eb6570a763fd9f3888165a978e11248c709"

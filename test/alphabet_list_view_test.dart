@@ -1,5 +1,6 @@
 import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:alphabet_list_view/src/scrollbar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -127,11 +128,11 @@ void main() {
       ),
     );
 
-    var buttonA = find.descendant(
+    final buttonA = find.descendant(
       of: find.byType(AlphabetScrollbar),
       matching: find.text('A'),
     );
-    var buttonB = find.descendant(
+    final buttonB = find.descendant(
       of: find.byType(AlphabetScrollbar),
       matching: find.text('B'),
     );
@@ -149,8 +150,7 @@ void main() {
 }
 
 class TestWidget extends StatelessWidget {
-  const TestWidget({Key? key, required this.items, this.options})
-      : super(key: key);
+  const TestWidget({super.key, required this.items, this.options});
   final List<AlphabetListViewItemGroup> items;
   final AlphabetListViewOptions? options;
 
@@ -164,5 +164,11 @@ class TestWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(IterableProperty<AlphabetListViewItemGroup>('items', items))
+    ..add(DiagnosticsProperty<AlphabetListViewOptions?>('options', options));
   }
 }

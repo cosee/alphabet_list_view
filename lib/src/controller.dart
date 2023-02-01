@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 
+/// SymbolChangeNotifier
 class SymbolChangeNotifier extends ChangeNotifier
     implements ValueListenable<String?> {
+  /// Constructor of SymbolChangeNotifier
   SymbolChangeNotifier([this._value]);
 
   @override

@@ -1,33 +1,76 @@
 import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:alphabet_list_view/src/controller.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 
+/// AlphabetList
 class AlphabetList extends StatefulWidget {
+  /// Constructor of AlphabetList
   const AlphabetList({
-    Key? key,
+    super.key,
     required this.items,
     required this.scrollController,
     required this.symbolChangeNotifierList,
     required this.symbolChangeNotifierScrollbar,
     this.alphabetListOptions = const ListOptions(),
-  }) : super(key: key);
+  });
 
+  /// List of item groups
   final List<AlphabetListViewItemGroup> items;
+
+  /// ScrollController
   final ScrollController scrollController;
+
+  /// ChangeNotifier for symbols
   final SymbolChangeNotifier symbolChangeNotifierList;
+
+  /// ChangeNotifier for scrollbar
   final SymbolChangeNotifier symbolChangeNotifierScrollbar;
+
+  /// options
   final ListOptions alphabetListOptions;
 
   @override
   State<AlphabetList> createState() => _AlphabetListState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IterableProperty<AlphabetListViewItemGroup>('items', items))
+      ..add(
+        DiagnosticsProperty<ScrollController>(
+          'scrollController',
+          scrollController,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<SymbolChangeNotifier>(
+          'symbolChangeNotifierList',
+          symbolChangeNotifierList,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<SymbolChangeNotifier>(
+          'symbolChangeNotifierScrollbar',
+          symbolChangeNotifierScrollbar,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<ListOptions>(
+          'alphabetListOptions',
+          alphabetListOptions,
+        ),
+      );
+  }
 }
 
 class _AlphabetListState extends State<AlphabetList> {
   late GlobalKey customScrollKey;
 
-  late SliverChildBuilderDelegate d;
+  late SliverChildBuilderDelegate delegate;
 
   @override
   void initState() {
@@ -47,7 +90,7 @@ class _AlphabetListState extends State<AlphabetList> {
     );
 
     return Padding(
-      padding: widget.alphabetListOptions.padding ?? const EdgeInsets.all(.0),
+      padding: widget.alphabetListOptions.padding ?? EdgeInsets.zero,
       child: Container(
         color: widget.alphabetListOptions.backgroundColor,
         child: ScrollConfiguration(
@@ -67,10 +110,11 @@ class _AlphabetListState extends State<AlphabetList> {
               ),
               ...widget.items.map(
                 (item) {
-                  bool useHeaderForEmptySection = widget.alphabetListOptions
+                  final bool useHeaderForEmptySection = widget
+                          .alphabetListOptions
                           .showSectionHeaderForEmptySections ||
                       !((item.childrenDelegate.estimatedChildCount ?? 0) == 0);
-                  Widget header = widget
+                  final Widget header = widget
                               .alphabetListOptions.showSectionHeader &&
                           useHeaderForEmptySection
                       ? Semantics(
@@ -174,10 +218,10 @@ class _AlphabetListState extends State<AlphabetList> {
   }
 
   void _jumpTo(RenderObject object) {
-    final RenderAbstractViewport viewport = RenderAbstractViewport.of(object)!;
+    final RenderAbstractViewport viewport = RenderAbstractViewport.of(object);
     double? target;
 
-    target = viewport.getOffsetToReveal(object, .0).offset.clamp(
+    target = viewport.getOffsetToReveal(object, 0).offset.clamp(
           widget.alphabetListOptions.topOffset ?? 0,
           widget.scrollController.position.maxScrollExtent +
               (widget.alphabetListOptions.topOffset ?? 0),
@@ -185,5 +229,23 @@ class _AlphabetListState extends State<AlphabetList> {
     widget.scrollController.jumpTo(
       target - (widget.alphabetListOptions.topOffset ?? 0),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+        DiagnosticsProperty<GlobalKey<State<StatefulWidget>>>(
+          'customScrollKey',
+          customScrollKey,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<SliverChildBuilderDelegate>(
+          'delegate',
+          delegate,
+        ),
+      );
   }
 }

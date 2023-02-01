@@ -56,8 +56,8 @@ class Home extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
-          child: const SizedBox.shrink(),
           color: Theme.of(context).colorScheme.primary,
+          child: const SizedBox.shrink(),
         ),
       ),
     );

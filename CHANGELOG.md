@@ -1,3 +1,8 @@
+## 0.1.5
+
+* Updated for Flutter 3.7.
+* Added cosee_lints package
+
 ## 0.1.4
 
 * Updated changelog.

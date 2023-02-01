@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 ///
 /// Optional class containing all options for the AlphabetListView.
 class AlphabetListViewOptions {
+  /// Constructor of AlphabetListViewOptions
   const AlphabetListViewOptions({
     this.listOptions = const ListOptions(),
     this.scrollbarOptions = const ScrollbarOptions(),
@@ -24,6 +25,7 @@ class AlphabetListViewOptions {
 
 /// Options for the list of the AlphabetListView.
 class ListOptions {
+  /// Constructor of ListOptions
   const ListOptions({
     this.backgroundColor,
     this.topOffset,
@@ -35,14 +37,14 @@ class ListOptions {
     this.beforeList,
     this.afterList,
     this.listHeaderBuilder,
-  }) : assert((topOffset ?? 0) >= 0);
+  }) : assert((topOffset ?? 0) >= 0, 'Offset must not be zero');
 
   /// Optional background color.
   final Color? backgroundColor;
 
   /// Sets an offset to the upper edge.
   ///
-  /// Must be >= 0 or [null]
+  /// Must be >= 0 or null
   /// Does not work in combination with [stickySectionHeader] set to true.
   final double? topOffset;
 
@@ -73,6 +75,7 @@ class ListOptions {
 
 /// Options for the scrollbar of the AlphabetListView
 class ScrollbarOptions {
+  /// Constructor of ScrollbarOptions
   const ScrollbarOptions({
     this.width = 40,
     this.padding,
@@ -117,6 +120,7 @@ class ScrollbarOptions {
 
 /// Options for the overlay of the AlphabetListView
 class OverlayOptions {
+  /// Constructor of OverlayOptions
   const OverlayOptions({
     this.showOverlay = true,
     this.alignment = Alignment.center,

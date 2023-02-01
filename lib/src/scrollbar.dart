@@ -1,24 +1,59 @@
 import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:alphabet_list_view/src/controller.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+/// AlphabetScrollBar
 class AlphabetScrollbar extends StatefulWidget {
+  /// Constructor of AlphabetScrollbar
   const AlphabetScrollbar({
-    Key? key,
+    super.key,
     required this.items,
     required this.symbolChangeNotifierScrollbar,
     required this.symbolChangeNotifierList,
     this.alphabetScrollbarOptions = const ScrollbarOptions(),
-  }) : super(key: key);
+  });
 
+  /// List of Groups
   final List<AlphabetListViewItemGroup> items;
+
+  /// Scrollbar options
   final ScrollbarOptions alphabetScrollbarOptions;
+
+  /// ChangeNotifier for scrollbar
   final SymbolChangeNotifier symbolChangeNotifierScrollbar;
+
+  /// ChangeNotifier for list
   final SymbolChangeNotifier symbolChangeNotifierList;
 
   @override
-  _AlphabetScrollbarState createState() => _AlphabetScrollbarState();
+  State<AlphabetScrollbar> createState() => _AlphabetScrollbarState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IterableProperty<AlphabetListViewItemGroup>('items', items))
+      ..add(
+        DiagnosticsProperty<ScrollbarOptions>(
+          'alphabetScrollbarOptions',
+          alphabetScrollbarOptions,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<SymbolChangeNotifier>(
+          'symbolChangeNotifierScrollbar',
+          symbolChangeNotifierScrollbar,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<SymbolChangeNotifier>(
+          'symbolChangeNotifierList',
+          symbolChangeNotifierList,
+        ),
+      );
+  }
 }
 
 class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
@@ -40,8 +75,7 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          widget.alphabetScrollbarOptions.padding ?? const EdgeInsets.all(.0),
+      padding: widget.alphabetScrollbarOptions.padding ?? EdgeInsets.zero,
       child: Container(
         color: widget.alphabetScrollbarOptions.backgroundColor,
         width: widget.alphabetScrollbarOptions.width,
@@ -128,11 +162,12 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
     String? touchedSymbol;
 
     final result = BoxHitTestResult();
-    for (var entry in symbolKeys.entries) {
+    for (final entry in symbolKeys.entries) {
       try {
-        RenderBox? renderBox =
+        final RenderBox? renderBox =
             entry.value.currentContext?.findRenderObject() as RenderBox?;
-        Offset? localLocation = renderBox?.globalToLocal(details.position);
+        final Offset? localLocation =
+            renderBox?.globalToLocal(details.position);
 
         if (localLocation != null &&
             renderBox != null &&
@@ -161,5 +196,19 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
         selectedSymbol = symbol;
       });
     }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty('selectedSymbol', selectedSymbol))
+      ..add(
+        DiagnosticsProperty<Map<String, GlobalKey<State<StatefulWidget>>>>(
+          'symbolKeys',
+          symbolKeys,
+        ),
+      )
+      ..add(IterableProperty<String>('uniqueItems', uniqueItems));
   }
 }

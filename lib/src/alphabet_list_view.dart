@@ -3,25 +3,46 @@ import 'package:alphabet_list_view/src/controller.dart';
 import 'package:alphabet_list_view/src/list.dart';
 import 'package:alphabet_list_view/src/overlay.dart';
 import 'package:alphabet_list_view/src/scrollbar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 /// A ListView with sticky headers and an iOS-like clickable sidebar.
 ///
 /// Add [AlphabetListViewOptions] to make adjustments.
 class AlphabetListView extends StatefulWidget {
+  /// Constructor of AlphabetListView
   const AlphabetListView({
-    Key? key,
+    super.key,
     required this.items,
     this.options = const AlphabetListViewOptions(),
     this.scrollController,
-  }) : super(key: key);
+  });
 
+  /// List items
   final Iterable<AlphabetListViewItemGroup> items;
+
+  /// List options
   final AlphabetListViewOptions options;
+
+  /// Optional ScrollController
   final ScrollController? scrollController;
 
   @override
-  _AlphabetListViewState createState() => _AlphabetListViewState();
+  State<AlphabetListView> createState() => _AlphabetListViewState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IterableProperty<AlphabetListViewItemGroup>('items', items))
+      ..add(DiagnosticsProperty<AlphabetListViewOptions>('options', options))
+      ..add(
+        DiagnosticsProperty<ScrollController?>(
+          'scrollController',
+          scrollController,
+        ),
+      );
+  }
 }
 
 class _AlphabetListViewState extends State<AlphabetListView> {
@@ -40,7 +61,7 @@ class _AlphabetListViewState extends State<AlphabetListView> {
 
   @override
   Widget build(BuildContext context) {
-    late List<AlphabetListViewItemGroup> sortedItems =
+    final List<AlphabetListViewItemGroup> sortedItems =
         _generateAfterSymbolsSortedList(
       widget.items,
       widget.options.scrollbarOptions.symbols.toSet().toList(),
@@ -109,10 +130,35 @@ class _AlphabetListViewState extends State<AlphabetListView> {
         ),
     ];
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+        DiagnosticsProperty<ScrollController>(
+          'scrollController',
+          scrollController,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<SymbolChangeNotifier>(
+          'symbolChangeNotifierScrollbar',
+          symbolChangeNotifierScrollbar,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<SymbolChangeNotifier>(
+          'symbolChangeNotifierList',
+          symbolChangeNotifierList,
+        ),
+      );
+  }
 }
 
 /// Item groups shown in the list.
 class AlphabetListViewItemGroup {
+  /// Constructor of AlphabetListViewItemGroup.
   AlphabetListViewItemGroup({
     required this.tag,
     required Iterable<Widget> children,
@@ -121,17 +167,19 @@ class AlphabetListViewItemGroup {
           children.toList(),
         );
 
+  /// Builder constructor of AlphabetListViewItemGroup.
   AlphabetListViewItemGroup.builder({
     required this.tag,
     required int itemCount,
     required IndexedWidgetBuilder itemBuilder,
-  })  : assert(itemCount >= 0),
+  })  : assert(itemCount >= 0, 'itemCount must not be smaller than zero!'),
         key = GlobalKey(),
         childrenDelegate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
         );
 
+  /// Key
   final GlobalKey key;
 
   /// String to identify this group.
@@ -139,5 +187,7 @@ class AlphabetListViewItemGroup {
   /// Must be unique and included in the symbols of the sidebar.
   /// Typically only 1 character e.g. 'A'.
   final String tag;
+
+  /// Delegate class for children.
   final SliverChildDelegate childrenDelegate;
 }
