@@ -2,4 +2,4 @@ include: package:cosee_lints/analysis_options_package.yaml
 
 dart_code_metrics:
   extends:
-    - package_cosee_lints/metrics.yaml
+    - package:cosee_lints/metrics.yaml

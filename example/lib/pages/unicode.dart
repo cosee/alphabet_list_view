@@ -1,23 +1,25 @@
 import 'package:alphabet_list_view/alphabet_list_view.dart';
-import 'package:alphabet_list_view_example/repository.dart' as repo;
+import 'package:alphabet_list_view_example/repository.dart';
 import 'package:flutter/material.dart';
 
 class ExampleUnicode extends StatelessWidget {
-  ExampleUnicode({Key? key}) : super(key: key);
+  ExampleUnicode({super.key});
 
   final List<AlphabetListViewItemGroup> animals = [
-    for (var emojiType in repo.emojis.entries)
+    for (var emojiType in Repository.emojis.entries)
       AlphabetListViewItemGroup(
         tag: emojiType.key,
         children: emojiType.value
-            .map((emoji) => Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Text(
-                    '$emoji\n${emoji.runes.toList()}',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                ))
+            .map(
+              (emoji) => Padding(
+                padding: const EdgeInsets.all(4),
+                child: Text(
+                  '$emoji\n${emoji.runes.toList()}',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 20),
+                ),
+              ),
+            )
             .toList(),
       ),
   ];
@@ -28,22 +30,22 @@ class ExampleUnicode extends StatelessWidget {
       items: animals,
       options: AlphabetListViewOptions(
         scrollbarOptions: ScrollbarOptions(
-          symbols: repo.emojiHeaders,
+          symbols: Repository.emojiHeaders,
           width: 60,
           mainAxisAlignment: MainAxisAlignment.start,
           symbolBuilder: (context, symbol, state) {
             return FittedBox(
               child: Padding(
-                padding: const EdgeInsets.all(2.0),
+                padding: const EdgeInsets.all(2),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
+                    borderRadius: const BorderRadius.all(Radius.circular(100)),
                     color: state == AlphabetScrollbarItemState.active
                         ? Theme.of(context).colorScheme.primary
                         : Colors.transparent,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(2.0),
+                    padding: const EdgeInsets.all(2),
                     child: Text(
                       symbol,
                       textAlign: TextAlign.center,
@@ -60,10 +62,10 @@ class ExampleUnicode extends StatelessWidget {
             return DecoratedBox(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  stops: const [.0, .6],
+                  stops: const [0.0, 0.6],
                   colors: [
                     Colors.green,
-                    Colors.green.withOpacity(.0),
+                    Colors.green.withOpacity(0),
                   ],
                 ),
               ),

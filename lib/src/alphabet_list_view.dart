@@ -67,10 +67,10 @@ class _AlphabetListViewState extends State<AlphabetListView> {
       widget.options.scrollbarOptions.symbols.toSet().toList(),
     );
     TextDirection? rowTextDirection;
-    if (widget.options.scrollbarOptions.forcePosition ==
-        AlphabetScrollbarPosition.left) {
+    final ScrollbarOptions scrollbarOptions = widget.options.scrollbarOptions;
+    if (scrollbarOptions.forcePosition == AlphabetScrollbarPosition.left) {
       rowTextDirection = TextDirection.rtl;
-    } else if (widget.options.scrollbarOptions.forcePosition ==
+    } else if (scrollbarOptions.forcePosition ==
         AlphabetScrollbarPosition.right) {
       rowTextDirection = TextDirection.ltr;
     }

@@ -74,44 +74,41 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: widget.alphabetScrollbarOptions.padding ?? EdgeInsets.zero,
-      child: Container(
-        color: widget.alphabetScrollbarOptions.backgroundColor,
-        width: widget.alphabetScrollbarOptions.width,
-        child: Semantics(
-          explicitChildNodes: true,
-          child: Listener(
-            behavior: HitTestBehavior.translucent,
-            onPointerMove: _pointerMoveEventHandler,
-            onPointerDown: _pointerMoveEventHandler,
-            child: Column(
-              mainAxisAlignment:
-                  widget.alphabetScrollbarOptions.mainAxisAlignment,
-              mainAxisSize: MainAxisSize.min,
-              children: uniqueItems.map((symbol) {
-                return Flexible(
-                  child: Semantics(
-                    button: true,
-                    child: Container(
-                      color: Colors.transparent,
-                      width: widget.alphabetScrollbarOptions.width,
-                      key: symbolKeys[symbol],
-                      child:
-                          widget.alphabetScrollbarOptions.symbolBuilder?.call(
-                                context,
-                                symbol,
-                                _getSymbolState(symbol),
-                              ) ??
-                              DefaultScrollbarSymbol(
-                                symbol: symbol,
-                                state: _getSymbolState(symbol),
-                              ),
-                    ),
+      color: widget.alphabetScrollbarOptions.backgroundColor,
+      width: widget.alphabetScrollbarOptions.width,
+      child: Semantics(
+        explicitChildNodes: true,
+        child: Listener(
+          behavior: HitTestBehavior.translucent,
+          onPointerMove: _pointerMoveEventHandler,
+          onPointerDown: _pointerMoveEventHandler,
+          child: Column(
+            mainAxisAlignment:
+                widget.alphabetScrollbarOptions.mainAxisAlignment,
+            mainAxisSize: MainAxisSize.min,
+            children: uniqueItems.map((symbol) {
+              return Flexible(
+                child: Semantics(
+                  button: true,
+                  child: Container(
+                    color: Colors.transparent,
+                    width: widget.alphabetScrollbarOptions.width,
+                    key: symbolKeys[symbol],
+                    child: widget.alphabetScrollbarOptions.symbolBuilder?.call(
+                          context,
+                          symbol,
+                          _getSymbolState(symbol),
+                        ) ??
+                        DefaultScrollbarSymbol(
+                          symbol: symbol,
+                          state: _getSymbolState(symbol),
+                        ),
                   ),
-                );
-              }).toList(),
-            ),
+                ),
+              );
+            }).toList(),
           ),
         ),
       ),

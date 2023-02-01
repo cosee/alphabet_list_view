@@ -25,8 +25,8 @@ class DefaultAlphabetOverlay extends StatelessWidget {
     return Container(
       decoration: decoration ??
           BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Theme.of(context).colorScheme.secondary.withOpacity(.8),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.8),
           ),
       height: 100,
       width: 100,

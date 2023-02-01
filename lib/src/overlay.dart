@@ -62,7 +62,7 @@ class _AlphabetSymbolOverlayState extends State<AlphabetSymbolOverlay> {
         alignment: widget.alphabetOverlayOptions.alignment,
         child: IgnorePointer(
           child: AnimatedOpacity(
-            opacity: symbol == null ? .0 : opacity,
+            opacity: symbol == null ? 0 : opacity,
             duration: const Duration(milliseconds: 100),
             child: widget.alphabetOverlayOptions.overlayBuilder
                     ?.call(context, symbol ?? '?') ??
@@ -102,7 +102,7 @@ class _AlphabetSymbolOverlayState extends State<AlphabetSymbolOverlay> {
     });
     timer = Timer(duration, () {
       setState(() {
-        opacity = .0;
+        opacity = 0.0;
       });
     });
   }

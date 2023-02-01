@@ -37,6 +37,8 @@ void main() {
         TestWidget(
           items: [
             AlphabetListViewItemGroup(
+              // Not ascii character chosen intentionally.
+              // ignore: avoid-non-ascii-symbols
               tag: 'ɣ',
               children: [
                 const Text('A'),
@@ -46,6 +48,8 @@ void main() {
         ),
       );
 
+      // Not ascii character chosen intentionally.
+      // ignore: avoid-non-ascii-symbols
       final symbolGammaFinder = find.text('ɣ');
       expect(symbolGammaFinder, findsNothing);
     },

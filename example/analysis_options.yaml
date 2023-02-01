@@ -1,25 +1,5 @@
-include: package:flutter_lints/flutter.yaml
-
-analyzer:
-  plugins:
-    - dart_code_metrics
-  exclude:
-    - lib/**/*.i18n.dart
-    - lib/**/*.g.dart
-    - lib/**/*.config.dart
-    - test/*.config.dart
-    - test/**/*.config.dart
-
-linter:
-  rules:
-    prefer_single_quotes: true
-    sort_pub_dependencies: false
-    always_use_package_imports: true
-    curly_braces_in_flow_control_structures: true
-    avoid_web_libraries_in_flutter: true
+include: package:cosee_lints/analysis_options.yaml
 
 dart_code_metrics:
-  rules:
-    - no-boolean-literal-compare
-    - no-equal-then-else
-    - prefer-trailing-comma
+  extends:
+    - package:cosee_lints/metrics.yaml

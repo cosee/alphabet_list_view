@@ -1,18 +1,20 @@
 import 'package:alphabet_list_view/alphabet_list_view.dart';
-import 'package:alphabet_list_view_example/repository.dart' as repo;
+import 'package:alphabet_list_view_example/repository.dart';
 import 'package:flutter/material.dart';
 
 class ExampleWidgetBuilder extends StatelessWidget {
-  ExampleWidgetBuilder({Key? key}) : super(key: key);
+  ExampleWidgetBuilder({super.key});
   final List<AlphabetListViewItemGroup> animals = [
-    for (var animalLetter in repo.animals.entries)
+    for (var animalLetter in Repository.animals.entries)
       AlphabetListViewItemGroup(
         tag: animalLetter.key,
         children: animalLetter.value
-            .map((animal) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(animal),
-                ))
+            .map(
+              (animal) => Padding(
+                padding: const EdgeInsets.all(8),
+                child: Text(animal),
+              ),
+            )
             .toList(),
       ),
   ];
@@ -31,15 +33,15 @@ class ExampleWidgetBuilder extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.secondaryContainer,
                 borderRadius: const BorderRadius.horizontal(
-                  left: Radius.circular(100.0),
+                  left: Radius.circular(100),
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.only(left: 12.0),
+                padding: const EdgeInsets.only(left: 12),
                 child: FittedBox(
                   child: Text(
                     symbol,
-                    textScaleFactor: 1.0,
+                    textScaleFactor: 1,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -62,23 +64,21 @@ class ExampleWidgetBuilder extends StatelessWidget {
             } else {
               color = Colors.white;
             }
-            return Padding(
-              padding: const EdgeInsets.only(left: 4.0, top: 2.0, bottom: 2.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.horizontal(
-                    left: Radius.circular(100.0),
-                  ),
-                  color: state == AlphabetScrollbarItemState.active
-                      ? Colors.lightGreen
-                      : null,
+            return Container(
+              padding: const EdgeInsets.only(left: 4, top: 2, bottom: 2),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.horizontal(
+                  left: Radius.circular(100),
                 ),
-                child: Center(
-                  child: FittedBox(
-                    child: Text(
-                      symbol,
-                      style: TextStyle(color: color, fontSize: 20),
-                    ),
+                color: state == AlphabetScrollbarItemState.active
+                    ? Colors.lightGreen
+                    : null,
+              ),
+              child: Center(
+                child: FittedBox(
+                  child: Text(
+                    symbol,
+                    style: TextStyle(color: color, fontSize: 20),
                   ),
                 ),
               ),
@@ -86,33 +86,32 @@ class ExampleWidgetBuilder extends StatelessWidget {
           },
         ),
         listOptions: ListOptions(
-          backgroundColor: const Color.fromRGBO(210, 255, 210, 1.0),
+          backgroundColor: const Color.fromRGBO(210, 255, 210, 1),
           stickySectionHeader: false,
           showSectionHeaderForEmptySections: true,
           listHeaderBuilder: (context, symbol) {
             return Padding(
-              padding:
-                  const EdgeInsets.only(right: 18.0, top: 4.0, bottom: 4.0),
+              padding: const EdgeInsets.only(right: 18, top: 4, bottom: 4),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
                   height: 50,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.horizontal(
-                      right: Radius.circular(100.0),
+                      right: Radius.circular(100),
                     ),
                     color: Theme.of(context).colorScheme.secondaryContainer,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                      left: 8.0,
-                      top: 8.0,
-                      right: 16.0,
-                      bottom: 8.0,
+                      left: 8,
+                      top: 8,
+                      right: 16,
+                      bottom: 8,
                     ),
                     child: Text(
                       symbol,
-                      textScaleFactor: 1.0,
+                      textScaleFactor: 1,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 30,
