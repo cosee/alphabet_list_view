@@ -1,3 +1,9 @@
+# Responsive Notebook Background
+[![pub package][pub_badge]][pub_badge_link]
+[![package publisher][publisher_badge]][publisher_badge_link]
+[![style][style_badge]][style_link]
+[![license][license_badge]][license_link]
+
 A ListView with sticky headers and an iOS-like clickable sidebar.
 
 ![Preview example](example/screenshots/example.gif "Example")
@@ -91,3 +97,18 @@ AlphabetListView(
   options: options,
 );
 ```  
+[publisher_badge]: https://img.shields.io/pub/publisher/alphabet_list_view.svg
+
+[publisher_badge_link]: https://pub.dev/publishers/cosee.biz/packages
+
+[license_badge]: https://img.shields.io/github/license/cosee/alphabet_list_view
+
+[license_link]: https://github.com/cosee/alphabet_list_view/blob/master/LICENSE
+
+[style_badge]: https://img.shields.io/badge/style-cosee__lints-brightgreen
+
+[style_link]: https://pub.dev/packages/cosee_lints
+
+[pub_badge]: https://img.shields.io/pub/v/alphabet_list_view.svg
+
+[pub_badge_link]: https://pub.dartlang.org/packages/alphabet_list_view
