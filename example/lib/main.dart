@@ -1,4 +1,5 @@
 import 'package:alphabet_list_view_example/home.dart';
+import 'package:alphabet_list_view_example/theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'AlphabetListView demo',
-      theme: ThemeData(primarySwatch: Colors.green),
+      theme: CustomTheme.theme(context),
       home: const Home(),
     );
   }

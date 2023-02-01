@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class ExampleWidgetBuilder extends StatelessWidget {
   ExampleWidgetBuilder({super.key});
+
   final List<AlphabetListViewItemGroup> animals = [
     for (var animalLetter in Repository.animals.entries)
       AlphabetListViewItemGroup(
@@ -31,7 +32,7 @@ class ExampleWidgetBuilder extends StatelessWidget {
               width: 100,
               height: 100,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondaryContainer,
+                color: Theme.of(context).colorScheme.secondary,
                 borderRadius: const BorderRadius.horizontal(
                   left: Radius.circular(100),
                 ),
@@ -42,9 +43,9 @@ class ExampleWidgetBuilder extends StatelessWidget {
                   child: Text(
                     symbol,
                     textScaleFactor: 1,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ),
@@ -54,7 +55,7 @@ class ExampleWidgetBuilder extends StatelessWidget {
         ),
         scrollbarOptions: ScrollbarOptions(
           jumpToSymbolsWithNoEntries: true,
-          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
           symbolBuilder: (context, symbol, state) {
             Color color;
             if (state == AlphabetScrollbarItemState.active) {
@@ -62,7 +63,7 @@ class ExampleWidgetBuilder extends StatelessWidget {
             } else if (state == AlphabetScrollbarItemState.deactivated) {
               color = Colors.lightGreen;
             } else {
-              color = Colors.white;
+              color = Theme.of(context).colorScheme.primary;
             }
             return Container(
               padding: const EdgeInsets.only(left: 4, top: 2, bottom: 2),
@@ -100,7 +101,7 @@ class ExampleWidgetBuilder extends StatelessWidget {
                     borderRadius: const BorderRadius.horizontal(
                       right: Radius.circular(100),
                     ),
-                    color: Theme.of(context).colorScheme.secondaryContainer,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(

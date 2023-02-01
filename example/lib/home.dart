@@ -15,9 +15,10 @@ class Home extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('AlphabetListView'),
-          bottom: const TabBar(
+          bottom: TabBar(
+            indicatorColor: Theme.of(context).colorScheme.secondary,
             isScrollable: true,
-            tabs: [
+            tabs: const [
               Tab(text: 'Default'),
               Tab(text: 'RTL'),
               Tab(text: 'WidgetBuilder'),
