@@ -1,3 +1,7 @@
+## 0.1.7
+
+* Fixed example preview
+
 ## 0.1.6
 
 * Fixed backwards compatibility
