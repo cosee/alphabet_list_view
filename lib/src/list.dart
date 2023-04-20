@@ -179,7 +179,7 @@ class _AlphabetListState extends State<AlphabetList> {
     }
   }
 
-  Future<void> _showGroup(String symbol) async {
+  void _showGroup(String symbol) {
     final RenderObject? renderObject = widget.items
         .firstWhere((element) => element.tag == symbol)
         .key
