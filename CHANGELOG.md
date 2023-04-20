@@ -1,23 +1,28 @@
+## 0.1.8
+
+* Fix README title.
+* Add homepage & issue tracker link.
+
 ## 0.1.7
 
-* Fixed example preview
+* Fix example preview
 
 ## 0.1.6
 
-* Fixed backwards compatibility
+* Fix backwards compatibility.
 
 ## 0.1.5
 
-* Updated for Flutter 3.7.
-* Added cosee_lints package
+* Update for Flutter 3.7.
+* Add cosee_lints package.
 
 ## 0.1.4
 
-* Updated changelog.
+* Update changelog.
 
 ## 0.1.3
 
-* Improved compatibility with Flutter 3.0.0.
+* Improv compatibility with Flutter 3.0.0.
 
 ## 0.1.2
 
