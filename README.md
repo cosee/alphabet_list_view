@@ -1,4 +1,5 @@
-# Responsive Notebook Background
+# Alphabet List View
+
 [![pub package][pub_badge]][pub_badge_link]
 [![package publisher][publisher_badge]][publisher_badge_link]
 [![style][style_badge]][style_link]
@@ -23,7 +24,7 @@ Depend on it:
 
 ```yaml
 dependencies:
-  alphabet_list_view: ^0.1.0
+  alphabet_list_view: ^0.1.8
 ```
 
 Import it:
