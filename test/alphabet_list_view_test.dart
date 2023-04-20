@@ -169,10 +169,12 @@ class TestWidget extends StatelessWidget {
       ),
     );
   }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(IterableProperty<AlphabetListViewItemGroup>('items', items))
-    ..add(DiagnosticsProperty<AlphabetListViewOptions?>('options', options));
+    properties
+      ..add(IterableProperty<AlphabetListViewItemGroup>('items', items))
+      ..add(DiagnosticsProperty<AlphabetListViewOptions?>('options', options));
   }
 }
