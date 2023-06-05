@@ -154,7 +154,7 @@ void main() {
 }
 
 class TestWidget extends StatelessWidget {
-  const TestWidget({super.key, required this.items, this.options});
+  const TestWidget({required this.items, super.key, this.options});
   final List<AlphabetListViewItemGroup> items;
   final AlphabetListViewOptions? options;
 

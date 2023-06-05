@@ -12,8 +12,8 @@ import 'package:flutter/widgets.dart';
 class AlphabetListView extends StatefulWidget {
   /// Constructor of AlphabetListView
   const AlphabetListView({
-    super.key,
     required this.items,
+    super.key,
     this.options = const AlphabetListViewOptions(),
     this.scrollController,
   });

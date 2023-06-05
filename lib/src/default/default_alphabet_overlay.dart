@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 class DefaultAlphabetOverlay extends StatelessWidget {
   /// Constructor of DefaultAlphabetOverlay
   const DefaultAlphabetOverlay({
-    super.key,
     required this.symbol,
+    super.key,
     this.style,
     this.decoration,
   });

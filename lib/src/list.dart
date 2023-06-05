@@ -9,11 +9,11 @@ import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 class AlphabetList extends StatefulWidget {
   /// Constructor of AlphabetList
   const AlphabetList({
-    super.key,
     required this.items,
     required this.scrollController,
     required this.symbolChangeNotifierList,
     required this.symbolChangeNotifierScrollbar,
+    super.key,
     this.alphabetListOptions = const ListOptions(),
   });
 
@@ -169,7 +169,7 @@ class _AlphabetListState extends State<AlphabetList> {
           widget.items,
         );
       }
-    } catch (_) {}
+    } on Exception catch (_) {}
   }
 
   void _symbolChangeNotifierScrollbarListener() {

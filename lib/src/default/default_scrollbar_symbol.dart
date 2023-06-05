@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 class DefaultScrollbarSymbol extends StatelessWidget {
   /// Constructor of DefaultScrollbarSymbol
   const DefaultScrollbarSymbol({
-    super.key,
     required this.symbol,
     required this.state,
+    super.key,
     this.styleActive,
     this.styleInactive,
     this.styleDeactivated,
@@ -37,13 +37,10 @@ class DefaultScrollbarSymbol extends StatelessWidget {
       case AlphabetScrollbarItemState.active:
         textStyle = styleActive ??
             TextStyle(color: Theme.of(context).colorScheme.secondary);
-        break;
       case AlphabetScrollbarItemState.inactive:
         textStyle = styleInactive ?? const TextStyle(color: Colors.black);
-        break;
       case AlphabetScrollbarItemState.deactivated:
         textStyle = styleDeactivated ?? const TextStyle(color: Colors.grey);
-        break;
     }
 
     return FittedBox(

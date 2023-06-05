@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 class DefaultAlphabetListHeader extends StatelessWidget {
   /// Constructor of DefaultAlphabetListHeader
   const DefaultAlphabetListHeader({
-    super.key,
     required this.symbol,
+    super.key,
     this.backgroundColor,
     this.style,
   });

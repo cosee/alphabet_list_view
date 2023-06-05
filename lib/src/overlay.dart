@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 class AlphabetSymbolOverlay extends StatefulWidget {
   /// Constructor of AlphabetSymbolOverlay
   const AlphabetSymbolOverlay({
-    super.key,
     required this.symbolChangeNotifierScrollbar,
+    super.key,
     this.alphabetOverlayOptions = const OverlayOptions(),
   });
 

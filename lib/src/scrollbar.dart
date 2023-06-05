@@ -8,10 +8,10 @@ import 'package:flutter/rendering.dart';
 class AlphabetScrollbar extends StatefulWidget {
   /// Constructor of AlphabetScrollbar
   const AlphabetScrollbar({
-    super.key,
     required this.items,
     required this.symbolChangeNotifierScrollbar,
     required this.symbolChangeNotifierList,
+    super.key,
     this.alphabetScrollbarOptions = const ScrollbarOptions(),
   });
 
@@ -172,7 +172,7 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
           touchedSymbol = entry.key;
           break;
         }
-      } catch (_) {}
+      } on Exception catch (_) {}
     }
     return touchedSymbol;
   }
