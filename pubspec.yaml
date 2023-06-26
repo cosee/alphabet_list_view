@@ -1,9 +1,14 @@
 name: alphabet_list_view
 description: A ListView with sticky headers and an iOS-like clickable sidebar.
-version: 0.1.9
+version: 0.1.10
 repository: https://github.com/cosee/alphabet_list_view
 issue_tracker: https://github.com/cosee/alphabet_list_view/issues
 homepage: https://pub.dev/publishers/cosee.biz/packages
+screenshots:
+  - description: 'Default appearance of AlphabetListView'
+    path: example/screenshots/default.webp
+topics:
+  - list
 
 environment:
   sdk: '>=3.0.0 <4.0.0'

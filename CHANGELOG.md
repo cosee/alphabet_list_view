@@ -1,3 +1,7 @@
+## 0.1.10
+
+* Update example preview
+
 ## 0.1.9
 
 * Migrate to Dart 3
@@ -27,7 +31,7 @@
 
 ## 0.1.3
 
-* Improv compatibility with Flutter 3.0.0.
+* Improve compatibility with Flutter 3.0.0.
 
 ## 0.1.2
 

@@ -7,7 +7,7 @@
 
 A ListView with sticky headers and an iOS-like clickable sidebar.
 
-![Preview example](example/screenshots/example.gif "Example")
+![Preview example](example/screenshots/example.webp "Example")
 
 ## Features
 
