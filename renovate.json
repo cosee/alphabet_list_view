@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "major": {
+    "schedule": [
+      "before 5pm on friday"
+    ]
+  },
+  "minor": {
+    "schedule": [
+      "before 5pm on friday"
+    ]
+  },
+  "patch": {
+    "automerge": true,
+    "schedule": [
+      "before 5pm on friday"
+    ]
+  },
+  "timezone": "Europe/Berlin",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "before 5pm on friday"
+    ]
+  }
+}
