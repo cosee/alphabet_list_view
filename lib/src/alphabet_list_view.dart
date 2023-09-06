@@ -121,7 +121,7 @@ class _AlphabetListViewState extends State<AlphabetListView> {
     List<String> symbols,
   ) {
     return [
-      for (String symbol in symbols)
+      for (final String symbol in symbols)
         items.firstWhere(
           (item) {
             return item.tag == symbol;

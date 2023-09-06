@@ -66,7 +66,7 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
     super.initState();
     uniqueItems = widget.alphabetScrollbarOptions.symbols.toSet().toList();
     symbolKeys = {
-      for (var symbol in uniqueItems) symbol: GlobalKey(),
+      for (final symbol in uniqueItems) symbol: GlobalKey(),
     };
     widget.symbolChangeNotifierList
         .addListener(_symbolChangeNotifierListListener);
