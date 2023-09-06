@@ -68,14 +68,12 @@ class AlphabetList extends StatefulWidget {
 }
 
 class _AlphabetListState extends State<AlphabetList> {
-  late GlobalKey customScrollKey;
-
-  late SliverChildBuilderDelegate delegate;
+  late GlobalKey _customScrollKey;
 
   @override
   void initState() {
     super.initState();
-    customScrollKey = GlobalKey();
+    _customScrollKey = GlobalKey();
     widget.scrollController.addListener(_scrollControllerListener);
     widget.symbolChangeNotifierScrollbar
         .addListener(_symbolChangeNotifierScrollbarListener);
@@ -84,18 +82,22 @@ class _AlphabetListState extends State<AlphabetList> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void didUpdateWidget(covariant AlphabetList oldWidget) {
+    super.didUpdateWidget(oldWidget);
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => _scrollControllerListener(),
     );
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: widget.alphabetListOptions.padding ?? EdgeInsets.zero,
       color: widget.alphabetListOptions.backgroundColor,
       child: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
         child: CustomScrollView(
-          key: customScrollKey,
+          key: _customScrollKey,
           controller: widget.scrollController,
           physics: widget.alphabetListOptions.physics,
           slivers: [
@@ -126,24 +128,16 @@ class _AlphabetListState extends State<AlphabetList> {
                         : const SizedBox.shrink();
 
                 return SliverStickyHeader(
-                  header: Container(
-                    key: item.key,
-                  ),
+                  header: Container(key: item.key),
                   sliver: SliverStickyHeader(
-                    header: Container(
-                      child: header,
-                    ),
-                    sliver: SliverList(
-                      delegate: item.childrenDelegate,
-                    ),
+                    header: Container(child: header),
+                    sliver: SliverList(delegate: item.childrenDelegate),
                     sticky: widget.alphabetListOptions.stickySectionHeader,
                   ),
                 );
               },
             ),
-            SliverToBoxAdapter(
-              child: widget.alphabetListOptions.afterList,
-            ),
+            SliverToBoxAdapter(child: widget.alphabetListOptions.afterList),
           ],
         ),
       ),
@@ -159,10 +153,9 @@ class _AlphabetListState extends State<AlphabetList> {
   }
 
   void _scrollControllerListener() {
-    RenderBox? customScrollViewRenderBox;
     try {
-      customScrollViewRenderBox =
-          customScrollKey.currentContext?.findRenderObject() as RenderBox?;
+      final customScrollViewRenderBox =
+          _customScrollKey.currentContext?.findRenderObject() as RenderBox?;
       if (customScrollViewRenderBox != null) {
         widget.symbolChangeNotifierList.value = _getFirstVisibleItemGroupSymbol(
           customScrollViewRenderBox,
@@ -216,9 +209,8 @@ class _AlphabetListState extends State<AlphabetList> {
 
   void _jumpTo(RenderObject object) {
     final RenderAbstractViewport viewport = RenderAbstractViewport.of(object);
-    double? target;
 
-    target = viewport.getOffsetToReveal(object, 0).offset.clamp(
+    final target = viewport.getOffsetToReveal(object, 0).offset.clamp(
           widget.alphabetListOptions.topOffset ?? 0,
           widget.scrollController.position.maxScrollExtent +
               (widget.alphabetListOptions.topOffset ?? 0),
@@ -226,23 +218,5 @@ class _AlphabetListState extends State<AlphabetList> {
     widget.scrollController.jumpTo(
       target - (widget.alphabetListOptions.topOffset ?? 0),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(
-        DiagnosticsProperty<GlobalKey<State<StatefulWidget>>>(
-          'customScrollKey',
-          customScrollKey,
-        ),
-      )
-      ..add(
-        DiagnosticsProperty<SliverChildBuilderDelegate>(
-          'delegate',
-          delegate,
-        ),
-      );
   }
 }

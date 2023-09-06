@@ -43,9 +43,9 @@ class AlphabetSymbolOverlay extends StatefulWidget {
 }
 
 class _AlphabetSymbolOverlayState extends State<AlphabetSymbolOverlay> {
-  String? symbol;
-  double opacity = 1;
-  Timer? timer;
+  String? _symbol;
+  double _opacity = 1;
+  Timer? _timer;
 
   @override
   void initState() {
@@ -62,12 +62,12 @@ class _AlphabetSymbolOverlayState extends State<AlphabetSymbolOverlay> {
         alignment: widget.alphabetOverlayOptions.alignment,
         child: IgnorePointer(
           child: AnimatedOpacity(
-            opacity: symbol == null ? 0 : opacity,
+            opacity: _symbol == null ? 0 : _opacity,
             duration: const Duration(milliseconds: 100),
             child: widget.alphabetOverlayOptions.overlayBuilder
-                    ?.call(context, symbol ?? '?') ??
+                    ?.call(context, _symbol ?? '?') ??
                 DefaultAlphabetOverlay(
-                  symbol: symbol ?? '?',
+                  symbol: _symbol ?? '?',
                 ),
           ),
         ),
@@ -77,7 +77,7 @@ class _AlphabetSymbolOverlayState extends State<AlphabetSymbolOverlay> {
 
   @override
   void dispose() {
-    timer?.cancel();
+    _timer?.cancel();
     widget.symbolChangeNotifierScrollbar
         .removeListener(_symbolChangeNotifierScrollbarListener);
     super.dispose();
@@ -86,33 +86,14 @@ class _AlphabetSymbolOverlayState extends State<AlphabetSymbolOverlay> {
   void _symbolChangeNotifierScrollbarListener() {
     if (widget.alphabetOverlayOptions.showOverlay) {
       final String? tag = widget.symbolChangeNotifierScrollbar.value;
-      setState(() {
-        symbol = tag;
-      });
-      _resetOpacityCountdown(
-        const Duration(milliseconds: 500),
-      );
+      setState(() => _symbol = tag);
+      _resetOpacityCountdown(const Duration(milliseconds: 500));
     }
   }
 
   void _resetOpacityCountdown(Duration duration) {
-    timer?.cancel();
-    setState(() {
-      opacity = 1.0;
-    });
-    timer = Timer(duration, () {
-      setState(() {
-        opacity = 0.0;
-      });
-    });
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(StringProperty('symbol', symbol))
-      ..add(DoubleProperty('opacity', opacity))
-      ..add(DiagnosticsProperty<Timer?>('timer', timer));
+    _timer?.cancel();
+    setState(() => _opacity = 1.0);
+    _timer = Timer(duration, () => setState(() => _opacity = 0.0));
   }
 }

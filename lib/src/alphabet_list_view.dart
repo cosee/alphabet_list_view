@@ -46,34 +46,40 @@ class AlphabetListView extends StatefulWidget {
 }
 
 class _AlphabetListViewState extends State<AlphabetListView> {
-  late ScrollController scrollController;
-
-  late SymbolChangeNotifier symbolChangeNotifierScrollbar;
-  late SymbolChangeNotifier symbolChangeNotifierList;
+  late final ScrollController _scrollController;
+  late final SymbolChangeNotifier _symbolChangeNotifierScrollbar;
+  late final SymbolChangeNotifier _symbolChangeNotifierList;
+  late List<AlphabetListViewItemGroup> _sortedItems;
 
   @override
   void initState() {
     super.initState();
-    scrollController = widget.scrollController ?? ScrollController();
-    symbolChangeNotifierScrollbar = SymbolChangeNotifier();
-    symbolChangeNotifierList = SymbolChangeNotifier();
+    _scrollController = widget.scrollController ?? ScrollController();
+    _symbolChangeNotifierScrollbar = SymbolChangeNotifier();
+    _symbolChangeNotifierList = SymbolChangeNotifier();
+    _sortedItems = _generateAfterSymbolsSortedList(
+      widget.items,
+      widget.options.scrollbarOptions.symbols.toSet().toList(),
+    );
+  }
+
+  @override
+  void didUpdateWidget(covariant AlphabetListView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _sortedItems = _generateAfterSymbolsSortedList(
+      widget.items,
+      widget.options.scrollbarOptions.symbols.toSet().toList(),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<AlphabetListViewItemGroup> sortedItems =
-        _generateAfterSymbolsSortedList(
-      widget.items,
-      widget.options.scrollbarOptions.symbols.toSet().toList(),
-    );
-    TextDirection? rowTextDirection;
-    final ScrollbarOptions scrollbarOptions = widget.options.scrollbarOptions;
-    if (scrollbarOptions.forcePosition == AlphabetScrollbarPosition.left) {
-      rowTextDirection = TextDirection.rtl;
-    } else if (scrollbarOptions.forcePosition ==
-        AlphabetScrollbarPosition.right) {
-      rowTextDirection = TextDirection.ltr;
-    }
+    final rowTextDirection =
+        switch (widget.options.scrollbarOptions.forcePosition) {
+      AlphabetScrollbarPosition.left => TextDirection.rtl,
+      AlphabetScrollbarPosition.right => TextDirection.ltr,
+      _ => null,
+    };
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -83,24 +89,24 @@ class _AlphabetListViewState extends State<AlphabetListView> {
           child: Stack(
             children: [
               AlphabetList(
-                items: sortedItems,
-                scrollController: scrollController,
+                items: _sortedItems,
+                scrollController: _scrollController,
                 alphabetListOptions: widget.options.listOptions,
-                symbolChangeNotifierList: symbolChangeNotifierList,
-                symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
+                symbolChangeNotifierList: _symbolChangeNotifierList,
+                symbolChangeNotifierScrollbar: _symbolChangeNotifierScrollbar,
               ),
               AlphabetSymbolOverlay(
                 alphabetOverlayOptions: widget.options.overlayOptions,
-                symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
+                symbolChangeNotifierScrollbar: _symbolChangeNotifierScrollbar,
               ),
             ],
           ),
         ),
         AlphabetScrollbar(
-          items: sortedItems,
+          items: _sortedItems,
           alphabetScrollbarOptions: widget.options.scrollbarOptions,
-          symbolChangeNotifierScrollbar: symbolChangeNotifierScrollbar,
-          symbolChangeNotifierList: symbolChangeNotifierList,
+          symbolChangeNotifierScrollbar: _symbolChangeNotifierScrollbar,
+          symbolChangeNotifierList: _symbolChangeNotifierList,
         ),
       ],
     );
@@ -108,10 +114,10 @@ class _AlphabetListViewState extends State<AlphabetListView> {
 
   @override
   void dispose() {
-    symbolChangeNotifierList.dispose();
-    symbolChangeNotifierScrollbar.dispose();
+    _symbolChangeNotifierList.dispose();
+    _symbolChangeNotifierScrollbar.dispose();
     if (widget.scrollController == null) {
-      scrollController.dispose();
+      _scrollController.dispose();
     }
     super.dispose();
   }
@@ -119,41 +125,15 @@ class _AlphabetListViewState extends State<AlphabetListView> {
   List<AlphabetListViewItemGroup> _generateAfterSymbolsSortedList(
     Iterable<AlphabetListViewItemGroup> items,
     List<String> symbols,
-  ) {
-    return [
-      for (final String symbol in symbols)
-        items.firstWhere(
-          (item) {
-            return item.tag == symbol;
-          },
-          orElse: () => AlphabetListViewItemGroup(tag: symbol, children: []),
-        ),
-    ];
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(
-        DiagnosticsProperty<ScrollController>(
-          'scrollController',
-          scrollController,
-        ),
-      )
-      ..add(
-        DiagnosticsProperty<SymbolChangeNotifier>(
-          'symbolChangeNotifierScrollbar',
-          symbolChangeNotifierScrollbar,
-        ),
-      )
-      ..add(
-        DiagnosticsProperty<SymbolChangeNotifier>(
-          'symbolChangeNotifierList',
-          symbolChangeNotifierList,
-        ),
-      );
-  }
+  ) =>
+      symbols
+          .map(
+            (symbol) => items.firstWhere(
+              (item) => item.tag == symbol,
+              orElse: () => AlphabetListViewItemGroup(tag: symbol),
+            ),
+          )
+          .toList();
 }
 
 /// Item groups shown in the list.
@@ -161,7 +141,7 @@ class AlphabetListViewItemGroup {
   /// Constructor of AlphabetListViewItemGroup.
   AlphabetListViewItemGroup({
     required this.tag,
-    required Iterable<Widget> children,
+    Iterable<Widget> children = const [],
   })  : key = GlobalKey(),
         childrenDelegate = SliverChildListDelegate(
           children.toList(),
@@ -179,7 +159,7 @@ class AlphabetListViewItemGroup {
           childCount: itemCount,
         );
 
-  /// Key
+  /// The key used to indicate the scroll destination.
   final GlobalKey key;
 
   /// String to identify this group.

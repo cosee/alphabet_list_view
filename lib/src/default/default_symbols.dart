@@ -1,6 +1,6 @@
 /// Default symbols used by the sidebar.
 class DefaultScrollbarSymbols {
-  DefaultScrollbarSymbols._();
+  const DefaultScrollbarSymbols._();
 
   /// 'A'-'Z' and '#'
   static const List<String> alphabet = [
@@ -33,9 +33,3 @@ class DefaultScrollbarSymbols {
     '#',
   ];
 }
-
-/// Default symbols used by the sidebar.
-/// 'A'-'Z' and '#'
-// Backwards compatibility
-// ignore: prefer-static-class
-const List<String> defaultSymbols = DefaultScrollbarSymbols.alphabet;

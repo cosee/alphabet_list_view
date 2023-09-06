@@ -1,6 +1,3 @@
-/// AlphabetListView Library
-library alphabet_list_view;
-
 export 'src/alphabet_list_view.dart';
 export 'src/default/default_alphabet_list_header.dart';
 export 'src/default/default_alphabet_overlay.dart';

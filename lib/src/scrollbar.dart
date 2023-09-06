@@ -57,16 +57,16 @@ class AlphabetScrollbar extends StatefulWidget {
 }
 
 class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
-  String? selectedSymbol;
-  late Map<String, GlobalKey> symbolKeys;
-  late List<String> uniqueItems;
+  String? _selectedSymbol;
+  late Map<String, GlobalKey> _symbolKeys;
+  late List<String> _uniqueItems;
 
   @override
   void initState() {
     super.initState();
-    uniqueItems = widget.alphabetScrollbarOptions.symbols.toSet().toList();
-    symbolKeys = {
-      for (final symbol in uniqueItems) symbol: GlobalKey(),
+    _uniqueItems = widget.alphabetScrollbarOptions.symbols.toSet().toList();
+    _symbolKeys = {
+      for (final symbol in _uniqueItems) symbol: GlobalKey(),
     };
     widget.symbolChangeNotifierList
         .addListener(_symbolChangeNotifierListListener);
@@ -88,27 +88,30 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
             mainAxisAlignment:
                 widget.alphabetScrollbarOptions.mainAxisAlignment,
             mainAxisSize: MainAxisSize.min,
-            children: uniqueItems.map((symbol) {
-              return Flexible(
-                child: Semantics(
-                  button: true,
-                  child: Container(
-                    color: Colors.transparent,
-                    width: widget.alphabetScrollbarOptions.width,
-                    key: symbolKeys[symbol],
-                    child: widget.alphabetScrollbarOptions.symbolBuilder?.call(
-                          context,
-                          symbol,
-                          _getSymbolState(symbol),
-                        ) ??
-                        DefaultScrollbarSymbol(
-                          symbol: symbol,
-                          state: _getSymbolState(symbol),
-                        ),
+            children: _uniqueItems
+                .map(
+                  (symbol) => Flexible(
+                    child: Semantics(
+                      button: true,
+                      child: Container(
+                        color: Colors.transparent,
+                        width: widget.alphabetScrollbarOptions.width,
+                        key: _symbolKeys[symbol],
+                        child:
+                            widget.alphabetScrollbarOptions.symbolBuilder?.call(
+                                  context,
+                                  symbol,
+                                  _getSymbolState(symbol),
+                                ) ??
+                                DefaultScrollbarSymbol(
+                                  symbol: symbol,
+                                  state: _getSymbolState(symbol),
+                                ),
+                      ),
+                    ),
                   ),
-                ),
-              );
-            }).toList(),
+                )
+                .toList(),
           ),
         ),
       ),
@@ -129,7 +132,7 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
       if ((result.first.childrenDelegate.estimatedChildCount ?? 0) == 0 &&
           !widget.alphabetScrollbarOptions.jumpToSymbolsWithNoEntries) {
         return AlphabetScrollbarItemState.deactivated;
-      } else if (result.first.tag == selectedSymbol) {
+      } else if (result.first.tag == _selectedSymbol) {
         return AlphabetScrollbarItemState.active;
       } else {
         return AlphabetScrollbarItemState.inactive;
@@ -140,13 +143,14 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   }
 
   void _symbolChangeNotifierListListener() {
-    setState(() {
-      selectedSymbol = widget.symbolChangeNotifierList.value ?? selectedSymbol;
-    });
+    setState(
+      () => _selectedSymbol =
+          widget.symbolChangeNotifierList.value ?? _selectedSymbol,
+    );
   }
 
   void _pointerMoveEventHandler(PointerEvent event) {
-    final String? symbol = _identifyTouchedSymbol(event, symbolKeys);
+    final String? symbol = _identifyTouchedSymbol(event, _symbolKeys);
     if (symbol != null) {
       _onSymbolTriggered(symbol);
     }
@@ -189,23 +193,7 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
 
     if (result.isNotEmpty) {
       widget.symbolChangeNotifierScrollbar.value = symbol;
-      setState(() {
-        selectedSymbol = symbol;
-      });
+      setState(() => _selectedSymbol = symbol);
     }
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(StringProperty('selectedSymbol', selectedSymbol))
-      ..add(
-        DiagnosticsProperty<Map<String, GlobalKey<State<StatefulWidget>>>>(
-          'symbolKeys',
-          symbolKeys,
-        ),
-      )
-      ..add(IterableProperty<String>('uniqueItems', uniqueItems));
   }
 }

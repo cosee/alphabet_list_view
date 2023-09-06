@@ -1,6 +1,5 @@
 import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:alphabet_list_view/src/scrollbar.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -9,19 +8,11 @@ void main() {
     await tester.pumpWidget(
       TestWidget(
         items: [
-          AlphabetListViewItemGroup(
-            tag: 'A',
-            children: [],
-          ),
-          AlphabetListViewItemGroup(
-            tag: 'A',
-            children: [],
-          ),
+          AlphabetListViewItemGroup(tag: 'A'),
+          AlphabetListViewItemGroup(tag: 'A'),
         ],
         options: const AlphabetListViewOptions(
-          listOptions: ListOptions(
-            showSectionHeader: false,
-          ),
+          listOptions: ListOptions(showSectionHeader: false),
         ),
       ),
     );
@@ -40,9 +31,7 @@ void main() {
               // Not ascii character chosen intentionally.
               // ignore: avoid-non-ascii-symbols
               tag: 'ɣ',
-              children: [
-                const Text('A'),
-              ],
+              children: const [Text('A')],
             ),
           ],
         ),
@@ -61,9 +50,7 @@ void main() {
         items: [
           AlphabetListViewItemGroup(
             tag: 'A',
-            children: [
-              const Text('TARGET'),
-            ],
+            children: const [Text('TARGET')],
           ),
         ],
       ),
@@ -78,19 +65,17 @@ void main() {
         items: [
           AlphabetListViewItemGroup(
             tag: 'A',
-            children: [
-              for (int i = 0; i < 99; i++)
-                const SizedBox(
-                  height: 100,
-                  width: 100,
-                ),
-            ],
+            children: List.filled(
+              100,
+              const SizedBox(
+                height: 100,
+                width: 100,
+              ),
+            ),
           ),
           AlphabetListViewItemGroup(
             tag: 'B',
-            children: [
-              const Text('TARGET'),
-            ],
+            children: const [Text('TARGET')],
           ),
         ],
       ),
@@ -114,19 +99,17 @@ void main() {
         items: [
           AlphabetListViewItemGroup(
             tag: 'A',
-            children: [
-              for (int i = 0; i < 99; i++)
-                const SizedBox(
-                  height: 100,
-                  width: 100,
-                ),
-            ],
+            children: List.filled(
+              100,
+              const SizedBox(
+                height: 100,
+                width: 100,
+              ),
+            ),
           ),
           AlphabetListViewItemGroup(
             tag: 'B',
-            children: [
-              const Text('TARGET'),
-            ],
+            children: const [Text('TARGET')],
           ),
         ],
       ),
@@ -153,8 +136,10 @@ void main() {
   });
 }
 
+// ignore_for_file: diagnostic_describe_all_properties
 class TestWidget extends StatelessWidget {
   const TestWidget({required this.items, super.key, this.options});
+
   final List<AlphabetListViewItemGroup> items;
   final AlphabetListViewOptions? options;
 
@@ -168,13 +153,5 @@ class TestWidget extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(IterableProperty<AlphabetListViewItemGroup>('items', items))
-      ..add(DiagnosticsProperty<AlphabetListViewOptions?>('options', options));
   }
 }

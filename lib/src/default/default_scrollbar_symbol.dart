@@ -31,17 +31,14 @@ class DefaultScrollbarSymbol extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle? textStyle;
-
-    switch (state) {
-      case AlphabetScrollbarItemState.active:
-        textStyle = styleActive ??
-            TextStyle(color: Theme.of(context).colorScheme.secondary);
-      case AlphabetScrollbarItemState.inactive:
-        textStyle = styleInactive ?? const TextStyle(color: Colors.black);
-      case AlphabetScrollbarItemState.deactivated:
-        textStyle = styleDeactivated ?? const TextStyle(color: Colors.grey);
-    }
+    final textStyle = switch (state) {
+      AlphabetScrollbarItemState.active => styleActive ??
+          TextStyle(color: Theme.of(context).colorScheme.secondary),
+      AlphabetScrollbarItemState.inactive =>
+        styleInactive ?? const TextStyle(color: Colors.black),
+      AlphabetScrollbarItemState.deactivated =>
+        styleDeactivated ?? const TextStyle(color: Colors.grey),
+    };
 
     return FittedBox(
       fit: BoxFit.scaleDown,
