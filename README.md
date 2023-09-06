@@ -104,7 +104,7 @@ AlphabetListView(
 
 [license_badge]: https://img.shields.io/github/license/cosee/alphabet_list_view
 
-[license_link]: https://github.com/cosee/alphabet_list_view/blob/master/LICENSE
+[license_link]: https://github.com/cosee/alphabet_list_view/blob/main/LICENSE
 
 [style_badge]: https://img.shields.io/badge/style-cosee__lints-brightgreen
 
