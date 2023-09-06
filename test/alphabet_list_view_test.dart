@@ -79,7 +79,7 @@ void main() {
           AlphabetListViewItemGroup(
             tag: 'A',
             children: [
-              for (var i = 0; i < 99; i++)
+              for (int i = 0; i < 99; i++)
                 const SizedBox(
                   height: 100,
                   width: 100,
@@ -115,7 +115,7 @@ void main() {
           AlphabetListViewItemGroup(
             tag: 'A',
             children: [
-              for (var i = 0; i < 99; i++)
+              for (int i = 0; i < 99; i++)
                 const SizedBox(
                   height: 100,
                   width: 100,
