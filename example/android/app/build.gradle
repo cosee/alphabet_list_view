@@ -27,7 +27,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     compileSdkVersion flutter.compileSdkVersion
-    namespace 'com.example.alphabet_list_view_example'
+    namespace 'biz.cosee.alphabet_list_view_example'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -43,7 +43,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.alphabet_list_view_example"
+        applicationId "biz.cosee.alphabet_list_view_example"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
