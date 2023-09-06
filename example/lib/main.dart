@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'AlphabetListView demo',
+      title: 'AlphabetListView Example',
       theme: CustomTheme.theme(context),
       home: const Home(),
     );
