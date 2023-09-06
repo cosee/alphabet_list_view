@@ -3,26 +3,7 @@ import 'package:alphabet_list_view_example/repository.dart';
 import 'package:flutter/material.dart';
 
 class ExampleUnicode extends StatelessWidget {
-  ExampleUnicode({super.key});
-
-  final List<AlphabetListViewItemGroup> animals = [
-    for (var emojiType in Repository.emojis.entries)
-      AlphabetListViewItemGroup(
-        tag: emojiType.key,
-        children: emojiType.value
-            .map(
-              (emoji) => Padding(
-                padding: const EdgeInsets.all(4),
-                child: Text(
-                  '$emoji\n${emoji.runes.toList()}',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 20),
-                ),
-              ),
-            )
-            .toList(),
-      ),
-  ];
+  const ExampleUnicode({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -83,4 +64,22 @@ class ExampleUnicode extends StatelessWidget {
       ),
     );
   }
+
+  List<AlphabetListViewItemGroup> get animals => Repository.emojis.entries
+      .map(
+        (emojiType) => AlphabetListViewItemGroup(
+          tag: emojiType.key,
+          children: emojiType.value.map(
+            (emoji) => Padding(
+              padding: const EdgeInsets.all(4),
+              child: Text(
+                '$emoji\n${emoji.runes.toList()}',
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
+        ),
+      )
+      .toList();
 }

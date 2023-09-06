@@ -27,9 +27,9 @@ class Home extends StatelessWidget {
             ],
           ),
         ),
-        body: SafeArea(
+        body: const SafeArea(
           child: TabBarView(
-            physics: const NeverScrollableScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             children: [
               ExampleDefault(),
               ExampleRTL(),

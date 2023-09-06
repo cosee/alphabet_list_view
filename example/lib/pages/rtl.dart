@@ -4,22 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ExampleRTL extends StatelessWidget {
-  ExampleRTL({super.key});
-  final List<AlphabetListViewItemGroup> animals = [
-    for (var animalLetter in Repository.animals.entries)
-      AlphabetListViewItemGroup(
-        tag: animalLetter.key,
-        children: animalLetter.value.map(Text.new).toList(),
-      ),
-  ];
+  const ExampleRTL({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: AlphabetListView(
-        items: animals,
+        items: _animals,
       ),
     );
   }
+
+  List<AlphabetListViewItemGroup> get _animals => Repository.animals.entries
+      .map(
+        (animalLetter) => AlphabetListViewItemGroup(
+          tag: animalLetter.key,
+          children: animalLetter.value.map(Text.new),
+        ),
+      )
+      .toList();
 }

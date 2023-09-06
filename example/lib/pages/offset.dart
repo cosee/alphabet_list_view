@@ -5,15 +5,7 @@ import 'package:alphabet_list_view_example/repository.dart';
 import 'package:flutter/material.dart';
 
 class ExampleOffset extends StatelessWidget {
-  ExampleOffset({super.key});
-
-  final List<AlphabetListViewItemGroup> animals = [
-    for (var animalLetter in Repository.animals.entries)
-      AlphabetListViewItemGroup(
-        tag: animalLetter.key,
-        children: animalLetter.value.map(Text.new).toList(),
-      ),
-  ];
+  const ExampleOffset({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +19,7 @@ class ExampleOffset extends StatelessWidget {
       body: Builder(
         builder: (context) {
           return AlphabetListView(
-            items: animals,
+            items: _animals,
             options: AlphabetListViewOptions(
               listOptions: ListOptions(
                 stickySectionHeader: false,
@@ -49,6 +41,15 @@ class ExampleOffset extends StatelessWidget {
       ),
     );
   }
+
+  List<AlphabetListViewItemGroup> get _animals => Repository.animals.entries
+      .map(
+        (animalLetter) => AlphabetListViewItemGroup(
+          tag: animalLetter.key,
+          children: animalLetter.value.map(Text.new),
+        ),
+      )
+      .toList();
 }
 
 class _Blur extends StatelessWidget {

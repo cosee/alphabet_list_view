@@ -3,27 +3,12 @@ import 'package:alphabet_list_view_example/repository.dart';
 import 'package:flutter/material.dart';
 
 class ExampleWidgetBuilder extends StatelessWidget {
-  ExampleWidgetBuilder({super.key});
-
-  final List<AlphabetListViewItemGroup> animals = [
-    for (var animalLetter in Repository.animals.entries)
-      AlphabetListViewItemGroup(
-        tag: animalLetter.key,
-        children: animalLetter.value
-            .map(
-              (animal) => Padding(
-                padding: const EdgeInsets.all(8),
-                child: Text(animal),
-              ),
-            )
-            .toList(),
-      ),
-  ];
+  const ExampleWidgetBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AlphabetListView(
-      items: animals,
+      items: _animals,
       options: AlphabetListViewOptions(
         overlayOptions: OverlayOptions(
           alignment: Alignment.centerRight,
@@ -127,4 +112,18 @@ class ExampleWidgetBuilder extends StatelessWidget {
       ),
     );
   }
+
+  List<AlphabetListViewItemGroup> get _animals => Repository.animals.entries
+      .map(
+        (animalLetter) => AlphabetListViewItemGroup(
+          tag: animalLetter.key,
+          children: animalLetter.value.map(
+            (animal) => Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(animal),
+            ),
+          ),
+        ),
+      )
+      .toList();
 }

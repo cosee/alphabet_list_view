@@ -1,7 +1,7 @@
 // ignore_for_file: avoid-non-ascii-symbols
 
 class Repository {
-  Repository._();
+  const Repository._();
 
   static const Map<String, List<String>> animals = {
     'A': [
