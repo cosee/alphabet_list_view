@@ -24,7 +24,7 @@ Depend on it:
 
 ```yaml
 dependencies:
-  alphabet_list_view: ^0.1.10
+  alphabet_list_view: ^1.0.0
 ```
 
 Import it:
@@ -37,55 +37,71 @@ Example:
 
 ```dart
 final List<AlphabetListViewItemGroup> tech = [
-    AlphabetListViewItemGroup(tag: 'A', children: const [
-    Text('Apple'),
-    Text('Amazon'),
-    Text('Alibaba'),
-    ]),
-    AlphabetListViewItemGroup(tag: 'I', children: const [
-    Text('Intel'),
-    Text('IBM'),
-    ]),
+  AlphabetListViewItemGroup(
+    tag: 'A',
+    children: const [
+      Text('Apple'),
+      Text('Amazon'),
+      Text('Alibaba'),
+    ],
+  ),
+  AlphabetListViewItemGroup(
+    tag: 'I',
+    children: const [
+      Text('Intel'),
+      Text('IBM'),
+    ],
+  ),
 ];
 
 AlphabetListView(
-    items: tech,
+  items: tech,
 );
-```  
+```
+
+## Default symbols
+
+You can easily get the alphabet (A-Z) using the following code:
+```dart
+final String alphabet = DefaultScrollbarSymbols.alphabet;
+```
 
 ## Customization options
 
 ```dart
 final List<AlphabetListViewItemGroup> tech = [
-  AlphabetListViewItemGroup(tag: 'A', children: const [
-    Text('Apple'),
-    Text('Amazon'),
-    Text('Alibaba'),
-  ]),
-  AlphabetListViewItemGroup(tag: 'I', children: const [
-    Text('Intel'),
-    Text('IBM'),
-  ]),
+  AlphabetListViewItemGroup(
+    tag: 'A',
+    children: const [
+      Text('Apple'),
+      Text('Amazon'),
+      Text('Alibaba'),
+    ],
+  ),
+  AlphabetListViewItemGroup(
+    tag: 'I',
+    children: const [
+      Text('Intel'),
+      Text('IBM'),
+    ],
+  ),
 ];
 
 final AlphabetListViewOptions options = AlphabetListViewOptions(
   listOptions: ListOptions(
-    listHeaderBuilder: (context, symbol) {
-      return Padding(
+    listHeaderBuilder: (context, symbol) => Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: Text(symbol),
+        decoration: BoxDecoration(
+          color: Colors.grey,
+          borderRadius: BorderRadius.circular(100),
         ),
-      );
-    },
+        child: Text(symbol),
+      ),
+    ),
   ),
-  scrollbarOptions:
-  const ScrollbarOptions(
+  scrollbarOptions: const ScrollbarOptions(
     backgroundColor: Colors.yellow,
   ),
   overlayOptions: const OverlayOptions(
