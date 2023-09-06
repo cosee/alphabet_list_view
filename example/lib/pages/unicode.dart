@@ -14,48 +14,44 @@ class ExampleUnicode extends StatelessWidget {
           symbols: Repository.emojiHeaders,
           width: 60,
           mainAxisAlignment: MainAxisAlignment.start,
-          symbolBuilder: (context, symbol, state) {
-            return FittedBox(
-              child: Padding(
-                padding: const EdgeInsets.all(2),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(100)),
-                    color: state == AlphabetScrollbarItemState.active
-                        ? Theme.of(context).colorScheme.primary
-                        : Colors.transparent,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(2),
-                    child: Text(
-                      symbol,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 30),
-                    ),
+          symbolBuilder: (context, symbol, state) => FittedBox(
+            child: Padding(
+              padding: const EdgeInsets.all(2),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(100)),
+                  color: state == AlphabetScrollbarItemState.active
+                      ? Theme.of(context).colorScheme.primary
+                      : Colors.transparent,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(2),
+                  child: Text(
+                    symbol,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 30),
                   ),
                 ),
               ),
-            );
-          },
+            ),
+          ),
         ),
         listOptions: ListOptions(
-          listHeaderBuilder: (context, symbol) {
-            return DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  stops: const [0.0, 0.6],
-                  colors: [
-                    Colors.green,
-                    Colors.green.withOpacity(0),
-                  ],
-                ),
+          listHeaderBuilder: (context, symbol) => DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                stops: const [0.0, 0.6],
+                colors: [
+                  Colors.green,
+                  Colors.green.withOpacity(0),
+                ],
               ),
-              child: Text(
-                symbol,
-                style: const TextStyle(fontSize: 40),
-              ),
-            );
-          },
+            ),
+            child: Text(
+              symbol,
+              style: const TextStyle(fontSize: 40),
+            ),
+          ),
           physics: const ClampingScrollPhysics(),
         ),
         overlayOptions: const OverlayOptions(

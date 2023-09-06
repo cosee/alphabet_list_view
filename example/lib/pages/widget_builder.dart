@@ -42,14 +42,12 @@ class ExampleWidgetBuilder extends StatelessWidget {
           jumpToSymbolsWithNoEntries: true,
           backgroundColor: Theme.of(context).colorScheme.secondary,
           symbolBuilder: (context, symbol, state) {
-            Color color;
-            if (state == AlphabetScrollbarItemState.active) {
-              color = Colors.black;
-            } else if (state == AlphabetScrollbarItemState.deactivated) {
-              color = Colors.lightGreen;
-            } else {
-              color = Theme.of(context).colorScheme.primary;
-            }
+            final color = switch (state) {
+              AlphabetScrollbarItemState.active => Colors.black,
+              AlphabetScrollbarItemState.deactivated => Colors.lightGreen,
+              _ => Theme.of(context).colorScheme.primary,
+            };
+
             return Container(
               padding: const EdgeInsets.only(left: 4, top: 2, bottom: 2),
               decoration: BoxDecoration(
@@ -75,39 +73,37 @@ class ExampleWidgetBuilder extends StatelessWidget {
           backgroundColor: const Color.fromRGBO(210, 255, 210, 1),
           stickySectionHeader: false,
           showSectionHeaderForEmptySections: true,
-          listHeaderBuilder: (context, symbol) {
-            return Padding(
-              padding: const EdgeInsets.only(right: 18, top: 4, bottom: 4),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.horizontal(
-                      right: Radius.circular(100),
-                    ),
-                    color: Theme.of(context).colorScheme.primary,
+          listHeaderBuilder: (context, symbol) => Padding(
+            padding: const EdgeInsets.only(right: 18, top: 4, bottom: 4),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.horizontal(
+                    right: Radius.circular(100),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 8,
-                      top: 8,
-                      right: 16,
-                      bottom: 8,
-                    ),
-                    child: Text(
-                      symbol,
-                      textScaleFactor: 1,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 8,
+                    top: 8,
+                    right: 16,
+                    bottom: 8,
+                  ),
+                  child: Text(
+                    symbol,
+                    textScaleFactor: 1,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
                     ),
                   ),
                 ),
               ),
-            );
-          },
+            ),
+          ),
         ),
       ),
     );

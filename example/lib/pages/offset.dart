@@ -17,27 +17,24 @@ class ExampleOffset extends StatelessWidget {
         elevation: 0,
       ),
       body: Builder(
-        builder: (context) {
-          return AlphabetListView(
-            items: _animals,
-            options: AlphabetListViewOptions(
-              listOptions: ListOptions(
-                stickySectionHeader: false,
-                topOffset: MediaQuery.of(context).padding.top,
-                listHeaderBuilder: (context, symbol) =>
-                    DefaultAlphabetListHeader(
-                  symbol: symbol,
-                  backgroundColor: Colors.transparent,
-                ),
-              ),
-              scrollbarOptions: ScrollbarOptions(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).padding.top,
-                ),
+        builder: (context) => AlphabetListView(
+          items: _animals,
+          options: AlphabetListViewOptions(
+            listOptions: ListOptions(
+              stickySectionHeader: false,
+              topOffset: MediaQuery.of(context).padding.top,
+              listHeaderBuilder: (context, symbol) => DefaultAlphabetListHeader(
+                symbol: symbol,
+                backgroundColor: Colors.transparent,
               ),
             ),
-          );
-        },
+            scrollbarOptions: ScrollbarOptions(
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).padding.top,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
