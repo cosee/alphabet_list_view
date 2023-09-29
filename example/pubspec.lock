@@ -100,10 +100,10 @@ packages:
     dependency: "direct dev"
     description:
       name: cosee_lints
-      sha256: f10badcb4d81b8d29fb519a47efbc3d4337ef54715709cd9425ffcbfa3ece91e
+      sha256: "7aeec1a9ea91db248c1f1f246fd5c41a2f16491b661ee068c1fc3b1d650aca1e"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.0"
+    version: "0.3.0"
   crypto:
     dependency: transitive
     description:
