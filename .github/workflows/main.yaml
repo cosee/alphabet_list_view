@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: asdf-vm/actions/install@v2
+      - uses: asdf-vm/actions/install@v3
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: asdf-vm/actions/install@v2
+      - uses: asdf-vm/actions/install@v3
 
       - name: Install WebP
         run: |
