@@ -34,7 +34,7 @@ class DefaultAlphabetOverlay extends StatelessWidget {
         child: Center(
           child: Text(
             symbol,
-            textScaleFactor: 1,
+            textScaler: TextScaler.noScaling,
             style: style,
           ),
         ),
