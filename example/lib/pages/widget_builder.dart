@@ -27,7 +27,7 @@ class ExampleWidgetBuilder extends StatelessWidget {
                 child: FittedBox(
                   child: Text(
                     symbol,
-                    textScaleFactor: 1,
+                    textScaler: TextScaler.noScaling,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.primary,
@@ -94,7 +94,7 @@ class ExampleWidgetBuilder extends StatelessWidget {
                   ),
                   child: Text(
                     symbol,
-                    textScaleFactor: 1,
+                    textScaler: TextScaler.noScaling,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 30,
