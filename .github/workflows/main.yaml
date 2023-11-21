@@ -7,14 +7,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Cache asdf
+        uses: actions/cache@v3
+        id: asdf_cache
+        with:
+          path: ~/.asdf/
+          key: ${{ runner.os }}-${{ hashFiles('**/.tool-versions') }}
       - uses: asdf-vm/actions/install@v3
 
-      - name: Cache dependencies
+      - name: Cache flutter dependencies
         uses: actions/cache@v3
-        id: cache
+        id: flutter_cache
         with:
           path: .dart_tool/
-          key: ${{ runner.os }}-dependencies-${{ hashFiles('**/pubspec.lock') }}
+          key: ${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
       - name: Install dependencies
         run: flutter pub get
 
@@ -31,18 +38,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Cache asdf
+        uses: actions/cache@v3
+        id: asdf_cache
+        with:
+          path: ~/.asdf/
+          key: ${{ runner.os }}-${{ hashFiles('**/.tool-versions') }}
       - uses: asdf-vm/actions/install@v3
 
       - name: Install WebP
         run: |
           sudo apt update
           sudo apt install webp
-      - name: Cache dependencies
+      - name: Cache flutter dependencies
         uses: actions/cache@v3
-        id: cache
+        id: flutter_cache
         with:
           path: .dart_tool/
-          key: ${{ runner.os }}-dependencies-${{ hashFiles('**/pubspec.lock') }}
+          key: ${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
       - name: Install Dependencies
         run: |
           flutter pub get
