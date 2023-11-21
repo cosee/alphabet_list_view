@@ -54,11 +54,14 @@ jobs:
         uses: actions/cache@v3
         id: flutter_cache
         with:
-          path: .dart_tool/
+          path: |
+            .dart_tool/
+            ~/.pub-cache/
           key: ${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
       - name: Install Dependencies
         run: |
           flutter pub get
+          echo $GITHUB_PATH:$HOME/.pub-cache/bin >> $GITHUB_PATH
           flutter pub global activate pana
 
       - name: Verify Pub Score
