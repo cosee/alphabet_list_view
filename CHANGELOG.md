@@ -1,3 +1,7 @@
+## 1.0.1
+
+* Replace deprecated `textScaleFactor` with `textScaler`.
+
 ## 1.0.0
 
 * Stable release.

@@ -1,6 +1,6 @@
 name: alphabet_list_view
 description: A ListView with sticky headers and an iOS-like clickable sidebar.
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/cosee/alphabet_list_view/tree/main
 issue_tracker: https://github.com/cosee/alphabet_list_view/issues
 homepage: https://pub.dev/publishers/cosee.biz/packages
