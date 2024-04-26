@@ -1,3 +1,7 @@
+## 1.1.0
+
+* Add `decoration` to `ScrollbarOptions`.
+
 ## 1.0.1
 
 * Replace deprecated `textScaleFactor` with `textScaler`.
