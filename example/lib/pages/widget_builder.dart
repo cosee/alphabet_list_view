@@ -40,12 +40,19 @@ class ExampleWidgetBuilder extends StatelessWidget {
         ),
         scrollbarOptions: ScrollbarOptions(
           jumpToSymbolsWithNoEntries: true,
-          backgroundColor: Theme.of(context).colorScheme.secondary,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Theme.of(context).colorScheme.secondary,
+                Colors.lightGreen,
+              ],
+            ),
+          ),
           symbolBuilder: (context, symbol, state) {
             final color = switch (state) {
-              AlphabetScrollbarItemState.active => Colors.black,
+              AlphabetScrollbarItemState.active => Colors.green[900],
               AlphabetScrollbarItemState.deactivated => Colors.lightGreen,
-              _ => Theme.of(context).colorScheme.primary,
+              _ => Colors.green[800],
             };
 
             return Container(
