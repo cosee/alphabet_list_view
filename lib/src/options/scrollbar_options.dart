@@ -13,7 +13,12 @@ class ScrollbarOptions {
     this.jumpToSymbolsWithNoEntries = false,
     this.forcePosition,
     this.symbolBuilder,
-  });
+    this.decoration,
+  }) : assert(
+          backgroundColor == null || decoration == null,
+          'Cannot provide both a color and a decoration\n'
+          'To provide both, use "decoration: BoxDecoration(color: color)".',
+        );
 
   /// The width of the sidebar.
   final double width;
@@ -44,4 +49,7 @@ class ScrollbarOptions {
 
   /// Builder function for sidebar symbols.
   final SymbolStateBuilder? symbolBuilder;
+
+  /// Decoration for the sidebar.
+  final Decoration? decoration;
 }
