@@ -75,6 +75,7 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: widget.alphabetScrollbarOptions.decoration,
       padding: widget.alphabetScrollbarOptions.padding ?? EdgeInsets.zero,
       color: widget.alphabetScrollbarOptions.backgroundColor,
       width: widget.alphabetScrollbarOptions.width,
