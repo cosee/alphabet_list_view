@@ -30,7 +30,7 @@ jobs:
       - name: Analyze code
         run: flutter analyze
       - name: Run Code metrics
-        run: dart run dart_code_metrics:metrics analyze . --set-exit-on-violation-level=warning --disable-sunset-warning
+        run: dart run dart_code_linter:metrics analyze . --set-exit-on-violation-level=warning
       - name: Run tests
         run: flutter test
 
