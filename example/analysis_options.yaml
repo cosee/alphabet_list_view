@@ -1,5 +1,5 @@
 include: package:cosee_lints/analysis_options.yaml
 
-dart_code_metrics:
+dart_code_linter:
   extends:
     - package:cosee_lints/metrics.yaml
