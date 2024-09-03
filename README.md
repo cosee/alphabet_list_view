@@ -24,7 +24,7 @@ Depend on it:
 
 ```yaml
 dependencies:
-  alphabet_list_view: ^1.0.0
+  alphabet_list_view: ^1.1.1
 ```
 
 Import it:
