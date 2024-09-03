@@ -1,3 +1,9 @@
+## 1.1.1
+
+* Update dependencies.
+* Activate Material 3 in example project.
+* Add custom list tiles to example project.
+
 ## 1.1.0
 
 * Add `decoration` to `ScrollbarOptions`.
