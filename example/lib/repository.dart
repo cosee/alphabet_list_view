@@ -640,4 +640,137 @@ class Repository {
       '🍈',
     ],
   };
+
+  static const Map<String, List<(String, int)>> colors = {
+    'A': [
+      ('Aqua', 0xFF00FFFF),
+      ('AliceBlue', 0xFFF0F8FF),
+      ('AntiqueWhite', 0xFFFAEBD7),
+    ],
+    'B': [
+      ('Blue', 0xFF0000FF),
+      ('Beige', 0xFFF5F5DC),
+      ('Brown', 0xFFA52A2A),
+    ],
+    'C': [
+      ('Cyan', 0xFF00FFFF),
+      ('Coral', 0xFFFF7F50),
+      ('Crimson', 0xFFDC143C),
+    ],
+    'D': [
+      ('DarkBlue', 0xFF00008B),
+      ('DarkCyan', 0xFF008B8B),
+      ('DarkGoldenRod', 0xFFB8860B),
+    ],
+    'E': [
+      ('Ecru', 0xFFE6D8AD),
+      ('Emerald', 0xFF50C878),
+      ('Eggplant', 0xFF6F2C91),
+    ],
+    'F': [
+      ('Fuchsia', 0xFFFF00FF),
+      ('ForestGreen', 0xFF228B22),
+      ('FloralWhite', 0xFFFFFAF0),
+    ],
+    'G': [
+      ('Green', 0xFF008000),
+      ('Gold', 0xFFFFD700),
+      ('Gainsboro', 0xFFDCDCDC),
+    ],
+    'H': [
+      ('HoneyDew', 0xFFF0FFF0),
+      ('HotPink', 0xFFFF69B4),
+      ('Horizon', 0xFF4B0082),
+    ],
+    'I': [
+      ('Indigo', 0xFF4B0082),
+      ('Ivory', 0xFFFFFFF0),
+      ('IceBlue', 0xFF99CCFF),
+    ],
+    'J': [
+      ('Jade', 0xFF00A86B),
+      ('Jasmine', 0xFFE6E6FA),
+      ('Jet', 0xFF343434),
+    ],
+    'K': [
+      ('Khaki', 0xFFF0E68C),
+      ('Ketchup', 0xFFB22222),
+      ('KellyGreen', 0xFF4CBB17),
+    ],
+    'L': [
+      ('Lavender', 0xFFE6E6FA),
+      ('LemonChiffon', 0xFFFFFACD),
+      ('LightCoral', 0xFFF08080),
+    ],
+    'M': [
+      ('Magenta', 0xFFFF00FF),
+      ('Maroon', 0xFF800000),
+      ('MistyRose', 0xFFFFE4E1),
+    ],
+    'N': [
+      ('NavajoWhite', 0xFFFFDEAD),
+      ('Navy', 0xFF000080),
+      ('NeonGreen', 0xFF39FF14),
+    ],
+    'O': [
+      ('Olive', 0xFF808000),
+      ('Orange', 0xFFFFA500),
+      ('Orchid', 0xFFDA70D6),
+    ],
+    'P': [
+      ('Pink', 0xFFFFC0CB),
+      ('Plum', 0xFFDDA0DD),
+      ('PeachPuff', 0xFFFFDAB9),
+    ],
+    'Q': [
+      ('Quartz', 0xFFB4A8B1),
+      ('QueenBlue', 0xFF3A5EBD),
+      ('Quicksilver', 0xFFC0C0C0),
+    ],
+    'R': [
+      ('Red', 0xFFFF0000),
+      ('Rose', 0xFFFF007F),
+      ('RoyalBlue', 0xFF4169E1),
+    ],
+    'S': [
+      ('Salmon', 0xFFFA8072),
+      ('Sienna', 0xFFA0522D),
+      ('SkyBlue', 0xFF87CEEB),
+    ],
+    'T': [
+      ('Teal', 0xFF008080),
+      ('Tomato', 0xFFFF6347),
+      ('Turquoise', 0xFF40E0D0),
+    ],
+    'U': [
+      ('Ultramarine', 0xFF3F00FF),
+      ('Umber', 0xFF635147),
+      ('Ube', 0xFF6F4C7A),
+    ],
+    'V': [
+      ('Violet', 0xFFEE82EE),
+      ('Vanilla', 0xFFF3E5AB),
+      ('Vermilion', 0xFFE34234),
+    ],
+    'W': [
+      ('Wheat', 0xFFF5DEB3),
+      ('White', 0xFFFFFFFF),
+      ('Whisper', 0xFFF5F5F5),
+    ],
+    'X': [
+      ('Xanadu', 0xFF738678),
+      ('XmasGreen', 0xFF007A33),
+      ('Xanadu', 0xFF738678),
+    ],
+    'Y': [
+      ('Yellow', 0xFFFFFF00),
+      ('YellowGreen', 0xFF9ACD32),
+      ('YaleBlue', 0xFF00356B),
+    ],
+    'Z': [
+      ('Zaffre', 0xFF0018A8),
+      ('Zinnwaldite', 0xFF7E4B3A),
+      ('Zucchini', 0xFF4E5B31),
+    ],
+  };
 }

@@ -8,7 +8,7 @@ class ExampleWidgetBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlphabetListView(
-      items: _animals,
+      items: _colors,
       options: AlphabetListViewOptions(
         overlayOptions: OverlayOptions(
           alignment: Alignment.centerRight,
@@ -116,17 +116,44 @@ class ExampleWidgetBuilder extends StatelessWidget {
     );
   }
 
-  List<AlphabetListViewItemGroup> get _animals => Repository.animals.entries
+  List<AlphabetListViewItemGroup> get _colors => Repository.colors.entries
       .map(
-        (animalLetter) => AlphabetListViewItemGroup(
-          tag: animalLetter.key,
-          children: animalLetter.value.map(
-            (animal) => Padding(
+        (colorStartingLetterGroup) => AlphabetListViewItemGroup(
+          tag: colorStartingLetterGroup.key,
+          children: colorStartingLetterGroup.value.map(
+            (color) => Padding(
               padding: const EdgeInsets.all(8),
-              child: Text(animal),
+              child: _ColorButton(name: color.$1, color: Color(color.$2)),
             ),
           ),
         ),
       )
       .toList();
+}
+
+class _ColorButton extends StatelessWidget {
+  const _ColorButton({required this.name, required this.color});
+
+  final String name;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => _showSnackBar(context, name),
+      child: Container(
+        height: 80,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+        ),
+      ),
+    );
+  }
+
+  void _showSnackBar(BuildContext context, String text) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text(text)));
+  }
 }
