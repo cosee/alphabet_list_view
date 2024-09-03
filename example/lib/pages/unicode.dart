@@ -11,7 +11,7 @@ class ExampleUnicode extends StatelessWidget {
       items: animals,
       options: AlphabetListViewOptions(
         scrollbarOptions: ScrollbarOptions(
-          symbols: Repository.emojiHeaders,
+          symbols: Repository.emojis.keys,
           width: 60,
           mainAxisAlignment: MainAxisAlignment.start,
           symbolBuilder: (context, symbol, state) => FittedBox(

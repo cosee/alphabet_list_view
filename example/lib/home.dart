@@ -27,21 +27,15 @@ class Home extends StatelessWidget {
             ],
           ),
         ),
-        body: const SafeArea(
-          child: TabBarView(
-            physics: NeverScrollableScrollPhysics(),
-            children: [
-              ExampleDefault(),
-              ExampleRTL(),
-              ExampleWidgetBuilder(),
-              ExampleUnicode(),
-              ExampleOffset(),
-            ],
-          ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          color: Theme.of(context).colorScheme.primary,
-          child: const SizedBox.shrink(),
+        body: const TabBarView(
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            ExampleDefault(),
+            ExampleRTL(),
+            ExampleWidgetBuilder(),
+            ExampleUnicode(),
+            ExampleOffset(),
+          ],
         ),
       ),
     );

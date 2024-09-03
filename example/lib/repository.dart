@@ -588,7 +588,6 @@ class Repository {
     ],
   };
 
-  static const List<String> emojiHeaders = ['😀', '🐶', '🍏'];
   static const Map<String, List<String>> emojis = {
     '😀': [
       '😀',

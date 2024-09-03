@@ -4,7 +4,7 @@ class CustomTheme {
   const CustomTheme._();
 
   static final theme = ThemeData(
-    useMaterial3: false,
+    useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
       seedColor: _green,
       primary: _green,
