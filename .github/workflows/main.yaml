@@ -10,18 +10,20 @@ jobs:
 
       - name: Cache asdf
         uses: actions/cache@v4
-        id: asdf_cache
         with:
           path: ~/.asdf/
-          key: ${{ runner.os }}-${{ hashFiles('**/.tool-versions') }}
-      - uses: asdf-vm/actions/install@v3
+          key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
+      - name: Install asdf
+        uses: asdf-vm/actions/install@v3
+        # See https://github.com/asdf-vm/actions/issues/445
+        if: steps.cache-asdf.outputs.cache-hit != 'true'
 
       - name: Cache flutter dependencies
         uses: actions/cache@v4
-        id: flutter_cache
         with:
           path: .dart_tool/
-          key: ${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+          key: ${{ runner.os }}-flutter${{ hashFiles('example/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-flutter-
       - name: Install dependencies
         run: flutter pub get
 
@@ -38,13 +40,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Cache asdf
         uses: actions/cache@v4
-        id: asdf_cache
         with:
           path: ~/.asdf/
-          key: ${{ runner.os }}-${{ hashFiles('**/.tool-versions') }}
-      - uses: asdf-vm/actions/install@v3
+          key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
+      - name: Install asdf
+        uses: asdf-vm/actions/install@v3
+        # See https://github.com/asdf-vm/actions/issues/445
+        if: steps.cache-asdf.outputs.cache-hit != 'true'
 
       - name: Install WebP
         run: |
@@ -52,12 +57,10 @@ jobs:
           sudo apt install webp
       - name: Cache flutter dependencies
         uses: actions/cache@v4
-        id: flutter_cache
         with:
-          path: |
-            .dart_tool/
-            ~/.pub-cache/
-          key: ${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+          path: .dart_tool/
+          key: ${{ runner.os }}-flutter${{ hashFiles('example/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-flutter-
       - name: Install Dependencies
         run: |
           flutter pub get
