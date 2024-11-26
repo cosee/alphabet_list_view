@@ -22,7 +22,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .dart_tool/
-          key: ${{ runner.os }}-flutter${{ hashFiles('example/pubspec.lock') }}
+          key: ${{ runner.os }}-flutter-${{ hashFiles('example/pubspec.lock') }}
           restore-keys: ${{ runner.os }}-flutter-
       - name: Install dependencies
         run: flutter pub get
@@ -59,7 +59,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .dart_tool/
-          key: ${{ runner.os }}-flutter${{ hashFiles('example/pubspec.lock') }}
+          key: ${{ runner.os }}-flutter-${{ hashFiles('example/pubspec.lock') }}
           restore-keys: ${{ runner.os }}-flutter-
       - name: Install Dependencies
         run: |
