@@ -43,7 +43,7 @@ class ExampleUnicode extends StatelessWidget {
                 stops: const [0.0, 0.6],
                 colors: [
                   Colors.green,
-                  Colors.green.withOpacity(0),
+                  Colors.green.withValues(alpha: 0),
                 ],
               ),
             ),

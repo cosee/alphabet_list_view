@@ -60,7 +60,8 @@ class _Blur extends StatelessWidget {
         Expanded(
           child: ClipRect(
             child: Container(
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+              color:
+                  Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
               height: double.infinity,
               width: double.infinity,
               child: BackdropFilter(
