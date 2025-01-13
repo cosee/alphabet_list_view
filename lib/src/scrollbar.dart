@@ -120,6 +120,15 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   }
 
   @override
+  void didUpdateWidget(covariant AlphabetScrollbar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _uniqueItems = widget.alphabetScrollbarOptions.symbols.toSet().toList();
+    _symbolKeys = {
+      for (final symbol in _uniqueItems) symbol: GlobalKey(),
+    };
+  }
+
+  @override
   void dispose() {
     widget.symbolChangeNotifierList
         .removeListener(_symbolChangeNotifierListListener);
