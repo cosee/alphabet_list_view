@@ -1,5 +1,6 @@
 import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:alphabet_list_view/src/scrollbar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -136,7 +137,6 @@ void main() {
   });
 }
 
-// ignore_for_file: diagnostic_describe_all_properties
 class TestWidget extends StatelessWidget {
   const TestWidget({required this.items, super.key, this.options});
 
@@ -153,5 +153,13 @@ class TestWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<AlphabetListViewOptions?>('options', options))
+      ..add(IterableProperty<AlphabetListViewItemGroup>('items', items));
   }
 }
