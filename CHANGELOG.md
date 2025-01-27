@@ -1,3 +1,7 @@
+## 1.1.3
+
+* fix: Update scrollbar symbols on widget update ([#124](https://github.com/cosee/alphabet_list_view/pull/124))
+
 ## 1.1.2
 
 * Update dependencies.
