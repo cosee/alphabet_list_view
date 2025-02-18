@@ -21,5 +21,5 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  cosee_lints: ^0.7.0
+  cosee_lints: ^0.8.0
   dart_code_linter: ^2.0.0
