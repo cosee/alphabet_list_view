@@ -156,7 +156,8 @@ class _AlphabetListState extends State<AlphabetList> {
     try {
       final customScrollViewRenderBox =
           _customScrollKey.currentContext?.findRenderObject() as RenderBox?;
-      if (customScrollViewRenderBox != null) {
+      if (customScrollViewRenderBox != null &&
+          customScrollViewRenderBox.hasSize) {
         widget.symbolChangeNotifierList.value = _getFirstVisibleItemGroupSymbol(
           customScrollViewRenderBox,
           widget.items,
