@@ -1,3 +1,8 @@
+## 1.1.4
+
+* Add restriction for the minimum version of Flutter ([#144](https://github.com/cosee/alphabet_list_view/issues/144))
+* fix: "RenderBox was not laid out" Error ([#145](https://github.com/cosee/alphabet_list_view/pull/145))
+
 ## 1.1.3
 
 * fix: Update scrollbar symbols on widget update ([#124](https://github.com/cosee/alphabet_list_view/pull/124))
