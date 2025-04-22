@@ -8,15 +8,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup asdf
+        uses: asdf-vm/actions/setup@v3
       - name: Cache asdf
         uses: actions/cache@v4
         with:
-          path: ~/.asdf/
-          key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
+          path: |
+            ~/.asdf/installs
+            ~/.asdf/plugins
+            ~/.asdf/shims
+          key: ${{ runner.os }}-asdf-${{ hashFiles('.tool-versions') }}
+          restore-keys: ${{ runner.os }}-asdf-
       - name: Install asdf
         uses: asdf-vm/actions/install@v3
         # See https://github.com/asdf-vm/actions/issues/445
         if: steps.cache-asdf.outputs.cache-hit != 'true'
+      - name: Reshim asdf
+        run: asdf reshim
 
       - name: Cache flutter dependencies
         uses: actions/cache@v4
@@ -41,15 +49,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup asdf
+        uses: asdf-vm/actions/setup@v3
       - name: Cache asdf
         uses: actions/cache@v4
         with:
-          path: ~/.asdf/
-          key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
+          path: |
+            ~/.asdf/installs
+            ~/.asdf/plugins
+            ~/.asdf/shims
+          key: ${{ runner.os }}-asdf-${{ hashFiles('.tool-versions') }}
+          restore-keys: ${{ runner.os }}-asdf-
       - name: Install asdf
         uses: asdf-vm/actions/install@v3
         # See https://github.com/asdf-vm/actions/issues/445
         if: steps.cache-asdf.outputs.cache-hit != 'true'
+      - name: Reshim asdf
+        run: asdf reshim
 
       - name: Install WebP
         run: |
