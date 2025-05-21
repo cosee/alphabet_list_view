@@ -31,7 +31,8 @@ class DefaultAlphabetListHeader extends StatelessWidget {
           width: double.infinity,
           child: Text(
             symbol,
-            style: style ??
+            style:
+                style ??
                 const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ),

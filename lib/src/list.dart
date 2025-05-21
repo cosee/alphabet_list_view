@@ -75,10 +75,12 @@ class _AlphabetListState extends State<AlphabetList> {
     super.initState();
     _customScrollKey = GlobalKey();
     widget.scrollController.addListener(_scrollControllerListener);
-    widget.symbolChangeNotifierScrollbar
-        .addListener(_symbolChangeNotifierScrollbarListener);
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => _scrollControllerListener());
+    widget.symbolChangeNotifierScrollbar.addListener(
+      _symbolChangeNotifierScrollbarListener,
+    );
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _scrollControllerListener(),
+    );
   }
 
   @override
@@ -111,21 +113,26 @@ class _AlphabetListState extends State<AlphabetList> {
             ),
             ...widget.items.map(
               (item) {
-                final bool useHeaderForEmptySection = widget.alphabetListOptions
+                final bool useHeaderForEmptySection =
+                    widget
+                        .alphabetListOptions
                         .showSectionHeaderForEmptySections ||
                     !((item.childrenDelegate.estimatedChildCount ?? 0) == 0);
                 final Widget header =
                     widget.alphabetListOptions.showSectionHeader &&
-                            useHeaderForEmptySection
-                        ? Semantics(
-                            header: true,
-                            child: widget.alphabetListOptions.listHeaderBuilder
-                                    ?.call(context, item.tag) ??
-                                DefaultAlphabetListHeader(
-                                  symbol: item.tag,
-                                ),
-                          )
-                        : const SizedBox.shrink();
+                        useHeaderForEmptySection
+                    ? Semantics(
+                        header: true,
+                        child:
+                            widget.alphabetListOptions.listHeaderBuilder?.call(
+                              context,
+                              item.tag,
+                            ) ??
+                            DefaultAlphabetListHeader(
+                              symbol: item.tag,
+                            ),
+                      )
+                    : const SizedBox.shrink();
 
                 return SliverStickyHeader(
                   header: Container(key: item.key),
@@ -146,8 +153,9 @@ class _AlphabetListState extends State<AlphabetList> {
 
   @override
   void dispose() {
-    widget.symbolChangeNotifierScrollbar
-        .removeListener(_symbolChangeNotifierScrollbarListener);
+    widget.symbolChangeNotifierScrollbar.removeListener(
+      _symbolChangeNotifierScrollbarListener,
+    );
     widget.scrollController.removeListener(_scrollControllerListener);
     super.dispose();
   }
@@ -211,7 +219,10 @@ class _AlphabetListState extends State<AlphabetList> {
   void _jumpTo(RenderObject object) {
     final RenderAbstractViewport viewport = RenderAbstractViewport.of(object);
 
-    final target = viewport.getOffsetToReveal(object, 0).offset.clamp(
+    final target = viewport
+        .getOffsetToReveal(object, 0)
+        .offset
+        .clamp(
           widget.alphabetListOptions.topOffset ?? 0,
           widget.scrollController.position.maxScrollExtent +
               (widget.alphabetListOptions.topOffset ?? 0),

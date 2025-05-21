@@ -23,11 +23,13 @@ class DefaultAlphabetOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: decoration ??
+      decoration:
+          decoration ??
           BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(10)),
-            color:
-                Theme.of(context).colorScheme.secondary.withValues(alpha: 0.8),
+            color: Theme.of(
+              context,
+            ).colorScheme.secondary.withValues(alpha: 0.8),
           ),
       height: 100,
       width: 100,

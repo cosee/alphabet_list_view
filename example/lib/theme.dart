@@ -10,8 +10,9 @@ class CustomTheme {
       primary: _green,
       secondary: _yellow,
     ),
-    bottomSheetTheme:
-        const BottomSheetThemeData(backgroundColor: Colors.transparent),
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: Colors.transparent,
+    ),
   );
 
   static const MaterialColor _green = MaterialColor(

@@ -64,8 +64,11 @@ class _AlphabetSymbolOverlayState extends State<AlphabetSymbolOverlay> {
           child: AnimatedOpacity(
             opacity: _symbol == null ? 0 : _opacity,
             duration: const Duration(milliseconds: 100),
-            child: widget.alphabetOverlayOptions.overlayBuilder
-                    ?.call(context, _symbol ?? '?') ??
+            child:
+                widget.alphabetOverlayOptions.overlayBuilder?.call(
+                  context,
+                  _symbol ?? '?',
+                ) ??
                 DefaultAlphabetOverlay(
                   symbol: _symbol ?? '?',
                 ),
@@ -78,8 +81,9 @@ class _AlphabetSymbolOverlayState extends State<AlphabetSymbolOverlay> {
   @override
   void dispose() {
     _timer?.cancel();
-    widget.symbolChangeNotifierScrollbar
-        .removeListener(_symbolChangeNotifierScrollbarListener);
+    widget.symbolChangeNotifierScrollbar.removeListener(
+      _symbolChangeNotifierScrollbarListener,
+    );
     super.dispose();
   }
 

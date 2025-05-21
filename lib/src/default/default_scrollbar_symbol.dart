@@ -32,8 +32,9 @@ class DefaultScrollbarSymbol extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = switch (state) {
-      AlphabetScrollbarItemState.active => styleActive ??
-          TextStyle(color: Theme.of(context).colorScheme.secondary),
+      AlphabetScrollbarItemState.active =>
+        styleActive ??
+            TextStyle(color: Theme.of(context).colorScheme.secondary),
       AlphabetScrollbarItemState.inactive =>
         styleInactive ?? const TextStyle(color: Colors.black),
       AlphabetScrollbarItemState.deactivated =>

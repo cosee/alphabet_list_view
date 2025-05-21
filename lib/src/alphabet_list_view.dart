@@ -76,10 +76,10 @@ class _AlphabetListViewState extends State<AlphabetListView> {
   Widget build(BuildContext context) {
     final rowTextDirection =
         switch (widget.options.scrollbarOptions.forcePosition) {
-      AlphabetScrollbarPosition.left => TextDirection.rtl,
-      AlphabetScrollbarPosition.right => TextDirection.ltr,
-      _ => null,
-    };
+          AlphabetScrollbarPosition.left => TextDirection.rtl,
+          AlphabetScrollbarPosition.right => TextDirection.ltr,
+          _ => null,
+        };
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -125,15 +125,14 @@ class _AlphabetListViewState extends State<AlphabetListView> {
   List<AlphabetListViewItemGroup> _generateAfterSymbolsSortedList(
     Iterable<AlphabetListViewItemGroup> items,
     List<String> symbols,
-  ) =>
-      symbols
-          .map(
-            (symbol) => items.firstWhere(
-              (item) => item.tag == symbol,
-              orElse: () => AlphabetListViewItemGroup(tag: symbol),
-            ),
-          )
-          .toList();
+  ) => symbols
+      .map(
+        (symbol) => items.firstWhere(
+          (item) => item.tag == symbol,
+          orElse: () => AlphabetListViewItemGroup(tag: symbol),
+        ),
+      )
+      .toList();
 }
 
 /// Item groups shown in the list.
@@ -142,22 +141,22 @@ class AlphabetListViewItemGroup {
   AlphabetListViewItemGroup({
     required this.tag,
     Iterable<Widget> children = const [],
-  })  : key = GlobalKey(),
-        childrenDelegate = SliverChildListDelegate(
-          children.toList(),
-        );
+  }) : key = GlobalKey(),
+       childrenDelegate = SliverChildListDelegate(
+         children.toList(),
+       );
 
   /// Builder constructor of AlphabetListViewItemGroup.
   AlphabetListViewItemGroup.builder({
     required this.tag,
     required int itemCount,
     required IndexedWidgetBuilder itemBuilder,
-  })  : assert(itemCount >= 0, 'itemCount must not be smaller than zero!'),
-        key = GlobalKey(),
-        childrenDelegate = SliverChildBuilderDelegate(
-          itemBuilder,
-          childCount: itemCount,
-        );
+  }) : assert(itemCount >= 0, 'itemCount must not be smaller than zero!'),
+       key = GlobalKey(),
+       childrenDelegate = SliverChildBuilderDelegate(
+         itemBuilder,
+         childCount: itemCount,
+       );
 
   /// The key used to indicate the scroll destination.
   final GlobalKey key;

@@ -68,8 +68,9 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
     _symbolKeys = {
       for (final symbol in _uniqueItems) symbol: GlobalKey(),
     };
-    widget.symbolChangeNotifierList
-        .addListener(_symbolChangeNotifierListListener);
+    widget.symbolChangeNotifierList.addListener(
+      _symbolChangeNotifierListListener,
+    );
   }
 
   @override
@@ -100,14 +101,14 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
                         key: _symbolKeys[symbol],
                         child:
                             widget.alphabetScrollbarOptions.symbolBuilder?.call(
-                                  context,
-                                  symbol,
-                                  _getSymbolState(symbol),
-                                ) ??
-                                DefaultScrollbarSymbol(
-                                  symbol: symbol,
-                                  state: _getSymbolState(symbol),
-                                ),
+                              context,
+                              symbol,
+                              _getSymbolState(symbol),
+                            ) ??
+                            DefaultScrollbarSymbol(
+                              symbol: symbol,
+                              state: _getSymbolState(symbol),
+                            ),
                       ),
                     ),
                   ),
@@ -130,14 +131,16 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
 
   @override
   void dispose() {
-    widget.symbolChangeNotifierList
-        .removeListener(_symbolChangeNotifierListListener);
+    widget.symbolChangeNotifierList.removeListener(
+      _symbolChangeNotifierListListener,
+    );
     super.dispose();
   }
 
   AlphabetScrollbarItemState _getSymbolState(String symbol) {
-    final Iterable<AlphabetListViewItemGroup> result =
-        widget.items.where((item) => item.tag == symbol);
+    final Iterable<AlphabetListViewItemGroup> result = widget.items.where(
+      (item) => item.tag == symbol,
+    );
     if (result.isNotEmpty) {
       if ((result.first.childrenDelegate.estimatedChildCount ?? 0) == 0 &&
           !widget.alphabetScrollbarOptions.jumpToSymbolsWithNoEntries) {
@@ -177,8 +180,9 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
       try {
         final RenderBox? renderBox =
             entry.value.currentContext?.findRenderObject() as RenderBox?;
-        final Offset? localLocation =
-            renderBox?.globalToLocal(details.position);
+        final Offset? localLocation = renderBox?.globalToLocal(
+          details.position,
+        );
 
         if (localLocation != null &&
             renderBox != null &&
@@ -192,8 +196,9 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
   }
 
   void _onSymbolTriggered(String symbol) {
-    Iterable<AlphabetListViewItemGroup> result =
-        widget.items.where((item) => item.tag == symbol);
+    Iterable<AlphabetListViewItemGroup> result = widget.items.where(
+      (item) => item.tag == symbol,
+    );
 
     if (!widget.alphabetScrollbarOptions.jumpToSymbolsWithNoEntries) {
       result = result.where(
