@@ -1,3 +1,7 @@
+## 1.1.5
+
+* Update dependencies.
+
 ## 1.1.4
 
 * Add restriction for the minimum version of Flutter ([#144](https://github.com/cosee/alphabet_list_view/issues/144))
