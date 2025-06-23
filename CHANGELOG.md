@@ -1,3 +1,7 @@
+## 1.1.6
+
+* Fix pana score.
+
 ## 1.1.5
 
 * Update dependencies.
