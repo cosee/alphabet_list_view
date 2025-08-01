@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Request help
+    url: https://github.com/cosee/alphabet_list_view/discussions/categories/request-help
+    about: Need assistance or guidance with the alphabet_list_view package? We're here to help!

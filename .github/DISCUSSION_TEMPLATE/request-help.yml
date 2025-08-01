@@ -1,0 +1,15 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before submitting your request, please consider the following:
+        - Search for any [existing questions](https://github.com/cosee/alphabet_list_view/discussions/categories/request-help).
+        - Review the [guidelines for requesting help](https://github.com/cosee/alphabet_list_view/blob/main/CONTRIBUTING.md#request-help) to ensure your request is clear and helpful.
+
+  - type: textarea
+    attributes:
+      label: Description
+      description: Describe your question in detail. Explain what you are trying to achieve, any relevant context, and specific points where you need clarification or assistance
+      placeholder: Tell us about your question …
+    validations:
+      required: true
