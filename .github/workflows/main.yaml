@@ -1,6 +1,6 @@
 name: alphabet_list_view
 
-on: [ push ]
+on: [ push, pull_request ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
