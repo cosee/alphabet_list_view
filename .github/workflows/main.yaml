@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup asdf
         uses: asdf-vm/actions/setup@v4
@@ -51,7 +51,7 @@ jobs:
   pana:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup asdf
         uses: asdf-vm/actions/setup@v4
