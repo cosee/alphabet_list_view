@@ -210,7 +210,9 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
     }
 
     if (result.isNotEmpty) {
-      if (widget.alphabetScrollbarOptions.hapticFeedback) {
+      // Only trigger haptic feedback if this is a different symbol than the currently selected one
+      if (widget.alphabetScrollbarOptions.hapticFeedback &&
+          symbol != _selectedSymbol) {
         unawaited(HapticFeedback.selectionClick());
       }
 
