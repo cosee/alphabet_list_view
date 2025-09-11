@@ -14,6 +14,7 @@ class ScrollbarOptions {
     this.forcePosition,
     this.symbolBuilder,
     this.decoration,
+    this.hapticFeedback = true,
   }) : assert(
          backgroundColor == null || decoration == null,
          'Cannot provide both a color and a decoration\n'
@@ -52,4 +53,10 @@ class ScrollbarOptions {
 
   /// Decoration for the sidebar.
   final Decoration? decoration;
+
+  /// Haptic feedback type to trigger when a symbol is touched.
+  ///
+  /// Set to `false` to disable haptic feedback.
+  /// Defaults to `true` (uses selection click haptic feedback).
+  final bool hapticFeedback;
 }
