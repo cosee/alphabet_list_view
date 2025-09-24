@@ -1,3 +1,7 @@
+## 1.2.0
+
+* Add haptic feedback feature to scrollbar ([#189](https://github.com/cosee/alphabet_list_view/pull/189))
+
 ## 1.1.6
 
 * Fix pana score.
