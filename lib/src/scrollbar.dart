@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:alphabet_list_view/src/controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 
 /// AlphabetScrollBar
 class AlphabetScrollbar extends StatefulWidget {
@@ -207,6 +210,11 @@ class _AlphabetScrollbarState extends State<AlphabetScrollbar> {
     }
 
     if (result.isNotEmpty) {
+      if (widget.alphabetScrollbarOptions.hapticFeedback &&
+          symbol != _selectedSymbol) {
+        unawaited(HapticFeedback.selectionClick());
+      }
+
       widget.symbolChangeNotifierScrollbar.value = symbol;
       setState(() => _selectedSymbol = symbol);
     }
