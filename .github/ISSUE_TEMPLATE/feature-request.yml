@@ -7,7 +7,7 @@ body:
       value: |
         Before filling out the issue fields, please consider the following:
         - Search for any [existing requests](https://github.com/cosee/alphabet_list_view/issues?q=is%3Aissue%20label%3A3Aenhancement).
-        - Review the [guidelines for reporting bugs](https://github.com/cosee/alphabet_list_view/blob/main/CONTRIBUTING.md#feature-request) to ensure your request is clear and helpful.
+        - Review the [guidelines for requesting a feature](https://github.com/cosee/alphabet_list_view/blob/main/CONTRIBUTING.md#request-a-feature) to ensure your request is clear and helpful.
 
   - type: textarea
     attributes:
