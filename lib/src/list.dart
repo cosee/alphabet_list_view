@@ -113,24 +113,22 @@ class _AlphabetListState extends State<AlphabetList> {
             ),
             ...widget.items.map(
               (item) {
-                final bool useHeaderForEmptySection =
-                    widget
-                        .alphabetListOptions
+                final bool useHeaderForEmptySection = widget.alphabetListOptions
                         .showSectionHeaderForEmptySections ||
                     !((item.childrenDelegate.estimatedChildCount ?? 0) == 0);
-                final Widget header =
-                    widget.alphabetListOptions.showSectionHeader &&
+                final Widget header = widget
+                            .alphabetListOptions.showSectionHeader &&
                         useHeaderForEmptySection
                     ? Semantics(
                         header: true,
                         child:
                             widget.alphabetListOptions.listHeaderBuilder?.call(
-                              context,
-                              item.tag,
-                            ) ??
-                            DefaultAlphabetListHeader(
-                              symbol: item.tag,
-                            ),
+                                  context,
+                                  item.tag,
+                                ) ??
+                                DefaultAlphabetListHeader(
+                                  symbol: item.tag,
+                                ),
                       )
                     : const SizedBox.shrink();
 
@@ -219,10 +217,7 @@ class _AlphabetListState extends State<AlphabetList> {
   void _jumpTo(RenderObject object) {
     final RenderAbstractViewport viewport = RenderAbstractViewport.of(object);
 
-    final target = viewport
-        .getOffsetToReveal(object, 0)
-        .offset
-        .clamp(
+    final target = viewport.getOffsetToReveal(object, 0).offset.clamp(
           widget.alphabetListOptions.topOffset ?? 0,
           widget.scrollController.position.maxScrollExtent +
               (widget.alphabetListOptions.topOffset ?? 0),

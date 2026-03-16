@@ -16,10 +16,10 @@ class ScrollbarOptions {
     this.decoration,
     this.hapticFeedback = true,
   }) : assert(
-         backgroundColor == null || decoration == null,
-         'Cannot provide both a color and a decoration\n'
-         'To provide both, use "decoration: BoxDecoration(color: color)".',
-       );
+          backgroundColor == null || decoration == null,
+          'Cannot provide both a color and a decoration\n'
+          'To provide both, use "decoration: BoxDecoration(color: color)".',
+        );
 
   /// The width of the sidebar.
   final double width;

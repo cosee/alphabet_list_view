@@ -64,8 +64,7 @@ class _AlphabetSymbolOverlayState extends State<AlphabetSymbolOverlay> {
           child: AnimatedOpacity(
             opacity: _symbol == null ? 0 : _opacity,
             duration: const Duration(milliseconds: 100),
-            child:
-                widget.alphabetOverlayOptions.overlayBuilder?.call(
+            child: widget.alphabetOverlayOptions.overlayBuilder?.call(
                   context,
                   _symbol ?? '?',
                 ) ??

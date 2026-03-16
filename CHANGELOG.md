@@ -1,3 +1,8 @@
+## 1.2.1
+
+* Lower dart constraint to 3.0.0
+* Lower flutter constraint to 3.16.0
+
 ## 1.2.0
 
 * Add haptic feedback feature to scrollbar ([#189](https://github.com/cosee/alphabet_list_view/pull/189))

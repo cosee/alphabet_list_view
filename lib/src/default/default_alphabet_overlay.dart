@@ -23,8 +23,7 @@ class DefaultAlphabetOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:
-          decoration ??
+      decoration: decoration ??
           BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(10)),
             color: Theme.of(
