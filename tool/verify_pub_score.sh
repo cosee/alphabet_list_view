@@ -1,16 +1,40 @@
-#!/bin/bash
-# Runs `pana . --no-warning` and verifies that the package score
-# is greater or equal to the desired score. By default the desired score is
-# a perfect score but it can be overridden by passing the desired score as an argument.
-#
-# Ensure the package has a score of at least a 100
-# `./verify_pub_score.sh 100`
-#
-# Ensure the package has a perfect score
-# `./verify_pub_score.sh`
+#!/usr/bin/env bash
+set -euo pipefail
 
-PANA=$(pana . --no-warning); PANA_SCORE=$(echo $PANA | sed -n "s/.*Points: \([0-9]*\)\/\([0-9]*\)./\1\/\2/p")
-echo "score: $PANA_SCORE"
-IFS='/'; read -a SCORE_ARR <<< "$PANA_SCORE"; SCORE=SCORE_ARR[0]; TOTAL=SCORE_ARR[1]
-if [ -z "$1" ]; then MINIMUM_SCORE=TOTAL; else MINIMUM_SCORE=$1; fi
-if (( $SCORE < $MINIMUM_SCORE )); then echo "minimum score $MINIMUM_SCORE was not met!"; exit 1; fi
+# Runs `pana . --no-warning` and verifies the package score is >= desired score.
+# Usage:
+#   ./verify_pub_score.sh        # require perfect score
+#   ./verify_pub_score.sh 100    # require at least 100 points
+
+if ! PANA_OUTPUT="$(pana . --no-warning)"; then
+  echo "pana failed (non-zero exit). Make sure 'pana' is installed and runs successfully." >&2
+  exit 1
+fi
+readonly PANA_OUTPUT
+
+if [[ ! $PANA_OUTPUT =~ Points:\ ([0-9]+)\/([0-9]+) ]]; then
+  echo "Failed to parse pana output for Points: X/Y." >&2
+  echo "pana output was:" >&2
+  printf '%s\n' "$PANA_OUTPUT" >&2
+  exit 1
+fi
+
+readonly SCORE="${BASH_REMATCH[1]}"
+readonly TOTAL="${BASH_REMATCH[2]}"
+readonly MINIMUM_SCORE="${1:-$TOTAL}"
+
+if [[ ! "$MINIMUM_SCORE" =~ ^[0-9]+$ ]]; then
+  echo "Minimum score must be a non-negative integer. Got: '$MINIMUM_SCORE'." >&2
+  exit 1
+fi
+
+if (( MINIMUM_SCORE > TOTAL )); then
+  echo "Warning: requested minimum (${MINIMUM_SCORE}) is greater than maximum possible (${TOTAL})." >&2
+fi
+
+echo "score: ${SCORE}/${TOTAL}"
+
+if (( SCORE < MINIMUM_SCORE )); then
+  echo "Minimum score ${MINIMUM_SCORE} was not met (actual ${SCORE})." >&2
+  exit 1
+fi
